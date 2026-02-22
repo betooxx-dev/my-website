@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "title": "betooxx | Web Developer",
+    "description": "betooxx's personal site — web developer crafting digital experiences."
+  },
+  "navbar": {
+    "home": "Home",
+    "blog": "Blog",
+    "now": "Now",
+    "contact": "Contact"
+  },
+  "hero": {
+    "socialLabel": "Connect with me"
+  },
+  "about": {
+    "sectionNumber": "01",
+    "sectionLabel": "About me",
+    "sectionTitle": "The story behind the code",
+    "paragraph1": "I'm a web developer passionate about creating digital experiences that blend elegant design with solid engineering. With over five years of experience, I specialize in building modern, scalable web applications.",
+    "quote": "My goal is to transform complex ideas into intuitive and memorable interfaces.",
+    "paragraph2": "I work with technologies like React, Next.js, TypeScript and Node.js to take projects from conception to production. I'm passionate about clean code, web performance and accessibility.",
+    "paragraph3": "Outside of code, you'll find me exploring new technologies, sharing knowledge on my blog, or looking for the next idea to build."
+  },
+  "projects": {
+    "sectionNumber": "02",
+    "sectionLabel": "Projects",
+    "sectionTitle": "Selected work",
+    "items": {
+      "proyecto-saas": {
+        "title": "Analytics SaaS Platform",
+        "description": "Real-time dashboard for business metrics visualization. Serverless architecture with data processing at scale."
+      },
+      "app-mobile": {
+        "title": "Productivity App",
+        "description": "Mobile application for task and habit management with cloud synchronization."
+      },
+      "ecommerce": {
+        "title": "Headless E-commerce",
+        "description": "Online store with headless CMS, payment gateway and inventory management system."
+      }
+    }
+  },
+  "blog": {
+    "sectionNumber": "03",
+    "sectionLabel": "Blog",
+    "sectionTitle": "Latest articles",
+    "viewAll": "View all articles",
+    "pageTitle": "Blog",
+    "pageDescription": "Articles about web development, technology and more.",
+    "comingSoon": "Coming soon...",
+    "postComingSoon": "Article content coming soon...",
+    "categoryPrefix": "Category:",
+    "categoryComingSoon": "Articles in this category coming soon...",
+    "items": {
+      "arquitectura-frontend-2026": {
+        "title": "Frontend Architecture in 2026: Patterns that Matter",
+        "excerpt": "A tour of the architectural patterns that are defining how we build modern web applications, from server components to micro-frontends.",
+        "category": "Architecture"
+      },
+      "typescript-avanzado": {
+        "title": "Advanced TypeScript: Types that Work for You",
+        "excerpt": "How to leverage TypeScript's type system to write safer and more expressive code.",
+        "category": "TypeScript"
+      },
+      "productividad-developer": {
+        "title": "My Productivity Setup as a Developer",
+        "excerpt": "The tools, workflows and habits that keep me focused and productive.",
+        "category": "Productivity"
+      }
+    }
+  },
+  "contact": {
+    "sectionNumber": "04",
+    "sectionLabel": "Contact",
+    "title1": "Let's build something",
+    "title2": "together.",
+    "description": "I'm always open to new projects, creative ideas or the opportunity to be part of something great.",
+    "cta": "Get in touch"
+  },
+  "footer": {
+    "tagline": "Web developer crafting digital experiences.",
+    "navHeading": "Navigation",
+    "contactHeading": "Contact",
+    "copyright": "© 2026 betooxx. All rights reserved."
+  },
+  "now": {
+    "pageTitle": "Now",
+    "pageDescription": "What I'm doing right now.",
+    "comingSoon": "Coming soon..."
+  }
+}

@@ -1,24 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-	/* Navy palette */
-	--color-navy-50: #e6e8f0;
-	--color-navy-100: #c2c7d9;
-	--color-navy-200: #9ba3bf;
-	--color-navy-300: #7280a5;
-	--color-navy-400: #4f5f8a;
-	--color-navy-500: #364570;
-	--color-navy-600: #2a3558;
-	--color-navy-700: #1c2440;
-	--color-navy-800: #111729;
-	--color-navy-900: #0a0e1a;
-	--color-navy-950: #060810;
+  /* Navy palette */
+  --color-navy-50: #e6e8f0;
+  --color-navy-100: #c2c7d9;
+  --color-navy-200: #9ba3bf;
+  --color-navy-300: #7280a5;
+  --color-navy-400: #4f5f8a;
+  --color-navy-500: #364570;
+  --color-navy-600: #2a3558;
+  --color-navy-700: #1c2440;
+  --color-navy-800: #111729;
+  --color-navy-900: #0a0e1a;
+  --color-navy-950: #060810;
 
-	/* Accent — azul oscuro */
-	--color-accent-300: #7ba6db;
-	--color-accent-400: #4a80c4;
-	--color-accent-500: #2563a8;
-	--color-accent-600: #1b4f8a;
-	--color-accent-700: #133a6b;
+  /* Accent — azul oscuro */
+  --color-accent-300: #7ba6db;
+  --color-accent-400: #4a80c4;
+  --color-accent-500: #2563a8;
+  --color-accent-600: #1b4f8a;
+  --color-accent-700: #133a6b;
 
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-heading: var(--font-playfair), Georgia, serif;
+}
+
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 3.5em;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  color: var(--color-accent-400);
 }

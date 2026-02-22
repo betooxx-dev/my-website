@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "title": "betooxx | Desarrollador Web",
+    "description": "Sitio personal de betooxx — desarrollador web creando experiencias digitales."
+  },
+  "navbar": {
+    "home": "Inicio",
+    "blog": "Blog",
+    "now": "Now",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "socialLabel": "Conecta conmigo"
+  },
+  "about": {
+    "sectionNumber": "01",
+    "sectionLabel": "Sobre mí",
+    "sectionTitle": "La historia detrás del código",
+    "paragraph1": "Soy un desarrollador web apasionado por crear experiencias digitales que combinan diseño elegante con ingeniería sólida. Con más de cinco años de experiencia, me especializo en construir aplicaciones web modernas y escalables.",
+    "quote": "Mi objetivo es transformar ideas complejas en interfaces intuitivas y memorables.",
+    "paragraph2": "Trabajo con tecnologías como React, Next.js, TypeScript y Node.js para llevar proyectos desde la concepción hasta producción. Me apasiona el código limpio, el rendimiento web y la accesibilidad.",
+    "paragraph3": "Fuera del código, me encuentras explorando nuevas tecnologías, compartiendo conocimiento en mi blog, o buscando la próxima idea que construir."
+  },
+  "projects": {
+    "sectionNumber": "02",
+    "sectionLabel": "Proyectos",
+    "sectionTitle": "Trabajo seleccionado",
+    "items": {
+      "proyecto-saas": {
+        "title": "Plataforma SaaS de Analítica",
+        "description": "Dashboard en tiempo real para visualización de métricas de negocio. Arquitectura serverless con procesamiento de datos a escala."
+      },
+      "app-mobile": {
+        "title": "App de Productividad",
+        "description": "Aplicación móvil para gestión de tareas y hábitos con sincronización en la nube."
+      },
+      "ecommerce": {
+        "title": "E-commerce Headless",
+        "description": "Tienda online con CMS headless, pasarela de pagos y sistema de inventario."
+      }
+    }
+  },
+  "blog": {
+    "sectionNumber": "03",
+    "sectionLabel": "Blog",
+    "sectionTitle": "Últimos artículos",
+    "viewAll": "Ver todos los artículos",
+    "pageTitle": "Blog",
+    "pageDescription": "Artículos sobre desarrollo web, tecnología y más.",
+    "comingSoon": "Próximamente...",
+    "postComingSoon": "Contenido del artículo próximamente...",
+    "categoryPrefix": "Categoría:",
+    "categoryComingSoon": "Artículos de esta categoría próximamente...",
+    "items": {
+      "arquitectura-frontend-2026": {
+        "title": "Arquitectura Frontend en 2026: Patrones que Importan",
+        "excerpt": "Un recorrido por los patrones de arquitectura que están definiendo cómo construimos aplicaciones web modernas, desde server components hasta micro-frontends.",
+        "category": "Arquitectura"
+      },
+      "typescript-avanzado": {
+        "title": "TypeScript Avanzado: Tipos que Trabajan por Ti",
+        "excerpt": "Cómo aprovechar el sistema de tipos de TypeScript para escribir código más seguro y expresivo.",
+        "category": "TypeScript"
+      },
+      "productividad-developer": {
+        "title": "Mi Setup de Productividad como Developer",
+        "excerpt": "Las herramientas, flujos de trabajo y hábitos que me mantienen enfocado y productivo.",
+        "category": "Productividad"
+      }
+    }
+  },
+  "contact": {
+    "sectionNumber": "04",
+    "sectionLabel": "Contacto",
+    "title1": "Construyamos algo",
+    "title2": "juntos.",
+    "description": "Siempre estoy abierto a nuevos proyectos, ideas creativas o la oportunidad de ser parte de algo grande.",
+    "cta": "Escríbeme"
+  },
+  "footer": {
+    "tagline": "Desarrollador web creando experiencias digitales.",
+    "navHeading": "Navegación",
+    "contactHeading": "Contacto",
+    "copyright": "© 2026 betooxx. Todos los derechos reservados."
+  },
+  "now": {
+    "pageTitle": "Now",
+    "pageDescription": "Lo que estoy haciendo ahora mismo.",
+    "comingSoon": "Próximamente..."
+  }
+}
