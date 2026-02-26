@@ -6,7 +6,7 @@ export default async function HeroSection() {
   const t = await getTranslations("hero");
 
   return (
-    <section className="relative h-screen overflow-hidden bg-pine-900">
+    <section id="top" className="relative h-screen overflow-hidden bg-pine-900">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image

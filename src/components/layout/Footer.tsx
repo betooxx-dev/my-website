@@ -3,7 +3,7 @@ import SocialLinks from "@/components/shared/SocialLinks";
 import { Link } from "@/i18n/navigation";
 
 const navKeys = ["home", "blog", "now"] as const;
-const navHrefs = { home: "/", blog: "/blog", now: "/now" } as const;
+const navHrefs = { home: "/#top", blog: "/blog", now: "/now" } as const;
 
 export default async function Footer() {
   const t = await getTranslations("footer");
@@ -16,7 +16,7 @@ export default async function Footer() {
           {/* Brand */}
           <div>
             <Link
-              href="/"
+              href="/#top"
               className="text-xl font-bold tracking-tight text-pine-900"
             >
               <span className="text-pine-700">b</span>etooxx

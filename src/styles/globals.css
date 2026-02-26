@@ -13,6 +13,16 @@
   --font-heading: var(--font-playfair), Georgia, serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .drop-cap::first-letter {
   float: left;
   font-family: var(--font-playfair), Georgia, serif;
