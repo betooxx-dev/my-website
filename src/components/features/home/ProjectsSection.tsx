@@ -12,9 +12,9 @@ export default async function ProjectsSection() {
   const secondary = projects.filter((p) => !p.featured);
 
   return (
-    <section className="relative bg-navy-950 py-24 md:py-32">
+    <section className="relative -mt-10 rounded-t-[2.5rem] bg-pine-900 pb-24 pt-32 md:-mt-14 md:rounded-t-[3rem] md:pb-32 md:pt-36">
       {/* Top separator */}
-      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent-500/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-mint-50/25 to-transparent" />
 
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader

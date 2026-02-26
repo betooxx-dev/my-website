@@ -1,7 +1,7 @@
 const socials = [
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/betooxx",
+    href: "https://www.linkedin.com/in/alberto-avenda%C3%B1o",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -16,7 +16,7 @@ const socials = [
   },
   {
     name: "X",
-    href: "https://x.com/betooxx",
+    href: "https://x.com/betooxx_dev",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -31,7 +31,7 @@ const socials = [
   },
   {
     name: "Instagram",
-    href: "https://instagram.com/betooxx",
+    href: "https://www.instagram.com/avendanooxx",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -46,7 +46,7 @@ const socials = [
   },
   {
     name: "Facebook",
-    href: "https://facebook.com/betooxx",
+    href: "https://www.facebook.com/alberto.avendano.205880",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -61,7 +61,7 @@ const socials = [
   },
   {
     name: "TikTok",
-    href: "https://tiktok.com/@betooxx",
+    href: "https://www.tiktok.com/@avendanooxx",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -74,39 +74,49 @@ const socials = [
       </svg>
     ),
   },
-  {
-    name: "Twitch",
-    href: "https://twitch.tv/betooxx",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="h-5 w-5"
-        aria-hidden="true"
-      >
-        <title>Twitch</title>
-        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z" />
-      </svg>
-    ),
-  },
-  {
-    name: "Medium",
-    href: "https://medium.com/@betooxx",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="h-5 w-5"
-        aria-hidden="true"
-      >
-        <title>Medium</title>
-        <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-      </svg>
-    ),
-  },
+  // {
+  //   name: "Twitch",
+  //   href: "https://twitch.tv/betooxx",
+  //   icon: (
+  //     <svg
+  //       viewBox="0 0 24 24"
+  //       fill="currentColor"
+  //       className="h-5 w-5"
+  //       aria-hidden="true"
+  //     >
+  //       <title>Twitch</title>
+  //       <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z" />
+  //     </svg>
+  //   ),
+  // },
+  // {
+  //   name: "Medium",
+  //   href: "https://medium.com/@betooxx",
+  //   icon: (
+  //     <svg
+  //       viewBox="0 0 24 24"
+  //       fill="currentColor"
+  //       className="h-5 w-5"
+  //       aria-hidden="true"
+  //     >
+  //       <title>Medium</title>
+  //       <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+  //     </svg>
+  //   ),
+  // },
 ] as const;
 
-export default function SocialLinks() {
+interface SocialLinksProps {
+  tone?: "light" | "lightSolid" | "dark";
+}
+
+export default function SocialLinks({ tone = "light" }: SocialLinksProps) {
+  const toneClasses = {
+    dark: "text-pine-700/80 hover:text-pine-900",
+    light: "text-mint-50/60 hover:text-mint-50",
+    lightSolid: "text-mint-50 hover:text-mint-50",
+  }[tone];
+
   return (
     <div className="flex items-center gap-4">
       {socials.map((social) => (
@@ -115,7 +125,7 @@ export default function SocialLinks() {
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-navy-300 transition-colors hover:text-white"
+          className={`${toneClasses} transition-colors`}
           aria-label={social.name}
         >
           {social.icon}

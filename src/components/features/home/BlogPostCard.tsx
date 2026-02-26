@@ -37,9 +37,9 @@ export default function BlogPostCard({
     return (
       <Link
         href={`/blog/${slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-sm bg-navy-800/50 transition-colors hover:bg-navy-800"
+        className="group flex h-full flex-col overflow-hidden rounded-3xl border border-mint-50/15 bg-pine-900/70 transition-colors hover:border-mint-50/30 hover:bg-pine-900"
       >
-        <div className="relative aspect-video overflow-hidden bg-navy-700">
+        <div className="relative aspect-video overflow-hidden bg-pine-700">
           {image && (
             <Image
               src={image}
@@ -49,19 +49,19 @@ export default function BlogPostCard({
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-pine-900/75 to-transparent" />
         </div>
         <div className="flex flex-1 flex-col p-5 md:p-6">
-          <span className="mb-2 font-mono text-xs uppercase text-accent-500">
+          <span className="mb-2 font-mono text-xs uppercase text-mint-50/80">
             {category}
           </span>
-          <h3 className="mb-2 font-heading text-xl font-bold text-white md:text-2xl">
+          <h3 className="mb-2 font-heading text-xl font-bold text-mint-50 md:text-2xl">
             {title}
           </h3>
-          <p className="mb-4 flex-1 text-sm leading-relaxed text-navy-300">
+          <p className="mb-4 flex-1 text-sm leading-relaxed text-mint-50/75">
             {excerpt}
           </p>
-          <span className="font-mono text-xs text-navy-400">
+          <span className="font-mono text-xs text-mint-50/50">
             {formatDate(date, locale)}
           </span>
         </div>
@@ -72,18 +72,18 @@ export default function BlogPostCard({
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group flex flex-col rounded-sm border border-white/5 p-5 transition-colors hover:border-white/10 hover:bg-navy-800/30 md:p-6"
+      className="group flex flex-col rounded-3xl border border-mint-50/20 p-5 transition-colors hover:border-mint-50/40 hover:bg-pine-900/40 md:p-6"
     >
-      <span className="mb-3 font-mono text-xs uppercase text-accent-500">
+      <span className="mb-3 font-mono text-xs uppercase text-mint-50/80">
         {category}
       </span>
-      <h3 className="mb-2 font-heading text-lg font-bold text-white">
+      <h3 className="mb-2 font-heading text-lg font-bold text-mint-50">
         {title}
       </h3>
-      <p className="mb-4 flex-1 text-sm leading-relaxed text-navy-300">
+      <p className="mb-4 flex-1 text-sm leading-relaxed text-mint-50/75">
         {excerpt}
       </p>
-      <span className="font-mono text-xs text-navy-400">
+      <span className="font-mono text-xs text-mint-50/50">
         {formatDate(date, locale)}
       </span>
     </Link>

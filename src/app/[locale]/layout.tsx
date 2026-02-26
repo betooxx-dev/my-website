@@ -46,7 +46,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} bg-pine-900 text-mint-50 antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           {children}
