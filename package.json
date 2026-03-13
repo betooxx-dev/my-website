@@ -13,7 +13,7 @@
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint-staged && npm test"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": "biome check --write"
