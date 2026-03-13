@@ -155,7 +155,7 @@ Biome maneja tanto lint como formato. Configuración en `biome.json`.
 
 ## Convenciones de commits
 
-Seguir **Conventional Commits**: `type: descripción en infinitivo`
+Seguir **Conventional Commits**: `type: slug`
 
 ```
 feat: add experience section with company logos
