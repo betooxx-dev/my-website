@@ -28,7 +28,9 @@ html {
   }
 
   .hero-text-line {
+    /* biome-ignore lint/complexity/noImportantStyles: needed to override Framer Motion inline styles for reduced-motion */
     opacity: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: needed to override Framer Motion inline styles for reduced-motion */
     transform: none !important;
   }
 }
