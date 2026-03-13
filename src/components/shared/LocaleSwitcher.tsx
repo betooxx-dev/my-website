@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
 const localeLabels: Record<(typeof routing.locales)[number], string> = {
-  es: "Espanol",
+  es: "Español",
   en: "English",
 };
 
@@ -60,7 +60,7 @@ export default function LocaleSwitcher() {
         onClick={() => setIsOpen((prev) => !prev)}
         className="flex items-center gap-2 rounded-full border border-mint-50/20 bg-pine-900/55 px-3 py-1.5 transition-colors hover:border-mint-50/35 focus:border-mint-50/40 focus:outline-none"
       >
-        <span className="font-mono text-xs text-mint-50/75">
+        <span className="font-mono text-sm text-mint-50/75">
           {currentLocale.toUpperCase()}
         </span>
         <svg

@@ -19,7 +19,8 @@ export default async function Footer() {
               href="/#top"
               className="text-xl font-bold tracking-tight text-pine-900"
             >
-              <span className="text-pine-700">b</span>etooxx
+              <span className="text-amber-500">A</span>lberto{" "}
+              <span className="text-amber-500">A</span>vendaño
             </Link>
             <p className="mt-3 text-sm text-pine-700/80">{t("tagline")}</p>
             <div className="mt-4 flex justify-center lg:justify-start">
@@ -29,7 +30,7 @@ export default async function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="mb-4 font-mono text-xs uppercase tracking-widest text-pine-700/70">
+            <h4 className="mb-4 font-mono text-xs uppercase tracking-widest text-amber-500/70">
               {t("navHeading")}
             </h4>
             <ul className="space-y-3">
@@ -37,7 +38,7 @@ export default async function Footer() {
                 <li key={key}>
                   <Link
                     href={navHrefs[key]}
-                    className="text-sm text-pine-900/80 transition-colors hover:text-pine-900"
+                    className="text-sm text-pine-900/70 transition-colors hover:text-pine-900"
                   >
                     {navT(key)}
                   </Link>
@@ -48,20 +49,20 @@ export default async function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="mb-4 font-mono text-xs uppercase tracking-widest text-pine-700/70">
+            <h4 className="mb-4 font-mono text-xs uppercase tracking-widest text-amber-500/70">
               {t("contactHeading")}
             </h4>
             <a
               href="mailto:contacto@betooxx.dev"
-              className="text-sm text-pine-900/80 transition-colors hover:text-pine-900"
+              className="text-sm text-pine-900/70 transition-colors hover:text-pine-900"
             >
               contacto@betooxx.dev
             </a>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-pine-900/15 pt-8">
-          <p className="text-center font-mono text-xs text-pine-700/80">
+        <div className="mt-12 border-t border-pine-900/10 pt-8">
+          <p className="text-center font-mono text-xs text-pine-700/60">
             {t("copyright")}
           </p>
         </div>
