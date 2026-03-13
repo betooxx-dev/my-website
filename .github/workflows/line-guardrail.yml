@@ -2,8 +2,9 @@ name: Code File Line Guardrail
 
 on:
   pull_request:
+    branches: [master, develop]
   push:
-    branches: [main]
+    branches: [master, develop]
   workflow_dispatch:
     inputs:
       base_ref:
@@ -33,7 +34,7 @@ jobs:
           set -euo pipefail
 
           event_name="${{ github.event_name }}"
-          default_base="origin/main"
+          default_base="origin/master"
           zero_sha="0000000000000000000000000000000000000000"
           base_ref=""
           head_ref="HEAD"
