@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
+import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
@@ -29,9 +30,7 @@ export const viewport: Viewport = {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata");
   return {
-    metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL ?? "https://betooxx.com",
-    ),
+    metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
     title: {
       default: t("title"),
       template: "%s | Alberto",

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { env } from "@/env";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://betooxx.com";
+const base = env.NEXT_PUBLIC_SITE_URL;
 const locales = ["es", "en"] as const;
 
 const staticRoutes = ["", "/blog", "/now"] as const;
