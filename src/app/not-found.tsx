@@ -1,4 +1,5 @@
 import Link from "next/link";
+import "@/styles/not-found.css";
 
 // Root-level fallback — no next-intl context available here.
 // Strings are intentionally hardcoded (English fallback for invalid locales).
@@ -11,16 +12,25 @@ const copy = {
 
 export default function RootNotFound() {
   return (
-    <html lang="en" className="bg-pine-900">
-      <body className="m-0 bg-pine-900 font-sans text-mint-50 antialiased">
+    <html lang="en" className="nf-html">
+      <body className="nf-body">
         {/* Radial amber atmosphere */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 flex items-center justify-center"
+          style={{
+            position: "fixed",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+          }}
         >
           <div
-            className="h-[700px] w-[700px] rounded-full"
             style={{
+              width: 700,
+              height: 700,
+              borderRadius: "50%",
               background:
                 "radial-gradient(circle, rgba(212,165,116,0.05) 0%, transparent 65%)",
             }}
@@ -30,41 +40,111 @@ export default function RootNotFound() {
         {/* Ghost 404 — typographic watermark */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 flex select-none items-center justify-center"
+          className="nf-reveal"
+          style={{
+            position: "fixed",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+            userSelect: "none",
+            animationDelay: "0s",
+          }}
         >
-          <span className="font-serif text-[30vw] font-bold leading-none text-mint-50/[0.03]">
+          <span
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "30vw",
+              fontWeight: 700,
+              lineHeight: 1,
+              color: "rgba(244,255,248,0.03)",
+            }}
+          >
             404
           </span>
         </div>
 
         {/* Content */}
-        <main className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        <main
+          style={{
+            position: "relative",
+            zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "100vh",
+            textAlign: "center",
+            padding: "0 24px",
+          }}
+        >
           {/* Label */}
-          <p className="mb-6 font-mono text-[11px] tracking-[0.35em] uppercase text-amber-400">
+          <p
+            className="nf-reveal"
+            style={{
+              fontFamily: "'DM Mono', ui-monospace, monospace",
+              fontSize: 11,
+              letterSpacing: "0.35em",
+              textTransform: "uppercase",
+              color: "#d4a574",
+              marginBottom: 24,
+              animationDelay: "0.3s",
+            }}
+          >
             {copy.label}
           </p>
 
           {/* Thin amber rule */}
-          <div aria-hidden="true" className="mb-8 h-px w-8 bg-amber-400/40" />
+          <div
+            aria-hidden="true"
+            className="nf-reveal"
+            style={{
+              height: 1,
+              width: 32,
+              background: "rgba(212,165,116,0.4)",
+              marginBottom: 32,
+              animationDelay: "0.42s",
+            }}
+          />
 
           {/* Heading */}
-          <h1 className="mb-4 font-serif text-4xl font-bold tracking-tight text-mint-50">
+          <h1
+            className="nf-reveal"
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(28px, 5vw, 40px)",
+              fontWeight: 700,
+              color: "#f4fff8",
+              letterSpacing: "-0.02em",
+              marginBottom: 16,
+              animationDelay: "0.5s",
+            }}
+          >
             {copy.heading}
           </h1>
 
           {/* Description */}
-          <p className="mb-10 max-w-[22rem] text-sm leading-relaxed text-mint-50/50">
+          <p
+            className="nf-reveal"
+            style={{
+              fontSize: 14,
+              lineHeight: 1.7,
+              color: "rgba(244,255,248,0.5)",
+              maxWidth: 340,
+              marginBottom: 40,
+              animationDelay: "0.6s",
+            }}
+          >
             {copy.body}
           </p>
 
           {/* CTA */}
-          <Link
-            href="/"
-            className="group relative font-mono text-[11px] tracking-[0.2em] uppercase text-amber-400 transition-colors duration-300 hover:text-amber-300"
-          >
-            {copy.cta}
-            <span className="absolute -bottom-1 left-0 h-px w-0 bg-amber-400 transition-all duration-500 group-hover:w-full" />
-          </Link>
+          <div className="nf-reveal" style={{ animationDelay: "0.72s" }}>
+            <Link href="/" className="nf-cta">
+              {copy.cta}
+            </Link>
+          </div>
         </main>
       </body>
     </html>

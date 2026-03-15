@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Mono&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.nf-html {
+  background: #000f08;
+}
+
+.nf-body {
+  margin: 0;
+  background: #000f08;
+  color: #f4fff8;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Film grain — mirrors globals.css body::after */
+.nf-body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+@keyframes nfReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nf-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: nfReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nf-cta {
+  position: relative;
+  color: #d4a574;
+  text-decoration: none;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.nf-cta::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #d4a574;
+  transition: width 0.5s ease;
+}
+
+.nf-cta:hover {
+  color: #e8c9a0;
+}
+
+.nf-cta:hover::after {
+  width: 100%;
+}
