@@ -53,10 +53,10 @@ export default async function Footer() {
               {t("contactHeading")}
             </h4>
             <a
-              href="mailto:contacto@betooxx.dev"
+              href="mailto:avendanoargueta.josealberto@gmail.com"
               className="text-sm text-pine-900/70 transition-colors hover:text-pine-900"
             >
-              contacto@betooxx.dev
+              avendanoargueta.josealberto@gmail.com
             </a>
           </div>
         </div>

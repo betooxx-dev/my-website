@@ -45,13 +45,17 @@ function extractUsageFromFile(
   const dynamicNamespaces = new Set<string>();
 
   // Build varName → namespace map for all getTranslations/useTranslations bindings
+  // Handles both string form: getTranslations("ns") and object form: getTranslations({ locale, namespace: "ns" })
   const bindingRegex =
-    /const\s+(\w+)\s*=\s*(?:await\s+)?(?:get|use)Translations\s*\(\s*["'](\w+)["']\s*\)/g;
+    /const\s+(\w+)\s*=\s*(?:await\s+)?(?:get|use)Translations\s*\(\s*(?:["'](\w+)["']|\{[^}]*namespace\s*:\s*["'](\w+)["'][^}]*\})\s*\)/g;
 
   const varNamespaceMap = new Map<string, string>();
 
-  for (const [, varName, namespace] of content.matchAll(bindingRegex)) {
-    varNamespaceMap.set(varName, namespace);
+  for (const [, varName, nsString, nsObject] of content.matchAll(
+    bindingRegex,
+  )) {
+    const namespace = nsString ?? nsObject;
+    if (namespace) varNamespaceMap.set(varName, namespace);
   }
 
   for (const [varName, namespace] of varNamespaceMap) {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 interface ProjectCardProps {
   title: string;
@@ -11,7 +12,7 @@ interface ProjectCardProps {
   wip?: boolean;
 }
 
-export default function ProjectCard({
+export default async function ProjectCard({
   title,
   description,
   image,
@@ -21,6 +22,7 @@ export default function ProjectCard({
   featured,
   wip,
 }: ProjectCardProps) {
+  const t = await getTranslations("projects");
   const number = String(index + 1).padStart(2, "0");
 
   return (
@@ -58,7 +60,7 @@ export default function ProjectCard({
               <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
             </span>
             <span className="font-mono text-xs text-amber-300">
-              En progreso
+              {t("inProgress")}
             </span>
           </div>
         )}

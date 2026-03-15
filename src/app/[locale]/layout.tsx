@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -21,10 +21,21 @@ const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata");
   return {
-    title: t("title"),
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ?? "https://betooxx.com",
+    ),
+    title: {
+      default: t("title"),
+      template: "%s | Alberto",
+    },
     description: t("description"),
     icons: {
       icon: "/icon.svg",

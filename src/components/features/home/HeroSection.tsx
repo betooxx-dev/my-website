@@ -11,8 +11,9 @@ export default async function HeroSection() {
       <div className="absolute inset-0">
         <Image
           src="/banner-com-02.png"
-          alt="Banner principal"
+          alt={t("bannerAlt")}
           fill
+          sizes="100vw"
           className="object-cover object-[70%_center] md:object-left"
           priority
           quality={90}

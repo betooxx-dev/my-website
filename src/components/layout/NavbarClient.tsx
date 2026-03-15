@@ -58,7 +58,7 @@ export default function NavbarClient({ labels }: NavbarClientProps) {
         <div className="flex items-center gap-3">
           <LocaleSwitcher />
           <Link
-            href="mailto:contacto@betooxx.dev"
+            href="mailto:avendanoargueta.josealberto@gmail.com"
             className="rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-m font-medium text-amber-300 transition-all hover:border-amber-400/50 hover:bg-amber-400/20"
           >
             {labels.contact}

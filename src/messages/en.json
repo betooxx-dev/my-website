@@ -14,7 +14,8 @@
     "name": "Alberto",
     "title": "Web Developer",
     "subtitle": "I craft digital experiences with elegant design and solid engineering.",
-    "socialLabel": "Connect with me"
+    "socialLabel": "Connect with me",
+    "bannerAlt": "Main banner"
   },
   "experience": {
     "sectionNumber": "01",
@@ -24,7 +25,8 @@
   "projects": {
     "sectionNumber": "02",
     "sectionLabel": "Projects",
-    "sectionTitle": "Selected work"
+    "sectionTitle": "Selected work",
+    "inProgress": "In progress"
   },
   "blog": {
     "sectionNumber": "03",
@@ -52,9 +54,18 @@
     "contactHeading": "Contact",
     "copyright": "© 2026 betooxx. All rights reserved."
   },
+  "common": {
+    "wipLabel": "Under construction"
+  },
   "now": {
     "pageTitle": "Now",
     "pageDescription": "What I'm doing right now.",
     "comingSoon": "Coming soon..."
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "cta": "Back to home"
   }
 }

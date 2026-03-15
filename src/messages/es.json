@@ -14,7 +14,8 @@
     "name": "Alberto",
     "title": "Desarrollador Web",
     "subtitle": "Creo experiencias digitales con diseño elegante e ingeniería sólida.",
-    "socialLabel": "Conecta conmigo"
+    "socialLabel": "Conecta conmigo",
+    "bannerAlt": "Banner principal"
   },
   "experience": {
     "sectionNumber": "01",
@@ -24,7 +25,8 @@
   "projects": {
     "sectionNumber": "02",
     "sectionLabel": "Proyectos",
-    "sectionTitle": "Trabajo seleccionado"
+    "sectionTitle": "Trabajo seleccionado",
+    "inProgress": "En progreso"
   },
   "blog": {
     "sectionNumber": "03",
@@ -52,9 +54,18 @@
     "contactHeading": "Contacto",
     "copyright": "© 2026 Alberto. Todos los derechos reservados."
   },
+  "common": {
+    "wipLabel": "En construcción"
+  },
   "now": {
     "pageTitle": "Now",
     "pageDescription": "Lo que estoy haciendo ahora mismo.",
     "comingSoon": "Próximamente..."
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Página no encontrada",
+    "description": "La página que buscas no existe o fue movida.",
+    "cta": "Volver al inicio"
   }
 }

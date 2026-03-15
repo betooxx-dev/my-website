@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@swc/helpers": "^0.5.18",
+    "axios": "^1.13.6",
     "framer-motion": "^12.34.3",
     "next": "16.1.6",
     "next-intl": "^4.8.3",

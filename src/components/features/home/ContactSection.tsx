@@ -56,7 +56,7 @@ export default async function ContactSection() {
 
             {/* Secondary — email */}
             <a
-              href="mailto:contacto@betooxx.dev"
+              href="mailto:avendanoargueta.josealberto@gmail.com"
               className="inline-block rounded-full border border-mint-50/20 px-10 py-4 font-medium text-mint-50/70 transition-all duration-300 hover:border-mint-50/40 hover:text-mint-50"
             >
               {t("cta")}

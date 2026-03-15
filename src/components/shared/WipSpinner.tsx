@@ -1,8 +1,11 @@
+import { getTranslations } from "next-intl/server";
+
 interface WipSpinnerProps {
   tone?: "dark" | "light";
 }
 
-export default function WipSpinner({ tone = "dark" }: WipSpinnerProps) {
+export default async function WipSpinner({ tone = "dark" }: WipSpinnerProps) {
+  const t = await getTranslations("common");
   const isDark = tone === "dark";
 
   return (
@@ -55,7 +58,7 @@ export default function WipSpinner({ tone = "dark" }: WipSpinnerProps) {
         <p
           className={`font-mono text-xs uppercase tracking-widest ${isDark ? "text-pine-900/35" : "text-mint-50/35"}`}
         >
-          En construcción
+          {t("wipLabel")}
         </p>
       </div>
     </div>
