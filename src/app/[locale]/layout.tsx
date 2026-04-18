@@ -60,6 +60,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} bg-pine-900 text-mint-50 antialiased`}
+        suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
           {children}

@@ -14,8 +14,10 @@
     "name": "Alberto",
     "title": "Desarrollador Web",
     "subtitle": "Creo experiencias digitales con diseño elegante e ingeniería sólida.",
-    "socialLabel": "Conecta conmigo",
-    "bannerAlt": "Banner principal"
+    "bannerAlt": "Retrato de Alberto",
+    "portraitLabel": "Portrait · 2026 · MX",
+    "availableLabel": "Disponible para nuevos proyectos",
+    "portraitCode": "AA / 001"
   },
   "experience": {
     "sectionNumber": "01",
@@ -52,10 +54,13 @@
     "tagline": "Desarrollador web creando experiencias digitales.",
     "navHeading": "Navegación",
     "contactHeading": "Contacto",
+    "socialHeading": "Social",
+    "craftedLabel": "Hecho con cuidado",
     "copyright": "© 2026 Alberto. Todos los derechos reservados."
   },
   "common": {
-    "wipLabel": "En construcción"
+    "wipLabel": "En construcción",
+    "externalLink": "Enlace externo"
   },
   "now": {
     "pageTitle": "Now",

@@ -99,9 +99,131 @@ body::after {
     opacity: 0.4;
   }
   100% {
-    transform: scale(1.15);
+    transform: scale(1.45);
     opacity: 0;
   }
+}
+
+/* Hero portrait card — fade + slide-in from left */
+@keyframes heroCardReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(-40px, 0, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.hero-card-reveal {
+  opacity: 0;
+  animation: heroCardReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* Hero underline — draws in from 0 → 100% */
+@keyframes lineDraw {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.hero-line-draw {
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: lineDraw 1.2s cubic-bezier(0.7, 0, 0.3, 1) 0.9s forwards;
+}
+
+/* Marquee — horizontal infinite scroll */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 50s linear infinite;
+}
+
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Floating card — white paper on black canvas */
+.paper-card {
+  background: var(--color-mint-50);
+  color: var(--color-pine-900);
+  border-radius: 28px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px -24px rgba(0, 0, 0, 0.65),
+    0 8px 24px -12px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.paper-card-dark {
+  background: linear-gradient(180deg, #232325 0%, #1a1a1c 100%);
+  color: var(--color-mint-50);
+  border: 1px solid rgba(245, 245, 247, 0.06);
+  border-radius: 28px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px -24px rgba(0, 0, 0, 0.75);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s ease;
+}
+
+.paper-card-dark:hover {
+  border-color: rgba(212, 165, 116, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 30px 80px -24px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(212, 165, 116, 0.08),
+    0 0 60px -8px rgba(212, 165, 116, 0.18);
+}
+
+/* Aurora — slow-moving amber light behind hero / contact */
+@keyframes auroraDrift {
+  0%,
+  100% {
+    transform: translate3d(-8%, -4%, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(8%, 4%, 0) scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+.aurora {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      60% 50% at 30% 40%,
+      rgba(212, 165, 116, 0.22) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      50% 40% at 70% 60%,
+      rgba(184, 135, 90, 0.18) 0%,
+      transparent 60%
+    );
+  filter: blur(40px);
+  pointer-events: none;
+  animation: auroraDrift 16s ease-in-out infinite;
 }
 
 /* WIP spinner arc */
@@ -113,4 +235,9 @@ body::after {
 
 .wip-spinner {
   animation: spinArc 1.4s linear infinite;
+}
+
+/* Balanced text for headlines */
+.text-balance {
+  text-wrap: balance;
 }

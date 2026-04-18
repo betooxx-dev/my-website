@@ -14,8 +14,10 @@
     "name": "Alberto",
     "title": "Web Developer",
     "subtitle": "I craft digital experiences with elegant design and solid engineering.",
-    "socialLabel": "Connect with me",
-    "bannerAlt": "Main banner"
+    "bannerAlt": "Portrait of Alberto",
+    "portraitLabel": "Portrait · 2026 · MX",
+    "availableLabel": "Available for new projects",
+    "portraitCode": "AA / 001"
   },
   "experience": {
     "sectionNumber": "01",
@@ -52,10 +54,13 @@
     "tagline": "Web developer crafting digital experiences.",
     "navHeading": "Navigation",
     "contactHeading": "Contact",
+    "socialHeading": "Social",
+    "craftedLabel": "Crafted with care",
     "copyright": "© 2026 betooxx. All rights reserved."
   },
   "common": {
-    "wipLabel": "Under construction"
+    "wipLabel": "Under construction",
+    "externalLink": "External link"
   },
   "now": {
     "pageTitle": "Now",

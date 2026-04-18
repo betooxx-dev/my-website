@@ -1,22 +1,24 @@
 import { getTranslations } from "next-intl/server";
+import ProjectBento from "@/components/features/home/ProjectBento";
+import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeader from "@/components/shared/SectionHeader";
-import WipSpinner from "@/components/shared/WipSpinner";
 
 export default async function ProjectsSection() {
   const t = await getTranslations("projects");
 
   return (
-    <section className="relative -mt-10 rounded-t-[2.5rem] bg-mint-50 pb-24 pt-32 md:-mt-14 md:rounded-t-[3rem] md:pb-32 md:pt-36">
-      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-pine-900/20 to-transparent" />
+    <section className="relative bg-pine-900 py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <ScrollReveal>
+          <SectionHeader
+            number={t("sectionNumber")}
+            label={t("sectionLabel")}
+            title={t("sectionTitle")}
+            tone="light"
+          />
+        </ScrollReveal>
 
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader
-          number={t("sectionNumber")}
-          label={t("sectionLabel")}
-          title={t("sectionTitle")}
-          tone="dark"
-        />
-        <WipSpinner tone="dark" />
+        <ProjectBento inProgressLabel={t("inProgress")} />
       </div>
     </section>
   );

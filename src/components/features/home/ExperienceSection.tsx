@@ -2,63 +2,29 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeader from "@/components/shared/SectionHeader";
-import StaggerContainer from "@/components/shared/StaggerContainer";
-import StaggerItem from "@/components/shared/StaggerItem";
 
 const companies = [
-  {
-    name: "Zifra",
-    label: "Zifra",
-    logo: "/zifra.png",
-    large: true,
-    href: "https://zifra.mx",
-  },
-  {
-    name: "TPX",
-    label: "TPX",
-    logo: "/tpx.png",
-    large: true,
-    href: "https://tpx.mx",
-  },
-  {
-    name: "Hightech",
-    label: "Hightech",
-    logo: "/hightech.png",
-    large: true,
-    href: "https://htpro.dev",
-  },
-  {
-    name: "Handbook",
-    label: "Handbook",
-    logo: "/handbook.png",
-    large: false,
-    href: "https://handbookai.io",
-  },
+  { name: "Zifra", logo: "/zifra.png", href: "https://zifra.mx" },
+  { name: "TPX", logo: "/tpx.png", href: "https://tpx.mx" },
+  { name: "Hightech", logo: "/hightech.png", href: "https://htpro.dev" },
+  { name: "Handbook", logo: "/handbook.png", href: "https://handbookai.io" },
   {
     name: "Agora Partnerships",
-    label: "Agora Partnerships",
     logo: "/agora-partnerships.png",
-    large: false,
     href: "https://agora2030.org",
   },
-  {
-    name: "UPC",
-    label: "Univ. Politècnica de Catalunya",
-    logo: "/upc.png",
-    large: true,
-    href: "https://upc.edu",
-  },
+  { name: "UPC", logo: "/upc.png", href: "https://upc.edu" },
 ] as const;
 
 export default async function ExperienceSection() {
   const t = await getTranslations("experience");
 
+  // Duplicate for seamless marquee loop
+  const doubled = [...companies, ...companies];
+
   return (
     <section className="relative bg-pine-900 py-24 md:py-32">
-      {/* Top separator */}
-      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-mint-50/15 to-transparent" />
-
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
         <ScrollReveal>
           <SectionHeader
             number={t("sectionNumber")}
@@ -67,36 +33,45 @@ export default async function ExperienceSection() {
             tone="light"
           />
         </ScrollReveal>
+      </div>
 
-        <StaggerContainer className="grid grid-cols-3 gap-10 md:gap-16">
-          {companies.map((company) => (
-            <StaggerItem key={company.name} className="flex flex-col">
-              <a
-                href={company.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center"
-              >
-                <div className="relative flex h-24 w-full items-center justify-center md:h-28">
-                  <div
-                    className={`relative w-full transition-all duration-500 group-hover:scale-105 ${company.large ? "h-24 md:h-28" : "h-16 md:h-20"}`}
-                  >
-                    <Image
-                      src={company.logo}
-                      alt={company.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 30vw, 20vw"
-                    />
-                  </div>
-                </div>
-                <span className="pt-3 text-center font-mono text-xs text-mint-50/50 transition-colors group-hover:text-mint-50/80">
-                  {company.label}
-                </span>
-              </a>
-            </StaggerItem>
+      {/* Marquee with edge fade masks */}
+      <div
+        className="marquee-pause relative mt-8"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        }}
+      >
+        <div className="marquee-track flex w-max items-center gap-20 md:gap-28">
+          {doubled.map((company, i) => (
+            <a
+              key={`${company.name}-${i}`}
+              href={company.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative flex h-20 w-40 shrink-0 items-center justify-center md:h-28 md:w-56"
+              aria-label={company.name}
+            >
+              <div className="relative h-full w-full opacity-40 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0">
+                <Image
+                  src={company.logo}
+                  alt={company.name}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 160px, 224px"
+                />
+              </div>
+              {/* Amber glow on hover */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-amber-400/0 blur-2xl transition-all duration-500 group-hover:bg-amber-400/15"
+              />
+            </a>
           ))}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   );

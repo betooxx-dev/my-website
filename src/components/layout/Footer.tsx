@@ -10,27 +10,31 @@ export default async function Footer() {
   const navT = await getTranslations("navbar");
 
   return (
-    <footer className="relative rounded-t-[2.5rem] border-t border-pine-900/10 bg-mint-50 text-pine-900">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-12 text-center md:grid-cols-3 lg:text-left">
-          {/* Brand */}
-          <div>
-            <Link
-              href="/#top"
-              className="text-xl font-bold tracking-tight text-pine-900"
-            >
-              <span className="text-amber-500">A</span>lberto{" "}
-              <span className="text-amber-500">A</span>vendaño
-            </Link>
-            <p className="mt-3 text-sm text-pine-700/80">{t("tagline")}</p>
-            <div className="mt-4 flex justify-center lg:justify-start">
-              <SocialLinks tone="dark" />
-            </div>
-          </div>
+    <footer className="relative bg-pine-900 text-mint-50">
+      {/* Top hairline — gold accent */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
 
+      <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
+        {/* Brand marquee — oversized logotype as closing gesture */}
+        <div className="mb-16 overflow-hidden border-b border-mint-50/10 pb-12">
+          <Link
+            href="/#top"
+            className="block font-heading font-bold leading-[0.9] tracking-[-0.04em] text-mint-50 transition-opacity hover:opacity-80"
+            style={{ fontSize: "clamp(3rem, 10vw, 8rem)" }}
+          >
+            <span className="text-amber-400">A</span>lberto{" "}
+            <span className="text-amber-400">A</span>vendaño
+            <span className="text-amber-400">.</span>
+          </Link>
+          <p className="mt-6 max-w-md text-base text-mint-50/55">
+            {t("tagline")}
+          </p>
+        </div>
+
+        <div className="grid gap-12 md:grid-cols-3">
           {/* Navigation */}
           <div>
-            <h4 className="mb-4 font-mono text-xs uppercase tracking-widest text-amber-500/70">
+            <h4 className="mb-5 font-mono text-[10px] tracking-[0.3em] text-amber-400/70 uppercase">
               {t("navHeading")}
             </h4>
             <ul className="space-y-3">
@@ -38,8 +42,9 @@ export default async function Footer() {
                 <li key={key}>
                   <Link
                     href={navHrefs[key]}
-                    className="text-sm text-pine-900/70 transition-colors hover:text-pine-900"
+                    className="group inline-flex items-center gap-2 font-heading text-lg text-mint-50/70 transition-colors hover:text-mint-50"
                   >
+                    <span className="h-px w-0 bg-amber-400 transition-all duration-300 group-hover:w-6" />
                     {navT(key)}
                   </Link>
                 </li>
@@ -49,22 +54,34 @@ export default async function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="mb-4 font-mono text-xs uppercase tracking-widest text-amber-500/70">
+            <h4 className="mb-5 font-mono text-[10px] tracking-[0.3em] text-amber-400/70 uppercase">
               {t("contactHeading")}
             </h4>
             <a
               href="mailto:avendanoargueta.josealberto@gmail.com"
-              className="text-sm text-pine-900/70 transition-colors hover:text-pine-900"
+              className="break-all font-heading text-lg text-mint-50/70 transition-colors hover:text-amber-300"
             >
               avendanoargueta.josealberto@gmail.com
             </a>
           </div>
+
+          {/* Social */}
+          <div>
+            <h4 className="mb-5 font-mono text-[10px] tracking-[0.3em] text-amber-400/70 uppercase">
+              {t("socialHeading")}
+            </h4>
+            <SocialLinks tone="lightSolid" />
+          </div>
         </div>
 
-        <div className="mt-12 border-t border-pine-900/10 pt-8">
-          <p className="text-center font-mono text-xs text-pine-700/60">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-mint-50/10 pt-8 md:flex-row md:items-center">
+          <p className="font-mono text-[11px] tracking-[0.2em] text-mint-50/40 uppercase">
             {t("copyright")}
           </p>
+          <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] text-mint-50/30 uppercase">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-400" />
+            {t("craftedLabel")}
+          </div>
         </div>
       </div>
     </footer>

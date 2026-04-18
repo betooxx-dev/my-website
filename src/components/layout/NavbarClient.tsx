@@ -21,45 +21,44 @@ export default function NavbarClient({ labels }: NavbarClientProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const dark = scrolled;
-
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-5 pt-3 transition-all duration-500 sm:px-8 sm:pt-4">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 transition-all duration-500 sm:px-8 sm:pt-5">
       <nav
-        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full border px-4 py-4 backdrop-blur-2xl transition-all duration-500 sm:px-5 sm:py-4 ${
-          dark
-            ? "border-pine-700/40 bg-pine-700/60 shadow-[0_8px_32px_rgba(28,55,56,0.25)]"
-            : "border-pine-700/30 bg-pine-700/50 shadow-[0_4px_24px_rgba(28,55,56,0.15)]"
+        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full border px-4 py-3 backdrop-blur-2xl transition-all duration-500 sm:px-5 sm:py-3.5 ${
+          scrolled
+            ? "border-amber-400/20 bg-pine-900/75 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.6)]"
+            : "border-mint-50/10 bg-pine-900/45 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)]"
         }`}
       >
         {/* Logo */}
         <Link
           href="/"
-          className="text-xl font-bold tracking-tight text-mint-50 transition-opacity hover:opacity-80"
+          className="font-heading text-lg font-bold tracking-tight text-mint-50 transition-opacity hover:opacity-80 sm:text-xl"
         >
           <span className="text-amber-400">A</span>lberto{" "}
           <span className="text-amber-400">A</span>vendaño
         </Link>
 
         {/* Navigation Links */}
-        <div className="hidden items-center gap-6 sm:flex">
+        <div className="hidden items-center gap-7 sm:flex">
           {navKeys.map((key) => (
             <Link
               key={key}
               href={navHrefs[key]}
-              className="relative text-xl font-medium text-mint-50/70 transition-colors hover:text-mint-50 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-amber-400 after:transition-all hover:after:w-full"
+              className="group relative text-[15px] font-medium text-mint-50/70 transition-colors hover:text-mint-50"
             >
               {labels[key]}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-amber-400 transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <LocaleSwitcher />
           <Link
             href="mailto:avendanoargueta.josealberto@gmail.com"
-            className="rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-m font-medium text-amber-300 transition-all hover:border-amber-400/50 hover:bg-amber-400/20"
+            className="rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1.5 text-[13px] font-medium text-amber-300 transition-all duration-300 hover:border-amber-400/70 hover:bg-amber-400/20 hover:text-amber-200"
           >
             {labels.contact}
           </Link>
