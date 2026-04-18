@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* Core palette */
-  --color-pine-900: #000f08;
-  --color-pine-700: #1c3738;
-  --color-mint-50: #f4fff8;
+  /* Core palette — Space Black inspired */
+  --color-pine-900: #1d1d1f;
+  --color-pine-700: #2c2c2e;
+  --color-mint-50: #f5f5f7;
 
   /* Accent — warm amber/gold for contrast */
   --color-amber-400: #d4a574;
