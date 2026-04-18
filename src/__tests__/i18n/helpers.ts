@@ -7,11 +7,23 @@ export type TranslationValue = string | TranslationObject;
 export type TranslationObject = { [key: string]: TranslationValue };
 export type FlatTranslations = Record<string, string>;
 
+// ─── Path helpers ─────────────────────────────────────────────────────────────
+
+// Normalize to POSIX separators so assertions like `file.endsWith("src/env.ts")`
+// and `path.replace(cwd + "/", "")` work the same on Windows and macOS/Linux.
+const toPosix = (p: string): string => p.replace(/\\/g, "/");
+
+export const CWD = toPosix(process.cwd());
+
+export function relPath(absolute: string): string {
+  return toPosix(absolute).replace(`${CWD}/`, "");
+}
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 export const SOURCE_LOCALE = "es";
-export const MESSAGES_DIR = join(process.cwd(), "src/messages");
-export const SOURCE_DIR = join(process.cwd(), "src");
+export const MESSAGES_DIR = toPosix(join(process.cwd(), "src/messages"));
+export const SOURCE_DIR = toPosix(join(process.cwd(), "src"));
 
 // ─── JSON loaders ─────────────────────────────────────────────────────────────
 
@@ -77,7 +89,7 @@ export function findSourceFiles(
     if (statSync(fullPath).isDirectory())
       return findSourceFiles(fullPath, excludeDirs);
     if (/\.(ts|tsx)$/.test(entry) && !entry.endsWith(".d.ts"))
-      return [fullPath];
+      return [toPosix(fullPath)];
     return [];
   });
 }

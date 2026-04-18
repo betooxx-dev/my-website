@@ -5,6 +5,7 @@ import {
   flattenKeys,
   loadLocale,
   loadLocaleRaw,
+  relPath,
   SOURCE_DIR,
   SOURCE_LOCALE,
 } from "./helpers";
@@ -104,10 +105,6 @@ function aggregateUsage(files: string[]): AggregatedUsage {
 }
 
 // ─── Error formatting (SRP) ───────────────────────────────────────────────────
-
-function relPath(absolute: string): string {
-  return absolute.replace(`${process.cwd()}/`, "");
-}
 
 function formatUnusedError(
   unused: Array<{ key: string; line: number; value: string }>,

@@ -72,5 +72,12 @@
     "heading": "Página no encontrada",
     "description": "La página que buscas no existe o fue movida.",
     "cta": "Volver al inicio"
+  },
+  "error": {
+    "title": "500",
+    "heading": "Algo salió mal",
+    "description": "Ocurrió un error inesperado. Puedes intentar de nuevo o volver al inicio.",
+    "retry": "Intentar de nuevo",
+    "cta": "Volver al inicio"
   }
 }

@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { findSourceFiles, SOURCE_DIR } from "../i18n/helpers";
+import { findSourceFiles, relPath, SOURCE_DIR } from "../i18n/helpers";
 
 const ALLOWED_FILE = "src/env.ts";
 
@@ -14,7 +14,7 @@ describe("env — acceso a variables de entorno", () => {
       const lines = content.split("\n");
       for (let i = 0; i < lines.length; i++) {
         if (/process\.env\./.test(lines[i])) {
-          violations.push(`  ${file}:${i + 1}  →  ${lines[i].trim()}`);
+          violations.push(`  ${relPath(file)}:${i + 1}  →  ${lines[i].trim()}`);
         }
       }
     }

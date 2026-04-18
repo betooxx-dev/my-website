@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { findSourceFiles, SOURCE_DIR } from "./helpers";
+import { findSourceFiles, relPath, SOURCE_DIR } from "./helpers";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -86,10 +86,6 @@ function findHardcodedStrings(
 }
 
 // ─── Error formatting ─────────────────────────────────────────────────────────
-
-function relPath(absolute: string): string {
-  return absolute.replace(`${process.cwd()}/`, "");
-}
 
 function formatError(findings: HardcodedString[]): string {
   const items = findings
