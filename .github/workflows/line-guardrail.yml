@@ -1,0 +1,108 @@
+name: Code File Line Guardrail
+
+on:
+  pull_request:
+    branches: [master, develop]
+  push:
+    branches: [master, develop]
+  workflow_dispatch:
+    inputs:
+      base_ref:
+        description: "Base ref to diff against (e.g. origin/main or a SHA)"
+        required: false
+        default: "origin/main"
+
+jobs:
+  guardrail:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Resolve diff refs
+        id: refs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          event_name="${{ github.event_name }}"
+          default_base="origin/master"
+          zero_sha="0000000000000000000000000000000000000000"
+          base_ref=""
+          head_ref="HEAD"
+
+          if [ "$event_name" = "pull_request" ]; then
+            base_branch="${{ github.base_ref }}"
+            git fetch origin "$base_branch" --depth=1
+            base_ref="origin/$base_branch"
+          elif [ "$event_name" = "push" ]; then
+            before_sha="${{ github.event.before }}"
+            if [ -n "$before_sha" ] && [ "$before_sha" != "$zero_sha" ]; then
+              base_ref="$before_sha"
+            else
+              git fetch origin main --depth=1
+              base_ref="$default_base"
+            fi
+          else
+            requested_base="${{ inputs.base_ref }}"
+            if [ -z "$requested_base" ]; then
+              requested_base="$default_base"
+            fi
+            if [[ "$requested_base" == origin/* ]]; then
+              base_branch="${requested_base#origin/}"
+              git fetch origin "$base_branch" --depth=1
+            fi
+            base_ref="$requested_base"
+          fi
+
+          echo "base_ref=$base_ref" >> "$GITHUB_OUTPUT"
+          echo "head_ref=$head_ref" >> "$GITHUB_OUTPUT"
+
+      - name: Run line guardrail
+        shell: bash
+        run: |
+          set -euo pipefail
+          base_ref="${{ steps.refs.outputs.base_ref }}"
+          head_ref="${{ steps.refs.outputs.head_ref }}"
+          out_file="$RUNNER_TEMP/guardrail_output.txt"
+
+          set +e
+          python3 scripts/check_code_file_line_limit.py \
+            --mode ci \
+            --base-ref "$base_ref" \
+            --head-ref "$head_ref" \
+            --threshold 500 | tee "$out_file"
+          guardrail_exit="${PIPESTATUS[0]}"
+          set -e
+
+          if [ "$guardrail_exit" -ne 0 ]; then
+            while IFS='|' read -r marker file old_lines new_lines reason; do
+              if [ "$marker" = "VIOLATION" ]; then
+                echo "::error file=$file::$reason (old=$old_lines, new=$new_lines, limit=500)"
+              fi
+            done < <(grep '^VIOLATION|' "$out_file" || true)
+          fi
+
+          {
+            echo "### Code File Line Guardrail"
+            echo ""
+            if [ "$guardrail_exit" -eq 0 ]; then
+              echo "No threshold-crossing violations found."
+            else
+              echo "Guardrail failed due to threshold-crossing code files."
+            fi
+            echo ""
+            echo '```'
+            cat "$out_file"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          exit "$guardrail_exit"

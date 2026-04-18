@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Alberto | Desarrollador Web",
+    "description": "Sitio personal de Alberto — desarrollador web creando experiencias digitales."
+  },
+  "navbar": {
+    "home": "Inicio",
+    "blog": "Blog",
+    "now": "Now",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Alberto",
+    "title": "Desarrollador Web",
+    "subtitle": "Creo experiencias digitales con diseño elegante e ingeniería sólida.",
+    "bannerAlt": "Retrato de Alberto",
+    "portraitLabel": "Portrait · 2026 · MX",
+    "availableLabel": "Disponible para nuevos proyectos",
+    "portraitCode": "AA / 001"
+  },
+  "experience": {
+    "sectionNumber": "01",
+    "sectionLabel": "Experiencia",
+    "sectionTitle": "Empresas donde he colaborado"
+  },
+  "projects": {
+    "sectionNumber": "02",
+    "sectionLabel": "Proyectos",
+    "sectionTitle": "Trabajo seleccionado",
+    "inProgress": "En progreso"
+  },
+  "blog": {
+    "sectionNumber": "03",
+    "sectionLabel": "Blog",
+    "sectionTitle": "Últimos artículos",
+    "pageTitle": "Blog",
+    "pageDescription": "Artículos sobre desarrollo web, tecnología y más.",
+    "comingSoon": "Próximamente...",
+    "postComingSoon": "Contenido del artículo próximamente...",
+    "categoryPrefix": "Categoría:",
+    "categoryComingSoon": "Artículos de esta categoría próximamente..."
+  },
+  "contact": {
+    "sectionNumber": "04",
+    "sectionLabel": "Contacto",
+    "title1": "¿Tienes un proyecto",
+    "title2": "en mente?",
+    "description": "Si buscas desarrollar software a medida, visita Zifra — mi empresa. Para todo lo demás, escríbeme directamente.",
+    "ctaZifra": "Ver Zifra",
+    "cta": "Escríbeme"
+  },
+  "footer": {
+    "tagline": "Desarrollador web creando experiencias digitales.",
+    "navHeading": "Navegación",
+    "contactHeading": "Contacto",
+    "socialHeading": "Social",
+    "craftedLabel": "Hecho con cuidado",
+    "copyright": "© 2026 Alberto. Todos los derechos reservados."
+  },
+  "common": {
+    "wipLabel": "En construcción",
+    "externalLink": "Enlace externo"
+  },
+  "now": {
+    "pageTitle": "Now",
+    "pageDescription": "Lo que estoy haciendo ahora mismo.",
+    "comingSoon": "Próximamente..."
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Página no encontrada",
+    "description": "La página que buscas no existe o fue movida.",
+    "cta": "Volver al inicio"
+  },
+  "error": {
+    "title": "500",
+    "heading": "Algo salió mal",
+    "description": "Ocurrió un error inesperado. Puedes intentar de nuevo o volver al inicio.",
+    "retry": "Intentar de nuevo",
+    "cta": "Volver al inicio"
+  }
+}

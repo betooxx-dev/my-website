@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "betooxx | Web Developer",
+    "description": "betooxx's personal site — web developer crafting digital experiences."
+  },
+  "navbar": {
+    "home": "Home",
+    "blog": "Blog",
+    "now": "Now",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Alberto",
+    "title": "Web Developer",
+    "subtitle": "I craft digital experiences with elegant design and solid engineering.",
+    "bannerAlt": "Portrait of Alberto",
+    "portraitLabel": "Portrait · 2026 · MX",
+    "availableLabel": "Available for new projects",
+    "portraitCode": "AA / 001"
+  },
+  "experience": {
+    "sectionNumber": "01",
+    "sectionLabel": "Experience",
+    "sectionTitle": "Companies I've worked with"
+  },
+  "projects": {
+    "sectionNumber": "02",
+    "sectionLabel": "Projects",
+    "sectionTitle": "Selected work",
+    "inProgress": "In progress"
+  },
+  "blog": {
+    "sectionNumber": "03",
+    "sectionLabel": "Blog",
+    "sectionTitle": "Latest articles",
+    "pageTitle": "Blog",
+    "pageDescription": "Articles about web development, technology and more.",
+    "comingSoon": "Coming soon...",
+    "postComingSoon": "Article content coming soon...",
+    "categoryPrefix": "Category:",
+    "categoryComingSoon": "Articles in this category coming soon..."
+  },
+  "contact": {
+    "sectionNumber": "04",
+    "sectionLabel": "Contact",
+    "title1": "Got a project",
+    "title2": "in mind?",
+    "description": "Looking to build custom software? Visit Zifra — my company. For everything else, reach out directly.",
+    "ctaZifra": "Visit Zifra",
+    "cta": "Get in touch"
+  },
+  "footer": {
+    "tagline": "Web developer crafting digital experiences.",
+    "navHeading": "Navigation",
+    "contactHeading": "Contact",
+    "socialHeading": "Social",
+    "craftedLabel": "Crafted with care",
+    "copyright": "© 2026 betooxx. All rights reserved."
+  },
+  "common": {
+    "wipLabel": "Under construction",
+    "externalLink": "External link"
+  },
+  "now": {
+    "pageTitle": "Now",
+    "pageDescription": "What I'm doing right now.",
+    "comingSoon": "Coming soon..."
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "cta": "Back to home"
+  },
+  "error": {
+    "title": "500",
+    "heading": "Something went wrong",
+    "description": "An unexpected error occurred. You can try again or go back home.",
+    "retry": "Try again",
+    "cta": "Back to home"
+  }
+}
