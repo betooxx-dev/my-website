@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# my-website
 
-## Getting Started
+Mi sitio web!
 
-First, run the development server:
+## Stack
+
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · next-intl · Framer Motion · Biome · Jest.
+
+Ver [AGENTS.md](./AGENTS.md) para el detalle de convenciones, pre-commit hooks y estructura de tests.
+
+## Requisitos
+
+- Node.js 20+
+- npm
+
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` según el header `Accept-Language`. En dev no hace falta `.env.local`: `NEXT_PUBLIC_SITE_URL` cae al default de `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con Turbopack |
+| `npm run build` | Build de producción (`output: "standalone"`) |
+| `npm run start` | Corre el build de producción |
+| `npm run lint` | Biome check (lint + formato) |
+| `npm run format` | Biome format con escritura |
+| `npm test` | Corre la suite de Jest |
+| `npm run test:watch` | Jest en modo watch |
 
-## Learn More
+## Variables de entorno
 
-To learn more about Next.js, take a look at the following resources:
+Validadas con `@t3-oss/env-nextjs` + Zod en [src/env.ts](src/env.ts).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Tipo | Default |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | URL | `http://localhost:3000` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estructura
 
-## Deploy on Vercel
+```
+src/
+  app/[locale]/   Rutas con i18n (home, blog, now, error, not-found)
+  components/     UI (features, layout, shared)
+  i18n/           Configuración de next-intl
+  messages/       Traducciones (es.json es la fuente)
+  __tests__/      Tests de i18n y env
+  proxy.ts        Detección de locale (convención Next 16)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Docker (desarrollo)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker compose up --build
+```
+
+El [Dockerfile](Dockerfile) monta el código con hot-reload sobre `node:20-alpine`. El `next.config.ts` ya está configurado con `output: "standalone"` para producción cuando se necesite construir una imagen optimizada.
+
+## Contribuir
+
+Convención de commits: [Conventional Commits](https://www.conventionalcommits.org/) (`type: slug`). Detalles de flujo en [AGENTS.md](./AGENTS.md).
