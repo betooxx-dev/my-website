@@ -1,23 +1,20 @@
 {
   "metadata": {
-    "title": "Alberto | Desarrollador Web",
-    "description": "Sitio personal de Alberto — desarrollador web creando experiencias digitales."
+    "title": "Alberto | Ingeniero en Software",
+    "description": "Sitio personal de Alberto — ingeniero en software experto en mejora operativa a través del software."
   },
   "navbar": {
     "home": "Inicio",
     "blog": "Blog",
-    "now": "Now",
     "contact": "Contacto"
   },
   "hero": {
     "greeting": "Hola, soy",
     "name": "Alberto",
-    "title": "Desarrollador Web",
-    "subtitle": "Creo experiencias digitales con diseño elegante e ingeniería sólida.",
-    "bannerAlt": "Retrato de Alberto",
-    "portraitLabel": "Portrait · 2026 · MX",
-    "availableLabel": "Disponible para nuevos proyectos",
-    "portraitCode": "AA / 001"
+    "title": "Ingeniero en Software",
+    "subtitle": "Construyo productos digitales pensados para reflejar una visión y evolucionar en el tiempo.",
+    "bannerAlt": "Fotografía de Alberto en Irlanda",
+    "portraitLabel": "Acantilados de Moher, Irlanda · 2025"
   },
   "experience": {
     "sectionNumber": "01",
@@ -51,21 +48,14 @@
     "cta": "Escríbeme"
   },
   "footer": {
-    "tagline": "Desarrollador web creando experiencias digitales.",
     "navHeading": "Navegación",
     "contactHeading": "Contacto",
     "socialHeading": "Social",
-    "craftedLabel": "Hecho con cuidado",
-    "copyright": "© 2026 Alberto. Todos los derechos reservados."
+    "craftedLabel": "Hecho con 🔥",
+    "copyright": "© 2026 Alberto Avendaño. Todos los derechos reservados."
   },
   "common": {
-    "wipLabel": "En construcción",
-    "externalLink": "Enlace externo"
-  },
-  "now": {
-    "pageTitle": "Now",
-    "pageDescription": "Lo que estoy haciendo ahora mismo.",
-    "comingSoon": "Próximamente..."
+    "wipLabel": "En construcción"
   },
   "notFound": {
     "title": "404",
