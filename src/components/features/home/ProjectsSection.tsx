@@ -18,7 +18,10 @@ export default async function ProjectsSection() {
           />
         </ScrollReveal>
 
-        <ProjectBento inProgressLabel={t("inProgress")} />
+        <ProjectBento
+          inProgressLabel={t("inProgress")}
+          viewRepoLabel={t("viewRepo")}
+        />
       </div>
     </section>
   );

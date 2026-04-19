@@ -15,7 +15,20 @@
       "Bash(git -C \"D:/personal/my-website\" config user.email \"betooxx.dev@gmail.com\")",
       "Bash(git -C \"D:/personal/my-website\" add src/messages/en.json src/messages/es.json)",
       "Bash(git -C \"D:/personal/my-website\" push -u origin feat/redesign)",
-      "Bash(gh pr create --title 'feat: redesign homepage sections and clean up nav/copy' --body ' *)"
+      "Bash(gh pr create --title 'feat: redesign homepage sections and clean up nav/copy' --body ' *)",
+      "Bash(git -C \"D:/personal/my-website\" checkout master)",
+      "Bash(git -C \"D:/personal/my-website\" pull origin master)",
+      "Bash(git -C \"D:/personal/my-website\" checkout -- .claude/settings.local.json)",
+      "Bash(git -C \"D:/personal/my-website\" checkout -b feat/update-projects-section)",
+      "WebFetch(domain:github.com)",
+      "Bash(git -C \"D:/personal/my-website\" add next.config.ts src/components/features/home/ProjectBento.tsx)",
+      "Bash(git -C \"D:/personal/my-website\" commit -m \"feat: replace project mocks with real repos and redesign cards\")",
+      "Bash(git -C \"D:/personal/my-website\" add next.config.ts src/components/features/home/ProjectBento.tsx src/components/features/home/ProjectsSection.tsx src/messages/en.json src/messages/es.json)",
+      "Bash(git -C \"D:/personal/my-website\" push -u origin feat/update-projects-section)",
+      "Bash(gh pr create --title 'feat: replace project mocks with real repos and redesign cards' --body ' *)",
+      "Bash(git -C \"D:/personal/my-website\" add .claude/settings.local.json)",
+      "Bash(git -C \"D:/personal/my-website\" commit -m \"chore: update claude settings\")",
+      "Bash(git -C \"D:/personal/my-website\" push)"
     ]
   }
 }
