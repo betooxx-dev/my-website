@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
 
-const navKeys = ["home", "blog", "now"] as const;
-const navHrefs = { home: "/", blog: "/blog", now: "/now" } as const;
+const navKeys = ["home", "blog"] as const;
+const navHrefs = { home: "/", blog: "/blog" } as const;
 
 interface NavbarClientProps {
   labels: Record<(typeof navKeys)[number] | "contact", string>;

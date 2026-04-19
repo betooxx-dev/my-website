@@ -8,7 +8,7 @@ export default async function ProjectsSection() {
 
   return (
     <section className="relative bg-pine-900 py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
+      <div className="mx-auto max-w-5xl px-6 md:px-10">
         <ScrollReveal>
           <SectionHeader
             number={t("sectionNumber")}

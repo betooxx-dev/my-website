@@ -7,7 +7,6 @@ export default async function Navbar() {
   const labels = {
     home: t("home"),
     blog: t("blog"),
-    now: t("now"),
     contact: t("contact"),
   };
 

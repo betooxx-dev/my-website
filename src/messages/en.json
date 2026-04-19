@@ -1,23 +1,20 @@
 {
   "metadata": {
-    "title": "betooxx | Web Developer",
-    "description": "betooxx's personal site — web developer crafting digital experiences."
+    "title": "Alberto | Software Engineer",
+    "description": "Alberto's personal site — software engineer specialized in operational improvement through software."
   },
   "navbar": {
     "home": "Home",
     "blog": "Blog",
-    "now": "Now",
     "contact": "Contact"
   },
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Alberto",
-    "title": "Web Developer",
-    "subtitle": "I craft digital experiences with elegant design and solid engineering.",
-    "bannerAlt": "Portrait of Alberto",
-    "portraitLabel": "Portrait · 2026 · MX",
-    "availableLabel": "Available for new projects",
-    "portraitCode": "AA / 001"
+    "title": "Software Engineer",
+    "subtitle": "I build digital products designed to reflect a vision and evolve over time.",
+    "bannerAlt": "Photo of Alberto in Ireland",
+    "portraitLabel": "Cliffs of Moher, Ireland · 2025"
   },
   "experience": {
     "sectionNumber": "01",
@@ -51,21 +48,14 @@
     "cta": "Get in touch"
   },
   "footer": {
-    "tagline": "Web developer crafting digital experiences.",
     "navHeading": "Navigation",
     "contactHeading": "Contact",
     "socialHeading": "Social",
-    "craftedLabel": "Crafted with care",
-    "copyright": "© 2026 betooxx. All rights reserved."
+    "craftedLabel": "Hecho con 🔥",
+    "copyright": "© 2026 Alberto Avendaño. All rights reserved."
   },
   "common": {
-    "wipLabel": "Under construction",
-    "externalLink": "External link"
-  },
-  "now": {
-    "pageTitle": "Now",
-    "pageDescription": "What I'm doing right now.",
-    "comingSoon": "Coming soon..."
+    "wipLabel": "Under construction"
   },
   "notFound": {
     "title": "404",

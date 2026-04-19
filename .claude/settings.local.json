@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:next-intl.dev)",
+      "Bash(git mv *)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npx biome *)",
+      "Bash(git -C \"D:/personal/my-website\" checkout -b feat/redesign)",
+      "Bash(git -C \"D:/personal/my-website\" status)",
+      "Bash(git -C \"D:/personal/my-website\" diff --stat)",
+      "Bash(git -C \"D:/personal/my-website\" add src/app/[locale]/layout.tsx \"src/app/[locale]/now/page.tsx\" src/components/features/home/BlogPreviewSection.tsx src/components/features/home/ContactSection.tsx src/components/features/home/ExperienceSection.tsx src/components/features/home/HeroSection.tsx src/components/features/home/ProjectsSection.tsx src/components/layout/Footer.tsx src/components/layout/Navbar.tsx src/components/layout/NavbarClient.tsx src/messages/en.json src/messages/es.json src/styles/globals.css)",
+      "Bash(git -C \"D:/personal/my-website\" commit -m \"feat: redesign homepage sections and clean up nav/copy\")",
+      "Bash(git -C \"D:/personal/my-website\" config user.name \"betooxx-dev\")",
+      "Bash(git -C \"D:/personal/my-website\" config user.email \"betooxx.dev@gmail.com\")",
+      "Bash(git -C \"D:/personal/my-website\" add src/messages/en.json src/messages/es.json)",
+      "Bash(git -C \"D:/personal/my-website\" push -u origin feat/redesign)",
+      "Bash(gh pr create --title 'feat: redesign homepage sections and clean up nav/copy' --body ' *)"
+    ]
+  }
+}

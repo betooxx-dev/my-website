@@ -14,7 +14,7 @@ export default async function HeroSection() {
       {/* Aurora — biased to the right so it reinforces the type block */}
       <div className="aurora absolute inset-0 translate-x-1/4" aria-hidden />
 
-      <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 pb-20 pt-32 sm:px-10 md:grid-cols-[minmax(300px,420px)_1fr] md:gap-16 md:px-16 md:pt-36">
+      <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-5xl grid-cols-1 items-center gap-12 px-6 pb-20 pt-32 sm:px-10 md:grid-cols-[minmax(300px,420px)_1fr] md:gap-16 md:px-10 md:pt-36">
         {/* LEFT — Portrait card */}
         <div className="hero-card-reveal mx-auto w-full max-w-[360px] md:max-w-none">
           <TiltCard max={4} glare={false} className="group relative">
@@ -39,14 +39,6 @@ export default async function HeroSection() {
                 aria-hidden
                 className="absolute inset-0 bg-gradient-to-t from-pine-900/40 via-transparent to-transparent"
               />
-
-              {/* Inner editorial label at bottom of card */}
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
-                <span className="font-mono text-[9px] tracking-[0.3em] text-mint-50/70 uppercase">
-                  {t("portraitCode")}
-                </span>
-                <span className="h-px w-10 bg-amber-400/70" />
-              </div>
             </div>
 
             {/* Corner brackets — editorial crop marks */}
@@ -75,10 +67,10 @@ export default async function HeroSection() {
         </div>
 
         {/* RIGHT — Editorial type block */}
-        <div className="relative">
+        <div className="relative text-center md:text-left">
           {/* Greeting eyebrow */}
           <div className="mb-6 overflow-hidden">
-            <div className="hero-text-line flex items-center gap-3">
+            <div className="hero-text-line flex items-center justify-center gap-3 md:justify-start">
               <span className="h-px w-8 bg-amber-400/60" />
               <span className="font-mono text-[11px] tracking-[0.3em] text-amber-400 uppercase">
                 {t("greeting")}
@@ -94,13 +86,12 @@ export default async function HeroSection() {
                 style={{ fontSize: "clamp(4rem, 10vw, 9rem)" }}
               >
                 {t("name")}
-                <span className="text-amber-400">.</span>
               </h1>
             </div>
           </div>
 
           {/* Hairline underline that draws in */}
-          <div className="mt-5 mb-7 h-px max-w-sm bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-transparent hero-line-draw" />
+          <div className="mt-5 mb-7 h-px max-w-sm bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-transparent hero-line-draw mx-auto md:mx-0" />
 
           {/* Italic subtitle + description */}
           <div className="overflow-hidden">
@@ -111,40 +102,19 @@ export default async function HeroSection() {
               >
                 {t("title")}
               </p>
-              <p className="mt-5 max-w-md text-[17px] leading-relaxed text-mint-50/55 md:text-lg">
+              <p className="mt-5 max-w-md text-[17px] leading-relaxed text-mint-50/55 md:text-lg mx-auto md:mx-0">
                 {t("subtitle")}
               </p>
             </div>
           </div>
 
-          {/* Status chip + social */}
+          {/* Social links */}
           <div className="overflow-hidden">
-            <div className="hero-text-line mt-10 flex flex-wrap items-center gap-6">
-              <span className="inline-flex items-center gap-2.5 rounded-full border border-amber-400/25 bg-amber-400/[0.06] px-3.5 py-1.5 backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
-                </span>
-                <span className="font-mono text-[10px] tracking-[0.25em] text-amber-200/90 uppercase">
-                  {t("availableLabel")}
-                </span>
-              </span>
-
-              <div className="flex items-center gap-4">
-                <span className="h-px w-8 bg-mint-50/20" />
-                <SocialLinks tone="lightSolid" />
-              </div>
+            <div className="hero-text-line mt-10 flex flex-wrap items-center justify-center gap-6 md:justify-start">
+              <SocialLinks tone="lightSolid" />
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2">
-        <span className="font-mono text-[9px] tracking-[0.3em] text-mint-50/30 uppercase">
-          Scroll
-        </span>
-        <div className="h-10 w-[1px] animate-pulse bg-gradient-to-b from-amber-400/60 to-transparent" />
       </div>
     </section>
   );
