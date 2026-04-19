@@ -5,6 +5,14 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "opengraph.github.com",
+      },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

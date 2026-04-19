@@ -25,7 +25,8 @@
     "sectionNumber": "02",
     "sectionLabel": "Projects",
     "sectionTitle": "Selected work",
-    "inProgress": "In progress"
+    "inProgress": "In progress",
+    "viewRepo": "View repository"
   },
   "blog": {
     "sectionNumber": "03",
