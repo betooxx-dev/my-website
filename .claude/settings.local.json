@@ -28,7 +28,14 @@
       "Bash(gh pr create --title 'feat: replace project mocks with real repos and redesign cards' --body ' *)",
       "Bash(git -C \"D:/personal/my-website\" add .claude/settings.local.json)",
       "Bash(git -C \"D:/personal/my-website\" commit -m \"chore: update claude settings\")",
-      "Bash(git -C \"D:/personal/my-website\" push)"
+      "Bash(git -C \"D:/personal/my-website\" push)",
+      "Bash(git -C \"D:/personal/my-website\" checkout -b fix/dockerfile-production-build)",
+      "Bash(git -C \"D:/personal/my-website\" add Dockerfile)",
+      "Bash(git -C \"D:/personal/my-website\" commit -m \"fix: use multi-stage build and next start for production\")",
+      "Bash(git -C \"D:/personal/my-website\" push -u origin fix/dockerfile-production-build)",
+      "Bash(gh pr create --title 'fix: use multi-stage build and next start for production' --body ' *)",
+      "Bash(git -C \"D:/personal/my-website\" add .claude/settings.local.json CLAUDE.md)",
+      "Bash(git -C \"D:/personal/my-website\" commit -m \"chore: add CLAUDE.md and update claude settings\")"
     ]
   }
 }
