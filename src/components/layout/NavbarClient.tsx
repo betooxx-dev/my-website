@@ -4,14 +4,11 @@ import { useEffect, useState } from "react";
 import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
 
-const navKeys = ["home", "blog"] as const;
-const navHrefs = { home: "/", blog: "/blog" } as const;
-
 interface NavbarClientProps {
-  labels: Record<(typeof navKeys)[number] | "contact", string>;
+  contact: string;
 }
 
-export default function NavbarClient({ labels }: NavbarClientProps) {
+export default function NavbarClient({ contact }: NavbarClientProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -30,7 +27,6 @@ export default function NavbarClient({ labels }: NavbarClientProps) {
             : "border-mint-50/10 bg-pine-900/45 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)]"
         }`}
       >
-        {/* Logo */}
         <Link
           href="/"
           className="font-heading text-lg font-bold tracking-tight text-mint-50 transition-opacity hover:opacity-80 sm:text-xl"
@@ -39,28 +35,13 @@ export default function NavbarClient({ labels }: NavbarClientProps) {
           <span className="text-amber-400">A</span>vendaño
         </Link>
 
-        {/* Navigation Links */}
-        <div className="hidden items-center gap-7 sm:flex">
-          {navKeys.map((key) => (
-            <Link
-              key={key}
-              href={navHrefs[key]}
-              className="group relative text-[15px] font-medium text-mint-50/70 transition-colors hover:text-mint-50"
-            >
-              {labels[key]}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-amber-400 transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
-        </div>
-
-        {/* Right side */}
         <div className="flex items-center gap-2 sm:gap-3">
           <LocaleSwitcher />
           <Link
             href="mailto:avendanoargueta.josealberto@gmail.com"
             className="rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1.5 text-[13px] font-medium text-amber-300 transition-all duration-300 hover:border-amber-400/70 hover:bg-amber-400/20 hover:text-amber-200"
           >
-            {labels.contact}
+            {contact}
           </Link>
         </div>
       </nav>

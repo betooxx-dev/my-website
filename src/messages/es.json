@@ -4,8 +4,6 @@
     "description": "Sitio personal de Alberto — ingeniero en software experto en mejora operativa a través del software."
   },
   "navbar": {
-    "home": "Inicio",
-    "blog": "Blog",
     "contact": "Contacto"
   },
   "hero": {
@@ -28,16 +26,10 @@
     "inProgress": "En progreso",
     "viewRepo": "Ver repositorio"
   },
-  "blog": {
+  "certifications": {
     "sectionNumber": "03",
-    "sectionLabel": "Blog",
-    "sectionTitle": "Últimos artículos",
-    "pageTitle": "Blog",
-    "pageDescription": "Artículos sobre desarrollo web, tecnología y más.",
-    "comingSoon": "Próximamente...",
-    "postComingSoon": "Contenido del artículo próximamente...",
-    "categoryPrefix": "Categoría:",
-    "categoryComingSoon": "Artículos de esta categoría próximamente..."
+    "sectionLabel": "Certificaciones",
+    "sectionTitle": "Mis certificaciones"
   },
   "contact": {
     "sectionNumber": "04",
@@ -49,7 +41,6 @@
     "cta": "Escríbeme"
   },
   "footer": {
-    "navHeading": "Navegación",
     "contactHeading": "Contacto",
     "socialHeading": "Social",
     "craftedLabel": "Hecho con 🔥",
