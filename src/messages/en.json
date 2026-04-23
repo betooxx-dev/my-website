@@ -4,8 +4,6 @@
     "description": "Alberto's personal site — software engineer specialized in operational improvement through software."
   },
   "navbar": {
-    "home": "Home",
-    "blog": "Blog",
     "contact": "Contact"
   },
   "hero": {
@@ -28,16 +26,10 @@
     "inProgress": "In progress",
     "viewRepo": "View repository"
   },
-  "blog": {
+  "certifications": {
     "sectionNumber": "03",
-    "sectionLabel": "Blog",
-    "sectionTitle": "Latest articles",
-    "pageTitle": "Blog",
-    "pageDescription": "Articles about web development, technology and more.",
-    "comingSoon": "Coming soon...",
-    "postComingSoon": "Article content coming soon...",
-    "categoryPrefix": "Category:",
-    "categoryComingSoon": "Articles in this category coming soon..."
+    "sectionLabel": "Certifications",
+    "sectionTitle": "My certifications"
   },
   "contact": {
     "sectionNumber": "04",
@@ -49,7 +41,6 @@
     "cta": "Get in touch"
   },
   "footer": {
-    "navHeading": "Navigation",
     "contactHeading": "Contact",
     "socialHeading": "Social",
     "craftedLabel": "Hecho con 🔥",

@@ -3,12 +3,5 @@ import NavbarClient from "./NavbarClient";
 
 export default async function Navbar() {
   const t = await getTranslations("navbar");
-
-  const labels = {
-    home: t("home"),
-    blog: t("blog"),
-    contact: t("contact"),
-  };
-
-  return <NavbarClient labels={labels} />;
+  return <NavbarClient contact={t("contact")} />;
 }
