@@ -1,4 +1,4 @@
-import BlogPreviewSection from "@/components/features/home/BlogPreviewSection";
+import CertificationsSection from "@/components/features/home/CertificationsSection";
 import ContactSection from "@/components/features/home/ContactSection";
 import ExperienceSection from "@/components/features/home/ExperienceSection";
 import HeroSection from "@/components/features/home/HeroSection";
@@ -14,7 +14,7 @@ export default function Home() {
         <HeroSection />
         <ExperienceSection />
         <ProjectsSection />
-        <BlogPreviewSection />
+        <CertificationsSection />
         <ContactSection />
       </main>
       <Footer />
