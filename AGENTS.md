@@ -164,3 +164,17 @@ chore: update dependencies
 ```
 
 - No incluir al agente de IA como co-autor — omitir cualquier línea `Co-Authored-By:` de herramientas como Claude, Copilot u otras IAs
+
+## Convenciones de ramas
+
+Usar el mismo prefijo que el tipo de commit seguido de un slug descriptivo: `type/slug`
+
+```
+feat/experience-section
+fix/cta-social
+chore/update-dependencies
+docs/branch-conventions
+```
+
+- El slug debe ser corto, en minúsculas y con guiones
+- El prefijo debe coincidir con el tipo del commit principal que irá en esa rama
