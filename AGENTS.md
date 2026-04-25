@@ -162,3 +162,5 @@ feat: add experience section with company logos
 fix: resolve missing hero translations in en.json
 chore: update dependencies
 ```
+
+- No incluir al agente de IA como co-autor — omitir cualquier línea `Co-Authored-By:` de herramientas como Claude, Copilot u otras IAs
