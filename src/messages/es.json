@@ -36,9 +36,9 @@
     "sectionLabel": "Contacto",
     "title1": "¿Tienes un proyecto",
     "title2": "en mente?",
-    "description": "Si buscas desarrollar software a medida, visita Zifra — mi empresa. Para todo lo demás, escríbeme directamente.",
-    "ctaZifra": "Ver Zifra",
-    "cta": "Escríbeme"
+    "description": "¿Tienes algo en mente? Encuéntrame en mis redes o escríbeme directamente al correo.",
+    "ctaLinkedIn": "Conectar en LinkedIn",
+    "ctaX": "Escribir en X"
   },
   "footer": {
     "contactHeading": "Contacto",

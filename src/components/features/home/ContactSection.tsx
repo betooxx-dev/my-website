@@ -55,21 +55,23 @@ export default async function eContactSection() {
               {/* CTAs */}
               <div className="flex flex-col gap-3">
                 <a
-                  href="https://zifra.mx"
+                  href="https://www.linkedin.com/in/alberto-avenda%C3%B1o"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-full bg-amber-400 px-5 py-3 text-[13px] font-semibold text-pine-900 transition-all duration-300 hover:bg-amber-300"
                 >
-                  {t("ctaZifra")}
+                  {t("ctaLinkedIn")}
                   <span className="transition-transform duration-300 group-hover:translate-x-0.5">
                     →
                   </span>
                 </a>
                 <a
-                  href="mailto:avendanoargueta.josealberto@gmail.com"
+                  href="https://x.com/betooxx_dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-full border border-mint-50/20 px-5 py-3 text-[13px] font-medium text-mint-50/70 transition-all duration-300 hover:border-mint-50/40 hover:text-mint-50"
                 >
-                  {t("cta")}
+                  {t("ctaX")}
                   <span className="transition-transform duration-300 group-hover:translate-x-0.5">
                     →
                   </span>
