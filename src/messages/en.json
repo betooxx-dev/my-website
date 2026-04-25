@@ -36,9 +36,9 @@
     "sectionLabel": "Contact",
     "title1": "Got a project",
     "title2": "in mind?",
-    "description": "Looking to build custom software? Visit Zifra — my company. For everything else, reach out directly.",
-    "ctaZifra": "Visit Zifra",
-    "cta": "Get in touch"
+    "description": "Have something in mind? Find me on social media or reach out directly via email.",
+    "ctaLinkedIn": "Connect on LinkedIn",
+    "ctaX": "DM on X"
   },
   "footer": {
     "contactHeading": "Contact",
