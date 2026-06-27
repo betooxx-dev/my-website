@@ -5,7 +5,6 @@ import TiltCard from "@/components/shared/TiltCard";
 
 export default async function HeroSection() {
   const t = await getTranslations("hero");
-  const signals = [t("statBuild"), t("statAI"), t("statOps")];
 
   return (
     <section
@@ -77,16 +76,6 @@ export default async function HeroSection() {
 
         {/* RIGHT — Editorial type block */}
         <div className="relative order-1 text-center md:order-none md:text-left">
-          <div className="hero-text-line mb-5 inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-mint-50/12 bg-mint-50/[0.04] px-3 py-1.5 text-left shadow-[0_18px_50px_-30px_rgba(21,128,91,0.5)] backdrop-blur-md md:justify-start">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_18px_rgba(21,128,91,0.85)]" />
-            <span className="font-mono text-[10px] tracking-[0.22em] text-mint-50/45 uppercase">
-              {t("signalLabel")}
-            </span>
-            <span className="text-xs font-medium text-mint-50/78">
-              {t("signalValue")}
-            </span>
-          </div>
-
           {/* Greeting eyebrow */}
           <div className="mb-6 overflow-hidden">
             <div className="hero-text-line flex items-center justify-center gap-3 md:justify-start">
@@ -148,19 +137,6 @@ export default async function HeroSection() {
                 {t("secondaryCta")}
               </a>
             </div>
-          </div>
-
-          <div className="hero-text-line mt-8 grid max-w-md grid-cols-1 gap-2 mx-auto sm:grid-cols-3 md:mx-0">
-            {signals.map((signal) => (
-              <div
-                key={signal}
-                className="rounded-2xl border border-mint-50/10 bg-mint-50/[0.025] px-4 py-3 backdrop-blur-sm"
-              >
-                <span className="block font-mono text-[10px] leading-tight tracking-[0.18em] text-mint-50/45 uppercase">
-                  {signal}
-                </span>
-              </div>
-            ))}
           </div>
 
           {/* Social links */}
