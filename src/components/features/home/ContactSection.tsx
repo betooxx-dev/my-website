@@ -28,7 +28,7 @@ export default async function ContactSection() {
   return (
     <section
       id="contact"
-      className="flex min-h-dvh scroll-mt-24 items-center px-4 py-24 sm:px-6"
+      className="flex min-h-dvh scroll-mt-24 items-center border-t border-border px-4 py-24 sm:px-6"
     >
       <ScrollReveal className="mx-auto w-full max-w-6xl">
         <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-card px-6 py-16 text-center sm:px-12 sm:py-24">

@@ -76,9 +76,6 @@ export default async function Footer() {
                 {EMAIL}
                 <ArrowUpRightIcon />
               </a>
-              <span className="text-sm text-muted-foreground">
-                {footerT("craftedLabel")}
-              </span>
             </div>
           </div>
         </div>
@@ -87,7 +84,7 @@ export default async function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-3 text-xs text-muted-foreground sm:flex-row">
           <p>{footerT("copyright")}</p>
-          <p>{metadataT("title")}</p>
+          <p>{footerT("craftedLabel")}</p>
         </div>
       </div>
     </footer>

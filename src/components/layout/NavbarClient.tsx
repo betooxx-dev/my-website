@@ -93,7 +93,7 @@ export default function NavbarClient({
 
   function renderDesktopLink(link: NavLink) {
     const className =
-      "rounded-full px-3.5 py-2 text-[13px] font-medium text-mint-50/62 transition-colors duration-300 hover:bg-mint-50/8 hover:text-mint-50 focus:bg-mint-50/8 focus:text-mint-50 focus:outline-none";
+      "rounded-full px-3.5 py-2 text-[13px] font-medium text-mint-50/62 transition-colors duration-300 hover:text-mint-50 focus:text-mint-50 focus:outline-none";
 
     if (link.href.startsWith("/")) {
       return (
@@ -171,7 +171,7 @@ export default function NavbarClient({
           </span>
         </Link>
 
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center rounded-full border border-mint-50/10 bg-mint-50/[0.03] p-1 lg:flex">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 lg:flex">
           {links.map(renderDesktopLink)}
         </div>
 
