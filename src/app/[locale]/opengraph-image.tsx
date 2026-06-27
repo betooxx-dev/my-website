@@ -11,7 +11,7 @@ export default async function Image() {
   return new ImageResponse(
     <div
       style={{
-        background: "#000f08",
+        background: "#fbfaf7",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -22,7 +22,7 @@ export default async function Image() {
     >
       <div
         style={{
-          color: "#f59e0b",
+          color: "#15805b",
           fontSize: 24,
           letterSpacing: 8,
           marginBottom: 24,
@@ -32,7 +32,7 @@ export default async function Image() {
       </div>
       <div
         style={{
-          color: "#f4fff8",
+          color: "#1f2a44",
           fontSize: 80,
           fontWeight: 700,
           lineHeight: 1,
@@ -42,7 +42,7 @@ export default async function Image() {
       </div>
       <div
         style={{
-          color: "rgba(244,255,248,0.55)",
+          color: "rgba(31,42,68,0.56)",
           fontSize: 28,
           marginTop: 24,
         }}

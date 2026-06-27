@@ -4,6 +4,12 @@
     "description": "Alberto's personal site — software engineer specialized in operational improvement through software."
   },
   "navbar": {
+    "experience": "Experience",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "blog": "Blog",
+    "menu": "Open menu",
+    "closeMenu": "Close menu",
     "contact": "Contact"
   },
   "hero": {
@@ -11,43 +17,139 @@
     "name": "Alberto",
     "title": "Software Engineer",
     "subtitle": "I build digital products designed to reflect a vision and evolve over time.",
+    "primaryCta": "See projects",
+    "secondaryCta": "Email me",
+    "signalLabel": "Available for",
+    "signalValue": "Product, AI and operations",
+    "statBuild": "Full-stack",
+    "statAI": "Applied AI",
+    "statOps": "Operational improvement",
     "bannerAlt": "Photo of Alberto in Ireland",
     "portraitLabel": "Cliffs of Moher, Ireland · 2025"
   },
   "experience": {
-    "sectionNumber": "01",
-    "sectionLabel": "Experience",
     "sectionTitle": "Companies I've worked with"
   },
   "projects": {
-    "sectionNumber": "02",
-    "sectionLabel": "Projects",
     "sectionTitle": "Selected work",
     "inProgress": "In progress",
-    "viewRepo": "View repository"
+    "viewRepo": "View repository",
+    "items": {
+      "handbook": {
+        "kicker": "Full-stack · AI",
+        "title": "HandbookAI Interview",
+        "description": "AI-assisted workflow design app. FastAPI backend, Next.js frontend, and OpenAI integration.",
+        "tagNext": "Next.js",
+        "tagFastApi": "FastAPI",
+        "tagOpenAi": "OpenAI",
+        "tagMysql": "MySQL"
+      },
+      "colorEvolve": {
+        "kicker": "Algorithms",
+        "title": "Color Evolve",
+        "description": "Color palette optimizer using genetic algorithms to meet WCAG AA/AAA standards.",
+        "tagPython": "Python",
+        "tagJavascript": "JavaScript",
+        "tagWcag": "WCAG"
+      },
+      "spiceSnap": {
+        "kicker": "AI · Computer Vision",
+        "title": "Spice Snap",
+        "description": "Spice detection with deep learning and computer vision.",
+        "tagPython": "Python",
+        "tagDeepLearning": "Deep Learning",
+        "tagComputerVision": "Computer Vision"
+      },
+      "treeCalc": {
+        "kicker": "Dev Tool",
+        "title": "TreeCalc",
+        "description": "Calculator that visualizes math expressions as syntax trees with real-time token analysis.",
+        "tagJavascript": "JavaScript",
+        "tagPython": "Python",
+        "tagCfg": "CFG"
+      },
+      "letterGame": {
+        "kicker": "Game",
+        "title": "Letter Game",
+        "description": "Real-time typing game with falling letters. Uses Web Workers for better runtime performance.",
+        "tagJavascript": "JavaScript",
+        "tagWorkers": "Web Workers"
+      },
+      "barhalla": {
+        "kicker": "Marketplace",
+        "title": "Barhalla MVP",
+        "description": "Marketplace app for finding nearby barbers.",
+        "tagMvp": "MVP"
+      }
+    }
+  },
+  "about": {
+    "sectionTitle": "A little about who I am",
+    "body": "I like building software with intent: products that solve real problems, feel clear to the people using them, and can evolve without becoming fragile. I work well where engineering, product judgment, and operational improvement meet.",
+    "pillars": {
+      "product": {
+        "title": "Product engineering",
+        "body": "I think from architecture and data through interaction, performance, and delivery."
+      },
+      "taste": {
+        "title": "Design judgment",
+        "body": "I care about spacing, hierarchy, and motion so interfaces feel calm."
+      },
+      "systems": {
+        "title": "Systems and process",
+        "body": "I like turning complex operations into simple, measurable, maintainable flows."
+      }
+    }
   },
   "certifications": {
-    "sectionNumber": "03",
-    "sectionLabel": "Certifications",
     "sectionTitle": "My certifications"
   },
   "contact": {
-    "sectionNumber": "04",
-    "sectionLabel": "Contact",
     "title1": "Got a project",
     "title2": "in mind?",
     "description": "Have something in mind? Find me on social media or reach out directly via email.",
+    "emailLabel": "Email",
+    "socialLabel": "Social",
     "ctaLinkedIn": "Connect on LinkedIn",
     "ctaX": "DM on X"
   },
   "footer": {
     "contactHeading": "Contact",
     "socialHeading": "Social",
-    "craftedLabel": "Hecho con 🔥",
+    "craftedLabel": "Crafted with 🔥",
     "copyright": "© 2026 Alberto Avendaño. All rights reserved."
   },
-  "common": {
-    "wipLabel": "Under construction"
+  "blog": {
+    "metadataTitle": "Blog",
+    "metadataDescription": "Essays and notes on product engineering, design craft, and calm software.",
+    "eyebrow": "Writing",
+    "title": "Notes on craft, design & shipping.",
+    "description": "I write about the things I learn building products: the details that make software feel calm, and the systems behind teams that ship great work.",
+    "all": "All",
+    "cover": "Cover image for",
+    "emptyStart": "No posts tagged",
+    "emptyEnd": "yet. Check back soon."
+  },
+  "blogPost": {
+    "allPosts": "All posts",
+    "cover": "Cover image for",
+    "ratings": "ratings",
+    "ratePost": "Rate this post",
+    "ratingLabel": "Thanks for rating.",
+    "share": "Copy link",
+    "recommended": "Thanks for recommending this post.",
+    "connect": "Enjoyed this? Let's connect.",
+    "comments": "Comments",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "comment": "Comment",
+    "commentPlaceholder": "Share your thoughts...",
+    "postComment": "Post comment",
+    "emptyComments": "No comments yet. Be the first to share your thoughts.",
+    "validation": "Please add your name and a comment.",
+    "posted": "Comment posted.",
+    "relatedKicker": "Keep reading",
+    "relatedTitle": "Related posts"
   },
   "notFound": {
     "title": "404",

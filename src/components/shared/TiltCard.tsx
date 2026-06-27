@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import type { MouseEvent, ReactNode } from "react";
 
 interface TiltCardProps {
@@ -31,6 +37,7 @@ export default function TiltCard({
 
   const glareX = useTransform(x, [-0.5, 0.5], ["20%", "80%"]);
   const glareY = useTransform(y, [-0.5, 0.5], ["20%", "80%"]);
+  const glareBackground = useMotionTemplate`radial-gradient(600px circle at ${glareX} ${glareY}, rgba(255,255,255,0.08), transparent 40%)`;
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -67,7 +74,7 @@ export default function TiltCard({
             aria-hidden
             className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-500 [.group:hover_&]:opacity-100"
             style={{
-              background: `radial-gradient(600px circle at ${glareX.get()} ${glareY.get()}, rgba(255,255,255,0.08), transparent 40%)`,
+              background: glareBackground,
             }}
           />
         )}

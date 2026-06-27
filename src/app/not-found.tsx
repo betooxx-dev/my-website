@@ -14,7 +14,7 @@ export default function RootNotFound() {
   return (
     <html lang="en" className="nf-html">
       <body className="nf-body">
-        {/* Radial amber atmosphere */}
+        {/* Radial green atmosphere */}
         <div
           aria-hidden="true"
           style={{
@@ -32,7 +32,7 @@ export default function RootNotFound() {
               height: 700,
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(212,165,116,0.05) 0%, transparent 65%)",
+                "radial-gradient(circle, rgba(21,128,91,0.08) 0%, transparent 65%)",
             }}
           />
         </div>
@@ -58,7 +58,7 @@ export default function RootNotFound() {
               fontSize: "30vw",
               fontWeight: 700,
               lineHeight: 1,
-              color: "rgba(244,255,248,0.03)",
+              color: "rgba(31,42,68,0.04)",
             }}
           >
             404
@@ -87,7 +87,7 @@ export default function RootNotFound() {
               fontSize: 11,
               letterSpacing: "0.35em",
               textTransform: "uppercase",
-              color: "#d4a574",
+              color: "#15805b",
               marginBottom: 24,
               animationDelay: "0.3s",
             }}
@@ -95,14 +95,14 @@ export default function RootNotFound() {
             {copy.label}
           </p>
 
-          {/* Thin amber rule */}
+          {/* Thin green rule */}
           <div
             aria-hidden="true"
             className="nf-reveal"
             style={{
               height: 1,
               width: 32,
-              background: "rgba(212,165,116,0.4)",
+              background: "rgba(21,128,91,0.4)",
               marginBottom: 32,
               animationDelay: "0.42s",
             }}
@@ -115,7 +115,7 @@ export default function RootNotFound() {
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: "clamp(28px, 5vw, 40px)",
               fontWeight: 700,
-              color: "#f4fff8",
+              color: "#1f2a44",
               letterSpacing: "-0.02em",
               marginBottom: 16,
               animationDelay: "0.5s",
@@ -130,7 +130,7 @@ export default function RootNotFound() {
             style={{
               fontSize: 14,
               lineHeight: 1.7,
-              color: "rgba(244,255,248,0.5)",
+              color: "rgba(31,42,68,0.56)",
               maxWidth: 340,
               marginBottom: 40,
               animationDelay: "0.6s",

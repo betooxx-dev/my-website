@@ -12,7 +12,7 @@ export default async function NotFound() {
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-pine-900">
-      {/* Radial amber atmosphere */}
+      {/* Radial green atmosphere */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden="true"
@@ -21,7 +21,7 @@ export default async function NotFound() {
           className="h-[700px] w-[700px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(212,165,116,0.05) 0%, transparent 65%)",
+              "radial-gradient(circle, rgba(21,128,91,0.08) 0%, transparent 65%)",
           }}
         />
       </div>
@@ -47,7 +47,7 @@ export default async function NotFound() {
           {t("title")}
         </p>
 
-        {/* Thin amber rule */}
+        {/* Thin green rule */}
         <div
           className="hero-text-line mb-8 h-px w-8 bg-amber-400/40"
           aria-hidden="true"

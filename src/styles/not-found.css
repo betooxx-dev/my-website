@@ -7,13 +7,13 @@
 }
 
 .nf-html {
-  background: #000f08;
+  background: #fbfaf7;
 }
 
 .nf-body {
   margin: 0;
-  background: #000f08;
-  color: #f4fff8;
+  background: #fbfaf7;
+  color: #1f2a44;
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -45,7 +45,7 @@
 
 .nf-cta {
   position: relative;
-  color: #d4a574;
+  color: #15805b;
   text-decoration: none;
   font-family: "DM Mono", ui-monospace, monospace;
   font-size: 11px;
@@ -61,12 +61,12 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: #d4a574;
+  background: #15805b;
   transition: width 0.5s ease;
 }
 
 .nf-cta:hover {
-  color: #e8c9a0;
+  color: #21b57c;
 }
 
 .nf-cta:hover::after {

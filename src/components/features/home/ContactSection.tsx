@@ -1,86 +1,92 @@
 import { getTranslations } from "next-intl/server";
 import ScrollReveal from "@/components/shared/ScrollReveal";
-import SectionHeader from "@/components/shared/SectionHeader";
 import SocialLinks from "@/components/shared/SocialLinks";
 
-export default async function eContactSection() {
+const EMAIL = "avendanoargueta.josealberto@gmail.com";
+
+function ArrowUpRightIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+    >
+      <path d="M7 17 17 7" />
+      <path d="M8 7h9v9" />
+    </svg>
+  );
+}
+
+export default async function ContactSection() {
   const t = await getTranslations("contact");
 
   return (
-    <section className="relative overflow-hidden bg-pine-900 py-28 md:py-36">
-      <div className="relative mx-auto max-w-5xl px-6 md:px-10">
-        <ScrollReveal>
-          <SectionHeader
-            number={t("sectionNumber")}
-            label={t("sectionLabel")}
-            title={`${t("title1")} ${t("title2")}`}
-            tone="light"
+    <section
+      id="contact"
+      className="flex min-h-dvh scroll-mt-24 items-center px-4 py-24 sm:px-6"
+    >
+      <ScrollReveal className="mx-auto w-full max-w-6xl">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-card px-6 py-16 text-center sm:px-12 sm:py-24">
+          <div
+            className="bg-grid mask-fade-edges pointer-events-none absolute inset-0 opacity-60"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute left-1/2 top-0 h-72 w-[40rem] max-w-full -translate-x-1/2 -translate-y-1/3 rounded-full bg-primary/25 blur-3xl"
+            aria-hidden
           />
 
-          {/* Main grid */}
-          <div className="grid items-center gap-16 md:grid-cols-[2fr_2fr]">
-            {/* LEFT — description + socials */}
-            <div className="text-center md:text-left">
-              <p className="text-[16px] leading-relaxed text-mint-50/65">
-                {t("description")}
-              </p>
+          <div className="relative flex flex-col items-center">
+            <h2 className="mx-auto max-w-2xl text-balance font-heading text-4xl leading-[1.05] tracking-tight text-foreground sm:text-6xl">
+              {t("title1")} {t("title2")}
+            </h2>
+            <p className="mx-auto mt-5 max-w-md text-pretty text-base leading-relaxed text-muted-foreground">
+              {t("description")}
+            </p>
 
-              <div className="mt-10">
-                <span className="mb-3 block font-mono text-[10px] tracking-[0.25em] text-mint-50/35 uppercase">
-                  Social
-                </span>
-                <div className="flex justify-center md:justify-start">
-                  <SocialLinks tone="light" />
-                </div>
-              </div>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href={`mailto:${EMAIL}`}
+                aria-label={`${t("emailLabel")}: ${EMAIL}`}
+                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring/50"
+              >
+                {EMAIL}
+                <ArrowUpRightIcon />
+              </a>
             </div>
 
-            {/* RIGHT — Contact card */}
-            <div className="rounded-2xl border border-mint-50/12 bg-mint-50/[0.03] p-7">
-              {/* Email */}
-              <div className="mb-6">
-                <span className="mb-2 block font-mono text-[10px] tracking-[0.25em] text-amber-400/60 uppercase">
-                  Email
-                </span>
-                <a
-                  href="mailto:avendanoargueta.josealberto@gmail.com"
-                  className="block font-mono text-[12px] leading-relaxed text-mint-50/65 transition-colors duration-300 hover:text-amber-300"
-                >
-                  avendanoargueta.josealberto@gmail.com
-                </a>
-              </div>
-
-              <div className="mb-6 h-px bg-mint-50/10" />
-
-              {/* CTAs */}
-              <div className="flex flex-col gap-3">
+            <div className="mt-10 flex flex-col items-center gap-3">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                {t("socialLabel")}
+              </p>
+              <SocialLinks tone="dark" />
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="https://www.linkedin.com/in/alberto-avenda%C3%B1o"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-full bg-amber-400 px-5 py-3 text-[13px] font-semibold text-pine-900 transition-all duration-300 hover:bg-amber-300"
+                  className="rounded-full border border-border bg-background/70 px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
                 >
                   {t("ctaLinkedIn")}
-                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    →
-                  </span>
                 </a>
                 <a
                   href="https://x.com/betooxx_dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-full border border-mint-50/20 px-5 py-3 text-[13px] font-medium text-mint-50/70 transition-all duration-300 hover:border-mint-50/40 hover:text-mint-50"
+                  className="rounded-full border border-border bg-background/70 px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
                 >
                   {t("ctaX")}
-                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    →
-                  </span>
                 </a>
               </div>
             </div>
           </div>
-        </ScrollReveal>
-      </div>
+        </div>
+      </ScrollReveal>
     </section>
   );
 }

@@ -27,7 +27,7 @@ export default function LocaleError({
           className="h-[700px] w-[700px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(212,165,116,0.05) 0%, transparent 65%)",
+              "radial-gradient(circle, rgba(21,128,91,0.08) 0%, transparent 65%)",
           }}
         />
       </div>

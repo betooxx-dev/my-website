@@ -112,7 +112,7 @@ interface SocialLinksProps {
 
 export default function SocialLinks({ tone = "light" }: SocialLinksProps) {
   const toneClasses = {
-    dark: "text-pine-700/80 hover:text-pine-900",
+    dark: "text-foreground/70 hover:text-primary",
     light: "text-mint-50/60 hover:text-mint-50",
     lightSolid: "text-mint-50 hover:text-mint-50",
   }[tone];
@@ -125,7 +125,7 @@ export default function SocialLinks({ tone = "light" }: SocialLinksProps) {
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${toneClasses} transition-colors`}
+          className={`${toneClasses} rounded-full p-1 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300/50`}
           aria-label={social.name}
         >
           {social.icon}

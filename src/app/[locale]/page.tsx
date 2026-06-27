@@ -1,3 +1,4 @@
+import AboutSection from "@/components/features/home/AboutSection";
 import CertificationsSection from "@/components/features/home/CertificationsSection";
 import ContactSection from "@/components/features/home/ContactSection";
 import ExperienceSection from "@/components/features/home/ExperienceSection";
@@ -14,6 +15,7 @@ export default function Home() {
         <HeroSection />
         <ExperienceSection />
         <ProjectsSection />
+        <AboutSection />
         <CertificationsSection />
         <ContactSection />
       </main>

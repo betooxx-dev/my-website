@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -7,19 +7,16 @@ import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontSans = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fontMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
-});
-
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -57,7 +54,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} bg-pine-900 text-mint-50 antialiased overflow-x-hidden`}
+        className={`${fontSans.variable} ${fontMono.variable} bg-background text-foreground antialiased overflow-x-hidden`}
         suppressHydrationWarning
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>

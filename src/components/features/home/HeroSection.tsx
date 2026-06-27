@@ -5,24 +5,29 @@ import TiltCard from "@/components/shared/TiltCard";
 
 export default async function HeroSection() {
   const t = await getTranslations("hero");
+  const signals = [t("statBuild"), t("statAI"), t("statOps")];
 
   return (
     <section
       id="top"
-      className="relative min-h-screen overflow-hidden bg-pine-900"
+      className="relative min-h-dvh overflow-hidden bg-pine-900"
     >
       {/* Aurora — biased to the right so it reinforces the type block */}
       <div className="aurora absolute inset-0 translate-x-1/4" aria-hidden />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(250,250,249,0.86),transparent)]"
+      />
 
-      <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-5xl grid-cols-1 items-center gap-12 px-6 pb-20 pt-32 sm:px-10 md:grid-cols-[minmax(300px,420px)_1fr] md:gap-16 md:px-10 md:pt-36">
+      <div className="relative z-10 mx-auto grid min-h-dvh w-full max-w-5xl grid-cols-1 items-center gap-12 px-6 pb-16 pt-32 sm:px-10 md:grid-cols-[minmax(300px,420px)_1fr] md:gap-16 md:px-10 md:pt-36">
         {/* LEFT — Portrait card */}
-        <div className="hero-card-reveal mx-auto w-full max-w-[360px] md:max-w-none">
+        <div className="hero-card-reveal order-2 mx-auto w-full max-w-[320px] md:order-none md:max-w-none">
           <TiltCard max={4} glare={false} className="group relative">
             <div
               className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px]"
               style={{
                 boxShadow:
-                  "0 30px 80px -20px rgba(0,0,0,0.75), 0 0 0 1px rgba(245,245,247,0.06) inset",
+                  "0 30px 80px -28px rgba(17,24,39,0.22), 0 0 0 1px rgba(17,24,39,0.08) inset",
               }}
             >
               <Image
@@ -38,6 +43,10 @@ export default async function HeroSection() {
               <div
                 aria-hidden
                 className="absolute inset-0 bg-gradient-to-t from-pine-900/40 via-transparent to-transparent"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-x-4 bottom-4 h-px bg-gradient-to-r from-transparent via-mint-50/45 to-transparent"
               />
             </div>
 
@@ -67,7 +76,17 @@ export default async function HeroSection() {
         </div>
 
         {/* RIGHT — Editorial type block */}
-        <div className="relative text-center md:text-left">
+        <div className="relative order-1 text-center md:order-none md:text-left">
+          <div className="hero-text-line mb-5 inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-mint-50/12 bg-mint-50/[0.04] px-3 py-1.5 text-left shadow-[0_18px_50px_-30px_rgba(21,128,91,0.5)] backdrop-blur-md md:justify-start">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_18px_rgba(21,128,91,0.85)]" />
+            <span className="font-mono text-[10px] tracking-[0.22em] text-mint-50/45 uppercase">
+              {t("signalLabel")}
+            </span>
+            <span className="text-xs font-medium text-mint-50/78">
+              {t("signalValue")}
+            </span>
+          </div>
+
           {/* Greeting eyebrow */}
           <div className="mb-6 overflow-hidden">
             <div className="hero-text-line flex items-center justify-center gap-3 md:justify-start">
@@ -106,6 +125,42 @@ export default async function HeroSection() {
                 {t("subtitle")}
               </p>
             </div>
+          </div>
+
+          <div className="overflow-hidden">
+            <div className="hero-text-line mt-8 flex flex-col items-center gap-3 sm:flex-row md:justify-start">
+              <a
+                href="#projects"
+                className="group inline-flex min-h-12 items-center justify-center rounded-full bg-amber-400 px-6 text-sm font-semibold text-pine-900 shadow-[0_18px_48px_-22px_rgba(21,128,91,0.6)] transition-all duration-300 hover:bg-amber-300 hover:shadow-[0_22px_54px_-20px_rgba(21,128,91,0.7)] focus:outline-none focus:ring-2 focus:ring-amber-300/60"
+              >
+                {t("primaryCta")}
+                <span
+                  aria-hidden
+                  className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5"
+                >
+                  →
+                </span>
+              </a>
+              <a
+                href="mailto:avendanoargueta.josealberto@gmail.com"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-mint-50/18 bg-mint-50/[0.03] px-6 text-sm font-medium text-mint-50/72 backdrop-blur-md transition-all duration-300 hover:border-mint-50/35 hover:bg-mint-50/[0.07] hover:text-mint-50 focus:outline-none focus:ring-2 focus:ring-mint-50/20"
+              >
+                {t("secondaryCta")}
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-text-line mt-8 grid max-w-md grid-cols-1 gap-2 mx-auto sm:grid-cols-3 md:mx-0">
+            {signals.map((signal) => (
+              <div
+                key={signal}
+                className="rounded-2xl border border-mint-50/10 bg-mint-50/[0.025] px-4 py-3 backdrop-blur-sm"
+              >
+                <span className="block font-mono text-[10px] leading-tight tracking-[0.18em] text-mint-50/45 uppercase">
+                  {signal}
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* Social links */}

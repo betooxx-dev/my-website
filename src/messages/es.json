@@ -4,6 +4,12 @@
     "description": "Sitio personal de Alberto — ingeniero en software experto en mejora operativa a través del software."
   },
   "navbar": {
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "certifications": "Certificaciones",
+    "blog": "Blog",
+    "menu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
     "contact": "Contacto"
   },
   "hero": {
@@ -11,32 +17,99 @@
     "name": "Alberto",
     "title": "Ingeniero en Software",
     "subtitle": "Construyo productos digitales pensados para reflejar una visión y evolucionar en el tiempo.",
+    "primaryCta": "Ver proyectos",
+    "secondaryCta": "Escribirme",
+    "signalLabel": "Disponible para",
+    "signalValue": "Producto, IA y operaciones",
+    "statBuild": "Full-stack",
+    "statAI": "IA aplicada",
+    "statOps": "Mejora operativa",
     "bannerAlt": "Fotografía de Alberto en Irlanda",
     "portraitLabel": "Acantilados de Moher, Irlanda · 2025"
   },
   "experience": {
-    "sectionNumber": "01",
-    "sectionLabel": "Experiencia",
     "sectionTitle": "Empresas donde he colaborado"
   },
   "projects": {
-    "sectionNumber": "02",
-    "sectionLabel": "Proyectos",
     "sectionTitle": "Trabajo seleccionado",
     "inProgress": "En progreso",
-    "viewRepo": "Ver repositorio"
+    "viewRepo": "Ver repositorio",
+    "items": {
+      "handbook": {
+        "kicker": "Full-stack · IA",
+        "title": "HandbookAI Interview",
+        "description": "App de diseño de flujos de trabajo con asistencia de IA. Backend en FastAPI, frontend en Next.js, integración con OpenAI.",
+        "tagNext": "Next.js",
+        "tagFastApi": "FastAPI",
+        "tagOpenAi": "OpenAI",
+        "tagMysql": "MySQL"
+      },
+      "colorEvolve": {
+        "kicker": "Algoritmos",
+        "title": "Color Evolve",
+        "description": "Optimizador de paletas de color con algoritmos genéticos para cumplir estándares WCAG AA/AAA.",
+        "tagPython": "Python",
+        "tagJavascript": "JavaScript",
+        "tagWcag": "WCAG"
+      },
+      "spiceSnap": {
+        "kicker": "IA · Computer Vision",
+        "title": "Spice Snap",
+        "description": "Detección de especias mediante deep learning y visión por computadora.",
+        "tagPython": "Python",
+        "tagDeepLearning": "Deep Learning",
+        "tagComputerVision": "Computer Vision"
+      },
+      "treeCalc": {
+        "kicker": "Dev Tool",
+        "title": "TreeCalc",
+        "description": "Calculadora que visualiza expresiones matemáticas como árboles de sintaxis con análisis de tokens en tiempo real.",
+        "tagJavascript": "JavaScript",
+        "tagPython": "Python",
+        "tagCfg": "CFG"
+      },
+      "letterGame": {
+        "kicker": "Game",
+        "title": "Juego de Letras",
+        "description": "Juego de tipeo en tiempo real con letras cayendo. Usa Web Workers para rendimiento óptimo.",
+        "tagJavascript": "JavaScript",
+        "tagWorkers": "Web Workers"
+      },
+      "barhalla": {
+        "kicker": "Marketplace",
+        "title": "Barhalla MVP",
+        "description": "App marketplace para encontrar barberos cerca de ti.",
+        "tagMvp": "MVP"
+      }
+    }
+  },
+  "about": {
+    "sectionTitle": "Un poco de quién soy",
+    "body": "Me gusta construir software con intención: productos que resuelven problemas reales, se sienten claros para quien los usa y pueden evolucionar sin volverse frágiles. Trabajo bien en la intersección entre ingeniería, criterio de producto y mejora operativa.",
+    "pillars": {
+      "product": {
+        "title": "Ingeniería de producto",
+        "body": "Pienso desde arquitectura y datos hasta interacción, rendimiento y entrega."
+      },
+      "taste": {
+        "title": "Criterio visual",
+        "body": "Cuido espaciado, jerarquía y movimiento para que la interfaz se sienta tranquila."
+      },
+      "systems": {
+        "title": "Sistemas y procesos",
+        "body": "Me interesa convertir operación compleja en flujos simples, medibles y mantenibles."
+      }
+    }
   },
   "certifications": {
-    "sectionNumber": "03",
-    "sectionLabel": "Certificaciones",
     "sectionTitle": "Mis certificaciones"
   },
   "contact": {
-    "sectionNumber": "04",
-    "sectionLabel": "Contacto",
     "title1": "¿Tienes un proyecto",
     "title2": "en mente?",
     "description": "¿Tienes algo en mente? Encuéntrame en mis redes o escríbeme directamente al correo.",
+    "emailLabel": "Email",
+    "socialLabel": "Social",
     "ctaLinkedIn": "Conectar en LinkedIn",
     "ctaX": "Escribir en X"
   },
@@ -46,8 +119,37 @@
     "craftedLabel": "Hecho con 🔥",
     "copyright": "© 2026 Alberto Avendaño. Todos los derechos reservados."
   },
-  "common": {
-    "wipLabel": "En construcción"
+  "blog": {
+    "metadataTitle": "Blog",
+    "metadataDescription": "Ensayos y notas sobre ingeniería de producto, diseño y software tranquilo.",
+    "eyebrow": "Writing",
+    "title": "Notas sobre craft, diseño y shipping.",
+    "description": "Escribo sobre lo que aprendo construyendo productos: los detalles que hacen que el software se sienta tranquilo y los sistemas detrás de equipos que entregan buen trabajo.",
+    "all": "Todo",
+    "cover": "Imagen de portada de",
+    "emptyStart": "Aún no hay posts con",
+    "emptyEnd": "Vuelve pronto."
+  },
+  "blogPost": {
+    "allPosts": "Todos los posts",
+    "cover": "Imagen de portada de",
+    "ratings": "ratings",
+    "ratePost": "Califica este post",
+    "ratingLabel": "Gracias por calificar.",
+    "share": "Copiar enlace",
+    "recommended": "Gracias por recomendar este post.",
+    "connect": "¿Te gustó esto? Conectemos.",
+    "comments": "Comentarios",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "comment": "Comentario",
+    "commentPlaceholder": "Comparte tu opinión...",
+    "postComment": "Publicar comentario",
+    "emptyComments": "Aún no hay comentarios. Sé la primera persona en compartir tu opinión.",
+    "validation": "Agrega tu nombre y un comentario.",
+    "posted": "Comentario publicado.",
+    "relatedKicker": "Sigue leyendo",
+    "relatedTitle": "Posts relacionados"
   },
   "notFound": {
     "title": "404",
