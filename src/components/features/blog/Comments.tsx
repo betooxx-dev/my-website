@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { type FormEvent, useState } from "react";
-import type { BlogComment } from "@/lib/blog-data";
+import { type BlogComment, submitBlogComment } from "@/lib/blog-data";
 import { formatDate } from "@/lib/format";
 import { MessageIcon, SendIcon } from "./BlogIcons";
 
@@ -18,6 +18,7 @@ function initials(name: string) {
 type CommentsProps = {
   initial: BlogComment[];
   locale: "es" | "en";
+  slug: string;
   labels: {
     title: string;
     name: string;
@@ -31,25 +32,23 @@ type CommentsProps = {
   };
 };
 
-export function Comments({ initial, locale, labels }: CommentsProps) {
+export function Comments({ initial, locale, slug, labels }: CommentsProps) {
   const [comments, setComments] = useState<BlogComment[]>(initial);
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
   const [message, setMessage] = useState("");
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!name.trim() || !body.trim()) {
       setMessage(labels.validation);
       return;
     }
 
-    const comment: BlogComment = {
-      id: crypto.randomUUID(),
+    const comment = await submitBlogComment(locale, slug, {
       author: name.trim(),
       body: body.trim(),
-      date: new Date().toISOString().slice(0, 10),
-    };
+    });
     setComments((prev) => [comment, ...prev]);
     setName("");
     setBody("");

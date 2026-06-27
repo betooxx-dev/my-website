@@ -2,7 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { BlogPost } from "@/lib/blog-data";
+import {
+  type BlogPost,
+  recommendBlogPost,
+  submitBlogRating,
+} from "@/lib/blog-data";
 import { HeartIcon, ShareIcon } from "./BlogIcons";
 import { StarRating } from "./StarRating";
 
@@ -22,24 +26,37 @@ export function PostEngagement({ post, labels }: PostEngagementProps) {
   const [recommended, setRecommended] = useState(false);
   const [recommendCount, setRecommendCount] = useState(post.ratingCount * 2);
   const [message, setMessage] = useState("");
+  const [average, setAverage] = useState(post.rating);
+  const [totalRatings, setTotalRatings] = useState(post.ratingCount);
 
-  const average = userRating
-    ? (post.rating * post.ratingCount + userRating) / (post.ratingCount + 1)
-    : post.rating;
-  const totalRatings = userRating ? post.ratingCount + 1 : post.ratingCount;
+  function fingerprint() {
+    const key = "argos-blog-fingerprint";
+    const existing = window.localStorage.getItem(key);
+    if (existing) return existing;
+    const next = crypto.randomUUID();
+    window.localStorage.setItem(key, next);
+    return next;
+  }
 
-  function handleRate(value: number) {
+  async function handleRate(value: number) {
+    const result = await submitBlogRating(post.locale, post.slug, {
+      value,
+      fingerprint: fingerprint(),
+    });
     setUserRating(value);
+    setAverage(result.rating);
+    setTotalRatings(result.ratingCount);
     setMessage(labels.ratingLabel);
   }
 
-  function handleRecommend() {
-    setRecommended((prev) => {
-      const next = !prev;
-      setRecommendCount((count) => count + (next ? 1 : -1));
-      if (next) setMessage(labels.recommended);
-      return next;
+  async function handleRecommend() {
+    if (recommended) return;
+    await recommendBlogPost(post.locale, post.slug, {
+      fingerprint: fingerprint(),
     });
+    setRecommended(true);
+    setRecommendCount((count) => count + 1);
+    setMessage(labels.recommended);
   }
 
   async function handleShare() {

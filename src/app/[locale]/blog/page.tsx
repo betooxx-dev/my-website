@@ -5,6 +5,8 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { getAllTags, getBlogPosts } from "@/lib/blog-data";
 
+export const dynamic = "force-dynamic";
+
 type BlogPageProps = {
   params: Promise<{ locale: "es" | "en" }>;
 };
@@ -23,8 +25,10 @@ export async function generateMetadata({
 export default async function BlogPage({ params }: BlogPageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
-  const posts = getBlogPosts(locale);
-  const tags = getAllTags(locale);
+  const [posts, tags] = await Promise.all([
+    getBlogPosts(locale),
+    getAllTags(locale),
+  ]);
 
   return (
     <>

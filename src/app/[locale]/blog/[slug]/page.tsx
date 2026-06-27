@@ -17,11 +17,13 @@ import {
 } from "@/lib/blog-data";
 import { formatDate } from "@/lib/format";
 
+export const dynamic = "force-dynamic";
+
 type PostPageProps = {
   params: Promise<{ locale: "es" | "en"; slug: string }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return getAllBlogStaticParams();
 }
 
@@ -29,7 +31,7 @@ export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getPostBySlug(locale, slug);
+  const post = await getPostBySlug(locale, slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -46,10 +48,10 @@ export async function generateMetadata({
 export default async function PostPage({ params }: PostPageProps) {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "blogPost" });
-  const post = getPostBySlug(locale, slug);
+  const post = await getPostBySlug(locale, slug);
   if (!post) notFound();
 
-  const related = getRelatedPosts(locale, slug);
+  const related = await getRelatedPosts(locale, slug);
 
   return (
     <>
@@ -131,6 +133,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <Comments
           initial={post.comments}
           locale={locale}
+          slug={slug}
           labels={{
             title: t("comments"),
             name: t("name"),
