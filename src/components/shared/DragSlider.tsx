@@ -7,12 +7,14 @@ import {
   useEffect,
   useRef,
 } from "react";
+import { hasDragged, normalizeInfiniteScroll } from "./infinite-slider";
 
 interface DragSliderProps {
   children: ReactNode;
   gapClassName?: string;
   speed?: number;
   className?: string;
+  marqueeDesktop?: boolean;
   "aria-label"?: string;
 }
 
@@ -23,12 +25,14 @@ export default function DragSlider({
   gapClassName = "gap-12",
   speed = 0.5,
   className = "",
+  marqueeDesktop = false,
   "aria-label": ariaLabel,
 }: DragSliderProps) {
   const scrollerRef = useRef(null as HTMLElement | null);
   const rafRef = useRef(null as number | null);
   const pausedRef = useRef(false);
   const dragging = useRef(false);
+  const moved = useRef(false);
   const startX = useRef(0);
   const startScroll = useRef(0);
 
@@ -45,14 +49,17 @@ export default function DragSlider({
       return;
     }
 
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    if (marqueeDesktop && desktop.matches) {
+      return;
+    }
+
     const tick = () => {
       if (!pausedRef.current && !dragging.current) {
-        const half = el.scrollWidth / 2;
-        let next = el.scrollLeft + speed;
-        if (next >= half) {
-          next -= half;
-        }
-        el.scrollLeft = next;
+        el.scrollLeft = normalizeInfiniteScroll({
+          scrollLeft: el.scrollLeft + speed,
+          scrollWidth: el.scrollWidth,
+        });
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -63,7 +70,7 @@ export default function DragSlider({
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [speed]);
+  }, [marqueeDesktop, speed]);
 
   const normalizeScroll = useCallback(() => {
     const el = scrollerRef.current;
@@ -71,12 +78,10 @@ export default function DragSlider({
       return;
     }
 
-    const half = el.scrollWidth / 2;
-    if (el.scrollLeft >= half) {
-      el.scrollLeft -= half;
-    } else if (el.scrollLeft < 0) {
-      el.scrollLeft += half;
-    }
+    el.scrollLeft = normalizeInfiniteScroll({
+      scrollLeft: el.scrollLeft,
+      scrollWidth: el.scrollWidth,
+    });
   }, []);
 
   const onPointerDown = (event: SliderPointerEvent) => {
@@ -86,9 +91,9 @@ export default function DragSlider({
     }
 
     dragging.current = true;
+    moved.current = false;
     startX.current = event.clientX;
     startScroll.current = el.scrollLeft;
-    el.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: SliderPointerEvent) => {
@@ -98,6 +103,12 @@ export default function DragSlider({
     }
 
     const delta = event.clientX - startX.current;
+    if (hasDragged(startX.current, event.clientX)) {
+      moved.current = true;
+      if (!el.hasPointerCapture(event.pointerId)) {
+        el.setPointerCapture(event.pointerId);
+      }
+    }
     el.scrollLeft = startScroll.current - delta;
     normalizeScroll();
   };
@@ -118,11 +129,22 @@ export default function DragSlider({
     <section
       ref={scrollerRef}
       aria-label={ariaLabel}
-      className={`mask-fade-edges hide-scrollbar relative cursor-grab overflow-x-auto overscroll-x-contain active:cursor-grabbing ${className}`}
+      className={`mask-fade-edges hide-scrollbar relative cursor-grab overflow-x-auto overscroll-x-contain active:cursor-grabbing ${
+        marqueeDesktop
+          ? "desktop-marquee-pause lg:cursor-default lg:overflow-hidden lg:active:cursor-default"
+          : ""
+      } ${className}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
+      onClickCapture={(event) => {
+        if (moved.current) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        moved.current = false;
+      }}
       onMouseEnter={() => {
         pausedRef.current = true;
       }}
@@ -131,7 +153,11 @@ export default function DragSlider({
       }}
       onScroll={normalizeScroll}
     >
-      <div className={`flex w-max items-stretch ${gapClassName}`}>
+      <div
+        className={`flex w-max items-stretch ${
+          marqueeDesktop ? "desktop-marquee-track" : ""
+        } ${gapClassName}`}
+      >
         <div className={`flex shrink-0 items-stretch ${gapClassName}`}>
           {children}
         </div>

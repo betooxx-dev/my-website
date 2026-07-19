@@ -10,32 +10,32 @@
   --card-foreground: oklch(0.2077 0.0398 265.7549);
   --popover: oklch(0.9858 0.0045 78.2984);
   --popover-foreground: oklch(0.2077 0.0398 265.7549);
-  --primary: oklch(0.596 0.1274 163.2254);
+  --primary: oklch(0.52 0.1274 163.2254);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.3717 0.0392 257.287);
   --secondary-foreground: oklch(0.9842 0.0034 247.8575);
   --muted: oklch(0.9683 0.0069 247.8956);
   --muted-foreground: oklch(0.5544 0.0407 257.4166);
-  --accent: oklch(0.596 0.1274 163.2254);
+  --accent: oklch(0.52 0.1274 163.2254);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.5858 0.222 17.5846);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.9288 0.0126 255.5078);
   --input: oklch(0.9288 0.0126 255.5078);
-  --ring: oklch(0.596 0.1274 163.2254);
-  --chart-1: oklch(0.596 0.1274 163.2254);
+  --ring: oklch(0.52 0.1274 163.2254);
+  --chart-1: oklch(0.52 0.1274 163.2254);
   --chart-2: oklch(0.3717 0.0392 257.287);
   --chart-3: oklch(0.8369 0.1644 84.4286);
   --chart-4: oklch(0.645 0.2154 16.4393);
   --chart-5: oklch(0.5544 0.0407 257.4166);
   --sidebar: oklch(0.9858 0.0045 78.2984);
   --sidebar-foreground: oklch(0.2077 0.0398 265.7549);
-  --sidebar-primary: oklch(0.596 0.1274 163.2254);
+  --sidebar-primary: oklch(0.52 0.1274 163.2254);
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.9683 0.0069 247.8956);
   --sidebar-accent-foreground: oklch(0.2077 0.0398 265.7549);
   --sidebar-border: oklch(0.9288 0.0126 255.5078);
-  --sidebar-ring: oklch(0.596 0.1274 163.2254);
+  --sidebar-ring: oklch(0.52 0.1274 163.2254);
   --font-serif: Georgia, serif;
   --font-heading: Georgia, serif;
   --radius: 0.5rem;
@@ -302,12 +302,14 @@ body::after {
   }
 }
 
-.marquee-track {
-  animation: marquee 50s linear infinite;
-}
+@media (min-width: 1024px) {
+  .desktop-marquee-track {
+    animation: marquee 34s linear infinite;
+  }
 
-.marquee-pause:hover .marquee-track {
-  animation-play-state: paused;
+  .desktop-marquee-pause:hover .desktop-marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 .hide-scrollbar {
@@ -427,4 +429,55 @@ body::after {
 /* Balanced text for headlines */
 .text-balance {
   text-wrap: balance;
+}
+
+/* Studio keeps the same warm canvas and green editorial accent as the public site. */
+.studio-canvas {
+  isolation: isolate;
+  background-image:
+    linear-gradient(
+      color-mix(in oklch, var(--border) 28%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--border) 28%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+  background-position: center top;
+}
+
+.studio-shell {
+  isolation: isolate;
+  background-image:
+    radial-gradient(
+      circle at 86% 4%,
+      color-mix(in oklch, var(--primary) 7%, transparent),
+      transparent 24rem
+    ),
+    linear-gradient(
+      color-mix(in oklch, var(--muted) 72%, var(--background)),
+      color-mix(in oklch, var(--muted) 42%, var(--background))
+    );
+}
+
+.studio-login-glow {
+  background:
+    radial-gradient(
+      circle at 78% 22%,
+      color-mix(in oklch, var(--primary) 24%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 22% 82%,
+      color-mix(in oklch, var(--primary) 13%, transparent),
+      transparent 42%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-login-glow {
+    background: none;
+  }
 }

@@ -8,15 +8,23 @@ on:
 
 jobs:
   check:
-    name: Lint & Build
+    name: Validate website
     runs-on: ubuntu-latest
+    env:
+      ARGOS_API_URL: https://api.example.test/api
+      NEXT_PUBLIC_ARGOS_API_URL: https://api.example.test/api
+      NEXT_PUBLIC_SITE_URL: https://example.test
+      STUDIO_ARGOS_API_KEY: ci-blog-admin-api-key
+      STUDIO_PASSWORD_HASH: scrypt:ci-salt:GGp03_CxrK_udF3Hk_SoGBXB7i1a9TccbmpPi9Fp5ZEUZUbLNqHf7fZLCibf642XtkU6D9zcRsiAWpMN-6_4qA
+      STUDIO_SESSION_SECRET: ci-session-secret-at-least-32-characters
+      STUDIO_USERNAME: studio-ci
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -25,5 +33,14 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test -- --runInBand
+
       - name: Build
         run: npm run build
+
+      - name: Dependency audit
+        run: npm audit --audit-level=moderate

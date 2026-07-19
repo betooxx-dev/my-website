@@ -1,14 +1,7 @@
 import { env } from "@/env";
-import { routing } from "@/i18n/routing";
+import type { routing } from "@/i18n/routing";
 
 type Locale = (typeof routing.locales)[number];
-
-export type BlogComment = {
-  id: string;
-  author: string;
-  date: string;
-  body: string;
-};
 
 export type BlogPost = {
   id: string;
@@ -16,19 +9,16 @@ export type BlogPost = {
   locale: Locale;
   title: string;
   excerpt: string;
-  content: string[];
+  contentMarkdown: string;
   date: string;
   publishedAt: string;
-  readingTime: string;
+  readingTimeMinutes: number;
   category: string;
   tags: string[];
   cover: string;
-  featured?: boolean;
-  rating: number;
-  ratingCount: number;
-  related: string[];
-  comments: BlogComment[];
-  status: "draft" | "published";
+  coverAssetId: string;
+  featured: boolean;
+  status: "published";
   createdAt: string;
   updatedAt: string;
 };
@@ -37,6 +27,12 @@ type ApiResponse<T> = {
   success: boolean;
   data: T;
 };
+
+class BlogApiError extends Error {
+  constructor(readonly status: number) {
+    super(`Blog API request failed: ${status}`);
+  }
+}
 
 function blogUrl(path: string) {
   const baseUrl =
@@ -48,11 +44,11 @@ function blogUrl(path: string) {
 
 async function readBlogApi<T>(path: string): Promise<T> {
   const response = await fetch(blogUrl(path), {
-    next: { revalidate: 60 },
+    cache: "no-store",
   });
 
   if (!response.ok) {
-    throw new Error(`Blog API request failed: ${response.status}`);
+    throw new BlogApiError(response.status);
   }
 
   const payload = (await response.json()) as ApiResponse<T>;
@@ -66,8 +62,9 @@ export async function getBlogPosts(locale: Locale) {
 export async function getPostBySlug(locale: Locale, slug: string) {
   try {
     return await readBlogApi<BlogPost>(`/blog/posts/${locale}/${slug}`);
-  } catch {
-    return undefined;
+  } catch (error) {
+    if (error instanceof BlogApiError && error.status === 404) return undefined;
+    throw error;
   }
 }
 
@@ -77,68 +74,4 @@ export async function getRelatedPosts(locale: Locale, slug: string) {
 
 export async function getAllTags(locale: Locale) {
   return readBlogApi<string[]>(`/blog/tags?locale=${locale}`);
-}
-
-export async function getAllBlogStaticParams() {
-  const postsByLocale = await Promise.all(
-    routing.locales.map(async (locale) => {
-      try {
-        return { locale, posts: await getBlogPosts(locale) };
-      } catch {
-        return { locale, posts: [] };
-      }
-    }),
-  );
-
-  return postsByLocale.flatMap(({ locale, posts }) =>
-    posts.map((post) => ({ locale, slug: post.slug })),
-  );
-}
-
-export async function submitBlogComment(
-  locale: Locale,
-  slug: string,
-  comment: { author: string; body: string },
-) {
-  return writeBlogApi<BlogComment>(`/blog/posts/${locale}/${slug}/comments`, {
-    author: comment.author,
-    body: comment.body,
-  });
-}
-
-export async function submitBlogRating(
-  locale: Locale,
-  slug: string,
-  rating: { value: number; fingerprint?: string },
-) {
-  return writeBlogApi<{ rating: number; ratingCount: number }>(
-    `/blog/posts/${locale}/${slug}/ratings`,
-    rating,
-  );
-}
-
-export async function recommendBlogPost(
-  locale: Locale,
-  slug: string,
-  recommendation: { fingerprint?: string },
-) {
-  return writeBlogApi<{ recommended: true }>(
-    `/blog/posts/${locale}/${slug}/recommendations`,
-    recommendation,
-  );
-}
-
-async function writeBlogApi<T>(path: string, body: unknown): Promise<T> {
-  const response = await fetch(blogUrl(path), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Blog API request failed: ${response.status}`);
-  }
-
-  const payload = (await response.json()) as ApiResponse<T>;
-  return payload.data;
 }

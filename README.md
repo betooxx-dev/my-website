@@ -20,7 +20,7 @@ npm install
 npm run dev
 ```
 
-El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` según el header `Accept-Language`. En dev no hace falta `.env.local`: `NEXT_PUBLIC_SITE_URL` cae al default de `http://localhost:3000`.
+El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` según el header `Accept-Language`. En desarrollo se usan defaults locales seguros; copia `.env.example` a `.env.local` cuando quieras conectar Studio con Argos.
 
 ## Scripts
 
@@ -31,6 +31,7 @@ El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` seg
 | `npm run start` | Corre el build de producción |
 | `npm run lint` | Biome check (lint + formato) |
 | `npm run format` | Biome format con escritura |
+| `npm run typecheck` | Verifica TypeScript sin emitir archivos |
 | `npm test` | Corre la suite de Jest |
 | `npm run test:watch` | Jest en modo watch |
 
@@ -38,9 +39,17 @@ El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` seg
 
 Validadas con `@t3-oss/env-nextjs` + Zod en [src/env.ts](src/env.ts).
 
-| Variable | Tipo | Default |
-|---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | URL | `http://localhost:3000` |
+| Variable | Uso | Desarrollo | Producción |
+|---|---|---|---|
+| `ARGOS_API_URL` | Argos desde el servidor | `http://localhost:5000/api` | HTTPS, obligatoria |
+| `NEXT_PUBLIC_ARGOS_API_URL` | Blog público desde el navegador | `http://localhost:5000/api` | HTTPS, obligatoria |
+| `NEXT_PUBLIC_SITE_URL` | URL canónica y sitemap | `http://localhost:3000` | HTTPS, obligatoria |
+| `STUDIO_ARGOS_API_KEY` | Scope `blog:admin` de Argos | Opcional | Obligatoria |
+| `STUDIO_USERNAME` | Login privado de Studio | `studio` | Obligatoria |
+| `STUDIO_PASSWORD_HASH` | Password en formato `scrypt:salt:base64url` | Default local | Obligatoria, sin default |
+| `STUDIO_SESSION_SECRET` | Firma HMAC de la sesión | Default local | Obligatoria, mínimo 32 caracteres |
+
+El build de producción falla temprano si falta una variable o si alguna URL usa HTTP. Los valores de CI son credenciales ficticias aisladas; despliegues reales deben usar secretos aleatorios y nunca copiar los placeholders de `.env.example`.
 
 ## Estructura
 

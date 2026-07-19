@@ -48,6 +48,7 @@ export default async function ExperienceSection() {
         <DragSlider
           gapClassName="gap-12"
           aria-label={t("sectionTitle")}
+          marqueeDesktop
           speed={0.45}
         >
           {companies.map((company) => (

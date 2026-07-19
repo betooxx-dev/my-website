@@ -1,6 +1,9 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      target: deps
+    command: npm run dev -- --hostname 0.0.0.0
     ports:
       - "3000:3000"
     volumes:
@@ -9,3 +12,5 @@ services:
       - /app/.next
     environment:
       - NODE_ENV=development
+      - ARGOS_API_URL=http://host.docker.internal:5000/api
+      - NEXT_PUBLIC_ARGOS_API_URL=http://localhost:5000/api

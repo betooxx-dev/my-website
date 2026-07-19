@@ -3,18 +3,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { ArrowLeftIcon, ClockIcon } from "@/components/features/blog/BlogIcons";
-import { Comments } from "@/components/features/blog/Comments";
-import { PostEngagement } from "@/components/features/blog/PostEngagement";
+import { MarkdownContent } from "@/components/features/blog/MarkdownContent";
 import { RelatedPosts } from "@/components/features/blog/RelatedPosts";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { Link } from "@/i18n/navigation";
-import {
-  getAllBlogStaticParams,
-  getPostBySlug,
-  getRelatedPosts,
-} from "@/lib/blog-data";
+import { getPostBySlug, getRelatedPosts } from "@/lib/blog-data";
 import { formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -22,10 +17,6 @@ export const dynamic = "force-dynamic";
 type PostPageProps = {
   params: Promise<{ locale: "es" | "en"; slug: string }>;
 };
-
-export async function generateStaticParams() {
-  return getAllBlogStaticParams();
-}
 
 export async function generateMetadata({
   params,
@@ -47,8 +38,9 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   const { locale, slug } = await params;
+  const postPromise = getPostBySlug(locale, slug);
   const t = await getTranslations({ locale, namespace: "blogPost" });
-  const post = await getPostBySlug(locale, slug);
+  const post = await postPromise;
   if (!post) notFound();
 
   const related = await getRelatedPosts(locale, slug);
@@ -72,7 +64,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <span>{formatDate(post.date, locale)}</span>
           <span className="inline-flex items-center gap-1">
             <ClockIcon className="size-4" />
-            {post.readingTime}
+            {post.readingTimeMinutes} min
           </span>
         </div>
 
@@ -94,10 +86,8 @@ export default async function PostPage({ params }: PostPageProps) {
           />
         </div>
 
-        <div className="mt-12 flex flex-col gap-6 text-pretty text-lg leading-relaxed text-foreground/90">
-          {post.content.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+        <div className="mt-12">
+          <MarkdownContent source={post.contentMarkdown} />
         </div>
 
         <div className="mt-10 flex flex-wrap gap-2">
@@ -112,40 +102,10 @@ export default async function PostPage({ params }: PostPageProps) {
           ))}
         </div>
 
-        <div className="mt-12">
-          <PostEngagement
-            post={post}
-            labels={{
-              ratings: t("ratings"),
-              ratePost: t("ratePost"),
-              ratingLabel: t("ratingLabel"),
-              share: t("share"),
-              recommended: t("recommended"),
-            }}
-          />
-        </div>
-
         <div className="mt-12 flex flex-col items-center gap-3 rounded-[1.5rem] border border-border bg-card/45 p-8 text-center">
           <p className="text-sm text-muted-foreground">{t("connect")}</p>
           <SocialLinks tone="dark" />
         </div>
-
-        <Comments
-          initial={post.comments}
-          locale={locale}
-          slug={slug}
-          labels={{
-            title: t("comments"),
-            name: t("name"),
-            namePlaceholder: t("namePlaceholder"),
-            comment: t("comment"),
-            commentPlaceholder: t("commentPlaceholder"),
-            post: t("postComment"),
-            empty: t("emptyComments"),
-            validation: t("validation"),
-            posted: t("posted"),
-          }}
-        />
 
         <RelatedPosts
           posts={related}

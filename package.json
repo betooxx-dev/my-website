@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
+    "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "simple-git-hooks"
@@ -18,15 +19,23 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": "biome check --write"
   },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.10"
+    }
+  },
   "dependencies": {
     "@swc/helpers": "^0.5.18",
     "@t3-oss/env-nextjs": "^0.13.10",
     "axios": "^1.13.6",
     "framer-motion": "^12.34.3",
-    "next": "16.1.6",
+    "next": "^16.2.10",
     "next-intl": "^4.8.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {

@@ -5,7 +5,8 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { BlogPost } from "@/lib/blog-data";
 import { formatDate } from "@/lib/format";
-import { ClockIcon, StarIcon } from "./BlogIcons";
+import { shouldBypassImageOptimization } from "@/lib/image-policy";
+import { ClockIcon } from "./BlogIcons";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
@@ -55,6 +56,7 @@ export function PostCard({
                 : "(max-width: 768px) 100vw, 33vw"
             }
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            unoptimized={shouldBypassImageOptimization(post.cover)}
           />
           <span className="absolute left-4 top-4 rounded-full border border-border/70 bg-background/80 px-3 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur">
             {post.category}
@@ -70,11 +72,7 @@ export function PostCard({
             <span>{formatDate(post.date, locale)}</span>
             <span className="inline-flex items-center gap-1">
               <ClockIcon className="size-3.5" />
-              {post.readingTime}
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <StarIcon filled className="size-3.5 text-primary" />
-              {post.rating.toFixed(1)}
+              {post.readingTimeMinutes} min
             </span>
           </div>
 
