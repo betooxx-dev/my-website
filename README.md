@@ -41,15 +41,15 @@ Validadas con `@t3-oss/env-nextjs` + Zod en [src/env.ts](src/env.ts).
 
 | Variable | Uso | Desarrollo | Producción |
 |---|---|---|---|
-| `ARGOS_API_URL` | Argos desde el servidor | `http://localhost:5000/api` | HTTPS, obligatoria |
-| `NEXT_PUBLIC_ARGOS_API_URL` | Blog público desde el navegador | `http://localhost:5000/api` | HTTPS, obligatoria |
-| `NEXT_PUBLIC_SITE_URL` | URL canónica y sitemap | `http://localhost:3000` | HTTPS, obligatoria |
-| `STUDIO_ARGOS_API_KEY` | Scope `blog:admin` de Argos | Opcional | Obligatoria |
-| `STUDIO_USERNAME` | Login privado de Studio | `studio` | Obligatoria |
-| `STUDIO_PASSWORD_HASH` | Password en formato `scrypt:salt:base64url` | Default local | Obligatoria, sin default |
-| `STUDIO_SESSION_SECRET` | Firma HMAC de la sesión | Default local | Obligatoria, mínimo 32 caracteres |
+| `ARGOS_API_URL` | Argos desde el servidor | `http://localhost:5000/api` | Pendiente del backend |
+| `NEXT_PUBLIC_ARGOS_API_URL` | Blog público desde el navegador | `http://localhost:5000/api` | Pendiente del backend |
+| `NEXT_PUBLIC_SITE_URL` | URL canónica y sitemap | `http://localhost:3000` | Pendiente del dominio final |
+| `STUDIO_ARGOS_API_KEY` | Scope `blog:admin` de Argos | Opcional | Pendiente del backend |
+| `STUDIO_USERNAME` | Login privado de Studio | `studio` | Pendiente del backend |
+| `STUDIO_PASSWORD_HASH` | Password en formato `scrypt:salt:base64url` | Default local | Pendiente del backend |
+| `STUDIO_SESSION_SECRET` | Firma HMAC de la sesión | Default local | Pendiente del backend |
 
-El build de producción falla temprano si falta una variable o si alguna URL usa HTTP. Los valores de CI son credenciales ficticias aisladas; despliegues reales deben usar secretos aleatorios y nunca copiar los placeholders de `.env.example`.
+Mientras el backend de Argos no esté desplegado, el portafolio puede compilar en producción sin estas variables. Cuando se habiliten Blog y Studio deberán volver a ser obligatorias, usar URLs HTTPS y secretos aleatorios, y nunca copiar los placeholders de `.env.example`.
 
 ## Estructura
 
@@ -75,7 +75,7 @@ El Compose de desarrollo monta el código con hot-reload sobre `node:20-alpine`.
 
 ```bash
 cp .env.production.example .env.production
-# Edita .env.production con URLs HTTPS y secretos reales.
+# Las variables de Argos y Studio permanecen comentadas hasta desplegar el backend.
 docker compose -f compose.production.yaml up --build -d
 docker compose -f compose.production.yaml ps
 ```

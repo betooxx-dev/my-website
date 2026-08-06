@@ -18,41 +18,14 @@ describe("Studio environment policy", () => {
     expect(client.NEXT_PUBLIC_SITE_URL).toBe("http://localhost:3000");
   });
 
-  it("requires every Studio credential and API key in production", () => {
+  it("allows a portfolio-only production build before Argos is deployed", () => {
     expect(
       studioServerEnvSchema(true).safeParse({ NODE_ENV: "production" }).success,
-    ).toBe(false);
-
-    expect(
-      studioServerEnvSchema(true).safeParse({
-        ARGOS_API_URL: "https://api.example.com/api",
-        NODE_ENV: "production",
-        STUDIO_ARGOS_API_KEY: "replace-with-blog-admin-api-key",
-        STUDIO_PASSWORD_HASH:
-          "scrypt:replace-with-random-salt:replace-with-base64url-hash",
-        STUDIO_SESSION_SECRET: "replace-with-at-least-32-random-characters",
-        STUDIO_USERNAME: "studio",
-      }).success,
-    ).toBe(false);
+    ).toBe(true);
+    expect(studioClientEnvSchema(true).safeParse({}).success).toBe(true);
   });
 
-  it("rejects insecure production URLs and accepts explicit HTTPS config", () => {
-    const insecureServer = studioServerEnvSchema(true).safeParse({
-      ARGOS_API_URL: "http://api.example.com/api",
-      NODE_ENV: "production",
-      STUDIO_ARGOS_API_KEY: "blog-admin-api-key",
-      STUDIO_PASSWORD_HASH: passwordHash,
-      STUDIO_SESSION_SECRET: "a-production-session-secret-over-32-characters",
-      STUDIO_USERNAME: "studio-owner",
-    });
-    const insecureClient = studioClientEnvSchema(true).safeParse({
-      NEXT_PUBLIC_ARGOS_API_URL: "http://api.example.com/api",
-      NEXT_PUBLIC_SITE_URL: "http://example.com",
-    });
-
-    expect(insecureServer.success).toBe(false);
-    expect(insecureClient.success).toBe(false);
-
+  it("accepts the future explicit HTTPS production configuration", () => {
     expect(
       studioServerEnvSchema(true).safeParse({
         ARGOS_API_URL: "https://api.example.com/api",
