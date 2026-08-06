@@ -27,56 +27,10 @@
   },
   "projects": {
     "sectionTitle": "Selected work",
-    "inProgress": "In progress",
-    "viewRepo": "View repository",
-    "items": {
-      "handbook": {
-        "kicker": "Full-stack · AI",
-        "title": "HandbookAI Interview",
-        "description": "AI-assisted workflow design app. FastAPI backend, Next.js frontend, and OpenAI integration.",
-        "tagNext": "Next.js",
-        "tagFastApi": "FastAPI",
-        "tagOpenAi": "OpenAI",
-        "tagMysql": "MySQL"
-      },
-      "colorEvolve": {
-        "kicker": "Algorithms",
-        "title": "Color Evolve",
-        "description": "Color palette optimizer using genetic algorithms to meet WCAG AA/AAA standards.",
-        "tagPython": "Python",
-        "tagJavascript": "JavaScript",
-        "tagWcag": "WCAG"
-      },
-      "spiceSnap": {
-        "kicker": "AI · Computer Vision",
-        "title": "Spice Snap",
-        "description": "Spice detection with deep learning and computer vision.",
-        "tagPython": "Python",
-        "tagDeepLearning": "Deep Learning",
-        "tagComputerVision": "Computer Vision"
-      },
-      "treeCalc": {
-        "kicker": "Dev Tool",
-        "title": "TreeCalc",
-        "description": "Calculator that visualizes math expressions as syntax trees with real-time token analysis.",
-        "tagJavascript": "JavaScript",
-        "tagPython": "Python",
-        "tagCfg": "CFG"
-      },
-      "letterGame": {
-        "kicker": "Game",
-        "title": "Letter Game",
-        "description": "Real-time typing game with falling letters. Uses Web Workers for better runtime performance.",
-        "tagJavascript": "JavaScript",
-        "tagWorkers": "Web Workers"
-      },
-      "barhalla": {
-        "kicker": "Marketplace",
-        "title": "Barhalla MVP",
-        "description": "Marketplace app for finding nearby barbers.",
-        "tagMvp": "MVP"
-      }
-    }
+    "loaderLabel": "A kiwi walking while the projects are being updated",
+    "statusLabel": "Work in progress",
+    "statusTitle": "Projects are being updated",
+    "statusDescription": "I'm preparing new case studies to better show the process, decisions, and impact behind each project."
   },
   "about": {
     "sectionTitle": "A little about who I am",

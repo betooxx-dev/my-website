@@ -27,56 +27,10 @@
   },
   "projects": {
     "sectionTitle": "Trabajo seleccionado",
-    "inProgress": "En progreso",
-    "viewRepo": "Ver repositorio",
-    "items": {
-      "handbook": {
-        "kicker": "Full-stack · IA",
-        "title": "HandbookAI Interview",
-        "description": "App de diseño de flujos de trabajo con asistencia de IA. Backend en FastAPI, frontend en Next.js, integración con OpenAI.",
-        "tagNext": "Next.js",
-        "tagFastApi": "FastAPI",
-        "tagOpenAi": "OpenAI",
-        "tagMysql": "MySQL"
-      },
-      "colorEvolve": {
-        "kicker": "Algoritmos",
-        "title": "Color Evolve",
-        "description": "Optimizador de paletas de color con algoritmos genéticos para cumplir estándares WCAG AA/AAA.",
-        "tagPython": "Python",
-        "tagJavascript": "JavaScript",
-        "tagWcag": "WCAG"
-      },
-      "spiceSnap": {
-        "kicker": "IA · Computer Vision",
-        "title": "Spice Snap",
-        "description": "Detección de especias mediante deep learning y visión por computadora.",
-        "tagPython": "Python",
-        "tagDeepLearning": "Deep Learning",
-        "tagComputerVision": "Computer Vision"
-      },
-      "treeCalc": {
-        "kicker": "Dev Tool",
-        "title": "TreeCalc",
-        "description": "Calculadora que visualiza expresiones matemáticas como árboles de sintaxis con análisis de tokens en tiempo real.",
-        "tagJavascript": "JavaScript",
-        "tagPython": "Python",
-        "tagCfg": "CFG"
-      },
-      "letterGame": {
-        "kicker": "Game",
-        "title": "Juego de Letras",
-        "description": "Juego de tipeo en tiempo real con letras cayendo. Usa Web Workers para rendimiento óptimo.",
-        "tagJavascript": "JavaScript",
-        "tagWorkers": "Web Workers"
-      },
-      "barhalla": {
-        "kicker": "Marketplace",
-        "title": "Barhalla MVP",
-        "description": "App marketplace para encontrar barberos cerca de ti.",
-        "tagMvp": "MVP"
-      }
-    }
+    "loaderLabel": "Kiwi caminando mientras se actualizan los proyectos",
+    "statusLabel": "En construcción",
+    "statusTitle": "Proyectos actualizándose",
+    "statusDescription": "Estoy preparando nuevos casos de estudio para mostrar mejor el proceso, las decisiones y el impacto detrás de cada proyecto."
   },
   "about": {
     "sectionTitle": "Un poco de quién soy",
