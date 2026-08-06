@@ -15,11 +15,16 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    qualities: [75, 85],
+    qualities: [75],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "opengraph.github.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.credly.com",
+        pathname: "/images/**",
       },
       {
         protocol: argosPublicUrl.protocol === "http:" ? "http" : "https",

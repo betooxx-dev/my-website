@@ -35,8 +35,9 @@ export default async function HeroSection() {
                 fill
                 sizes="(max-width: 768px) 90vw, 420px"
                 className="object-cover object-[60%_center]"
-                priority
-                quality={85}
+                fetchPriority="high"
+                loading="eager"
+                quality={75}
               />
               {/* Bottom-anchoring gradient for the caption below */}
               <div
@@ -88,10 +89,10 @@ export default async function HeroSection() {
 
           {/* Display name */}
           <div className="overflow-hidden">
-            <div className="hero-text-line">
+            <div className="hero-text-line hero-lcp-line">
               <h1
                 className="font-heading font-bold leading-[0.9] tracking-[-0.04em] text-mint-50"
-                style={{ fontSize: "clamp(4rem, 10vw, 9rem)" }}
+                style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
               >
                 {t("name")}
               </h1>

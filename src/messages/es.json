@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Alberto | Ingeniero en Software",
-    "description": "Sitio personal de Alberto — ingeniero en software experto en mejora operativa a través del software."
+    "title": "Alberto Avendaño | Ingeniero de Software",
+    "description": "Portafolio de Alberto Avendaño, ingeniero de software especializado en productos digitales, sistemas internos y mejora operativa para organizaciones."
   },
   "navbar": {
     "experience": "Experiencia",
@@ -14,9 +14,9 @@
   },
   "hero": {
     "greeting": "Hola, soy",
-    "name": "Alberto",
-    "title": "Ingeniero en Software",
-    "subtitle": "Construyo productos digitales pensados para reflejar una visión y evolucionar en el tiempo.",
+    "name": "Alberto Avendaño",
+    "title": "Ingeniero de Software",
+    "subtitle": "Diseño y construyo productos digitales, sistemas internos y experiencias web que convierten operaciones complejas en software claro y mantenible.",
     "primaryCta": "Ver proyectos",
     "secondaryCta": "Escribirme",
     "bannerAlt": "Fotografía de Alberto en Irlanda",
@@ -51,7 +51,10 @@
     }
   },
   "certifications": {
-    "sectionTitle": "Mis certificaciones"
+    "sectionTitle": "Mis certificaciones",
+    "description": "Credenciales verificadas en arquitectura cloud, fundamentos de AWS, redes y ciberseguridad.",
+    "providerLabel": "Credly",
+    "verifyLabel": "Ver {name} en Credly"
   },
   "contact": {
     "title1": "¿Tienes un proyecto",

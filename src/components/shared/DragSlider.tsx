@@ -164,6 +164,7 @@ export default function DragSlider({
         <div
           className={`flex shrink-0 items-stretch ${gapClassName}`}
           aria-hidden="true"
+          inert
         >
           {children}
         </div>

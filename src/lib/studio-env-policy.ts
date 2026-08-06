@@ -25,9 +25,10 @@ export function studioServerEnvSchema(production: boolean) {
 
 export function studioClientEnvSchema(_production: boolean) {
   return z.object({
-    // TODO: Require the public HTTPS URLs when the Argos backend and the
-    // portfolio's final domain are deployed.
+    // The site URL is resolved from Vercel (or the provisional production URL)
+    // before validation. Keep this local default for development consumers.
     NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
+    // TODO: Require the public Argos URL when the backend is deployed.
     NEXT_PUBLIC_ARGOS_API_URL: z.url().default("http://localhost:5000/api"),
   });
 }

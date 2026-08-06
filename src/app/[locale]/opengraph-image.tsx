@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
 
-export const alt = "Alberto — Desarrollador Web";
+export const alt = "Alberto Avendaño — Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,9 +33,9 @@ export default async function Image() {
       <div
         style={{
           color: "#1f2a44",
-          fontSize: 80,
+          fontSize: 68,
           fontWeight: 700,
-          lineHeight: 1,
+          lineHeight: 1.05,
         }}
       >
         {t("title")}

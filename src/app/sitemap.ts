@@ -8,20 +8,20 @@ const base = env.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, "");
 const locales = ["es", "en"] as const;
 
 const staticRoutes = isPublicBlogEnabled(env.NODE_ENV)
-  ? (["", "/blog", "/now"] as const)
-  : (["", "/now"] as const);
-
-export const dynamic = "force-dynamic";
+  ? (["", "/blog"] as const)
+  : ([""] as const);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) =>
     locales.map((locale) => ({
       url: `${base}/${locale}${route}`,
-      lastModified: new Date(),
       alternates: {
-        languages: Object.fromEntries(
-          locales.map((l) => [l, `${base}/${l}${route}`]),
-        ),
+        languages: {
+          ...Object.fromEntries(
+            locales.map((l) => [l, `${base}/${l}${route}`]),
+          ),
+          "x-default": route ? `${base}/es${route}` : base,
+        },
       },
     })),
   );

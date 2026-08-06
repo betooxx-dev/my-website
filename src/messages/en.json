@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Alberto | Software Engineer",
-    "description": "Alberto's personal site — software engineer specialized in operational improvement through software."
+    "title": "Alberto Avendaño | Software Engineer",
+    "description": "Alberto Avendaño's portfolio: software engineering, digital products, internal systems, and operational improvement for teams and organizations."
   },
   "navbar": {
     "experience": "Experience",
@@ -14,9 +14,9 @@
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "name": "Alberto",
+    "name": "Alberto Avendaño",
     "title": "Software Engineer",
-    "subtitle": "I build digital products designed to reflect a vision and evolve over time.",
+    "subtitle": "I design and build digital products, internal systems, and web experiences that turn complex operations into clear, maintainable software.",
     "primaryCta": "See projects",
     "secondaryCta": "Email me",
     "bannerAlt": "Photo of Alberto in Ireland",
@@ -51,7 +51,10 @@
     }
   },
   "certifications": {
-    "sectionTitle": "My certifications"
+    "sectionTitle": "My certifications",
+    "description": "Verified credentials in cloud architecture, AWS foundations, networking, and cybersecurity.",
+    "providerLabel": "Credly",
+    "verifyLabel": "View {name} on Credly"
   },
   "contact": {
     "title1": "Got a project",

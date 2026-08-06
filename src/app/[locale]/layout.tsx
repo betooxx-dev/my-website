@@ -24,15 +24,37 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("metadata");
+type LocaleLayoutProps = Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}>;
+
+export async function generateMetadata({
+  params,
+}: LocaleLayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
     title: {
       default: t("title"),
-      template: "%s | Alberto",
+      template: "%s | Alberto Avendaño",
     },
     description: t("description"),
+    authors: [
+      {
+        name: "Alberto Avendaño",
+        url: `${env.NEXT_PUBLIC_SITE_URL}/${locale}`,
+      },
+    ],
+    creator: "Alberto Avendaño",
+    publisher: "Alberto Avendaño",
+    category: "technology",
+    robots: {
+      index: true,
+      follow: true,
+    },
     icons: {
       icon: "/icon.svg",
     },
@@ -42,10 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({
   children,
   params,
-}: Readonly<{
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}>) {
+}: LocaleLayoutProps) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();

@@ -180,11 +180,15 @@ html {
     scroll-behavior: auto;
   }
 
+  .hero-card-reveal,
+  .hero-line-draw,
   .hero-text-line {
     /* biome-ignore lint/complexity/noImportantStyles: needed to override Framer Motion inline styles for reduced-motion */
     opacity: 1 !important;
     /* biome-ignore lint/complexity/noImportantStyles: needed to override Framer Motion inline styles for reduced-motion */
     transform: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion must disable decorative entrance animations */
+    animation: none !important;
   }
 }
 
@@ -227,6 +231,12 @@ body::after {
   animation-delay: 0.7s;
 }
 
+.hero-lcp-line {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
 @keyframes heroReveal {
   to {
     opacity: 1;
@@ -260,17 +270,15 @@ body::after {
 /* Hero portrait card — fade + slide-in from left */
 @keyframes heroCardReveal {
   0% {
-    opacity: 0;
     transform: translate3d(-40px, 0, 0) scale(0.96);
   }
   100% {
-    opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
 .hero-card-reveal {
-  opacity: 0;
+  opacity: 1;
   animation: heroCardReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
