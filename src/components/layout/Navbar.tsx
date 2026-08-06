@@ -1,4 +1,6 @@
 import { getTranslations } from "next-intl/server";
+import { env } from "@/env";
+import { isPublicBlogEnabled } from "@/lib/public-blog-policy";
 import NavbarClient from "./NavbarClient";
 
 export default async function Navbar() {
@@ -8,7 +10,9 @@ export default async function Navbar() {
     { href: "#experience", label: t("experience") },
     { href: "#projects", label: t("projects") },
     { href: "#certifications", label: t("certifications") },
-    { href: "/blog", label: t("blog") },
+    ...(isPublicBlogEnabled(env.NODE_ENV)
+      ? [{ href: "/blog", label: t("blog") }]
+      : []),
   ];
 
   return (

@@ -20,7 +20,7 @@ export default async function HeroSection() {
 
       <div className="relative z-10 mx-auto grid min-h-dvh w-full max-w-5xl grid-cols-1 items-center gap-12 px-6 pb-16 pt-32 sm:px-10 md:grid-cols-[minmax(300px,420px)_1fr] md:gap-16 md:px-10 md:pt-36">
         {/* LEFT — Portrait card */}
-        <div className="hero-card-reveal order-2 mx-auto w-full max-w-[320px] md:order-none md:max-w-none">
+        <div className="hero-card-reveal order-1 mx-auto w-full max-w-[320px] md:order-none md:max-w-none">
           <TiltCard max={4} glare={false} className="group relative">
             <div
               className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px]"
@@ -75,7 +75,7 @@ export default async function HeroSection() {
         </div>
 
         {/* RIGHT — Editorial type block */}
-        <div className="relative order-1 text-center md:order-none md:text-left">
+        <div className="relative order-2 text-center md:order-none md:text-left">
           {/* Greeting eyebrow */}
           <div className="mb-6 overflow-hidden">
             <div className="hero-text-line flex items-center justify-center gap-3 md:justify-start">

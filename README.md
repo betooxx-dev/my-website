@@ -69,7 +69,20 @@ src/
 docker compose up --build
 ```
 
-El [Dockerfile](Dockerfile) monta el código con hot-reload sobre `node:20-alpine`. El `next.config.ts` ya está configurado con `output: "standalone"` para producción cuando se necesite construir una imagen optimizada.
+El Compose de desarrollo monta el código con hot-reload sobre `node:20-alpine`.
+
+## Docker (producción)
+
+```bash
+cp .env.production.example .env.production
+# Edita .env.production con URLs HTTPS y secretos reales.
+docker compose -f compose.production.yaml up --build -d
+docker compose -f compose.production.yaml ps
+```
+
+El build usa la salida `standalone` de Next.js y ejecuta el servidor con un usuario sin privilegios. El archivo `.env.production` se monta como secreto durante el build —necesario para validar las variables `NEXT_PUBLIC_*`— y también se inyecta en runtime; está ignorado por Git y por el contexto normal de Docker.
+
+El puerto se publica únicamente en `127.0.0.1:3000` para colocarlo detrás de un reverse proxy con TLS. Puede cambiarse con `WEBSITE_PORT`. El healthcheck está disponible en `/api/health`.
 
 ## Contribuir
 

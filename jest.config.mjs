@@ -4,6 +4,10 @@ const createJestConfig = nextJest({ dir: "./" });
 
 /** @type {import('jest').Config} */
 const config = {
+  modulePathIgnorePatterns: [
+    "<rootDir>/.next/",
+    "<rootDir>/.claude/worktrees/",
+  ],
   testEnvironment: "node",
   testMatch: ["<rootDir>/src/__tests__/**/*.test.ts"],
 };
