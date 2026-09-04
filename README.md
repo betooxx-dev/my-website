@@ -10,17 +10,26 @@ Ver [AGENTS.md](./AGENTS.md) para el detalle de convenciones, pre-commit hooks y
 
 ## Requisitos
 
-- Node.js 20+
-- npm
+- Docker Desktop con Docker Compose
+- Node.js 22 solo para herramientas opcionales ejecutadas fuera de Docker
 
 ## Desarrollo
 
 ```bash
-npm install
-npm run dev
+cp .env.example .env.local
+docker compose up --build
 ```
 
 El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` según el header `Accept-Language`. En desarrollo se usan defaults locales seguros; copia `.env.example` a `.env.local` cuando quieras conectar Studio con Argos.
+
+Instala el hook de Git una sola vez desde el contenedor:
+
+```bash
+docker compose run --rm --no-deps web npm run prepare
+```
+
+El pre-commit ejecuta lint, typecheck y tests dentro de Docker; no necesita
+dependencias Node instaladas en la laptop.
 
 ## Scripts
 

@@ -13,7 +13,7 @@ Guía para agentes de IA y colaboradores sobre las convenciones, decisiones de d
 - **i18n:** next-intl
 - **Linter/Formatter:** Biome
 - **Tests:** Jest con `next/jest` (SWC transformer)
-- **Git hooks:** simple-git-hooks + lint-staged
+- **Git hooks:** simple-git-hooks; la validación corre dentro de Docker
 
 ---
 
@@ -66,14 +66,20 @@ on:
 
 ## Pre-commit hook
 
-El hook de pre-commit corre en este orden y bloquea el commit si falla cualquiera:
+El hook de pre-commit corre dentro del servicio `web` y bloquea el commit si
+falla cualquiera de estos pasos:
 
 ```
-npx lint-staged   →   npm test
+npm run lint   →   npm run typecheck   →   npm test -- --runInBand
 ```
 
-- **lint-staged** aplica `biome check --write` solo a los archivos staged (`*.ts`, `*.tsx`, `*.js`, `*.jsx`, `*.json`, `*.css`)
-- **npm test** corre todos los tests con Jest
+- **Biome** revisa el repositorio sin reescribir archivos durante el commit.
+- **TypeScript** verifica tipos sin emitir archivos.
+- **Jest** corre toda la suite en un solo proceso.
+
+Instala o actualiza el hook con
+`docker compose run --rm --no-deps web npm run prepare`. No instales
+`node_modules` en el host para ejecutar el hook.
 
 ### Agregar un nuevo test al pre-commit
 

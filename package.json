@@ -13,11 +13,11 @@
     "test:watch": "jest --watch",
     "prepare": "simple-git-hooks"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged && npm test"
+  "engines": {
+    "node": ">=22 <23"
   },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx,json,css}": "biome check --write"
+  "simple-git-hooks": {
+    "pre-commit": "docker compose run --rm --no-deps -e NODE_ENV=test web sh -lc 'npm run lint && npm run typecheck && npm test -- --runInBand'"
   },
   "overrides": {
     "postcss": "8.5.26",
@@ -46,7 +46,6 @@
     "@types/react-dom": "^19",
     "jest": "^30.3.0",
     "jest-environment-node": "^30.3.0",
-    "lint-staged": "^16.3.3",
     "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4",
     "typescript": "^5"

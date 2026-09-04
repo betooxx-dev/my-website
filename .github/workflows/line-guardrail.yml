@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       base_ref:
-        description: "Base ref to diff against (e.g. origin/main or a SHA)"
+        description: "Base ref to diff against (e.g. origin/master or a SHA)"
         required: false
-        default: "origin/main"
+        default: "origin/master"
 
 jobs:
   guardrail:
@@ -48,7 +48,7 @@ jobs:
             if [ -n "$before_sha" ] && [ "$before_sha" != "$zero_sha" ]; then
               base_ref="$before_sha"
             else
-              git fetch origin main --depth=1
+              git fetch origin master --depth=1
               base_ref="$default_base"
             fi
           else
