@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { securityHeaders } from "./src/config/security-headers";
 
 const withNextIntl = createNextIntlPlugin();
 const argosPublicUrl = new URL(
@@ -9,6 +10,14 @@ const argosAssetPath = `${argosPublicUrl.pathname.replace(/\/$/, "")}/blog/asset
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders(process.env.NODE_ENV),
+      },
+    ];
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: "9mb",

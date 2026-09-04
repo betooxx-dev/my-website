@@ -127,7 +127,9 @@ async function asResource<T>(
     const status = axios.isAxiosError(error)
       ? error.response?.status
       : undefined;
+    const code = axios.isAxiosError(error) ? error.code : undefined;
     const unauthorized = status === 401 || status === 403;
+    console.error("Studio resource request failed", { code, status });
     return {
       data: empty,
       status: unauthorized ? "unauthorized" : "unavailable",

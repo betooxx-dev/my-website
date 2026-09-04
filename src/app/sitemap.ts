@@ -32,11 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       locales.map(async (locale) => {
         try {
           return await getPublishedPosts(locale);
-        } catch (error) {
-          console.error(
-            `No se pudo generar el sitemap del blog (${locale}).`,
-            error,
-          );
+        } catch {
+          console.error("Blog sitemap request failed", { locale });
           return [];
         }
       }),
