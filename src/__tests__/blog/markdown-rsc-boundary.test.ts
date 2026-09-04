@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 describe("Markdown image RSC boundary", () => {
-  it("keeps the custom Next image loader inside a Client Component", () => {
+  it("keeps markdown image rendering server-compatible", () => {
     const serverRenderer = readFileSync(
       join(process.cwd(), "src/components/features/blog/MarkdownContent.tsx"),
       "utf8",
@@ -12,8 +12,8 @@ describe("Markdown image RSC boundary", () => {
       "utf8",
     );
 
-    expect(serverRenderer).not.toContain("loader={markdownImageLoader}");
-    expect(clientImage.trimStart()).toMatch(/^"use client";/);
-    expect(clientImage).toContain("loader={markdownImageLoader}");
+    expect(serverRenderer).not.toContain("next/image");
+    expect(clientImage.trimStart()).not.toMatch(/^"use client";/);
+    expect(clientImage).not.toContain('from "next/image"');
   });
 });

@@ -36,8 +36,7 @@ export default async function HeroSection() {
                 fill
                 sizes="(max-width: 768px) 90vw, 420px"
                 className="object-cover object-[60%_center]"
-                fetchPriority="high"
-                loading="eager"
+                preload
                 quality={75}
               />
               {/* Bottom-anchoring gradient for the caption below */}

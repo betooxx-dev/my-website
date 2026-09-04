@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import type { BlogPost } from "@/contracts";
 import { shouldBypassImageOptimization } from "@/features/blog/image-policy";
@@ -9,13 +6,10 @@ import type { Locale } from "@/i18n/routing";
 import { formatDate } from "@/shared/format";
 import { ClockIcon } from "./BlogIcons";
 
-const easing = [0.22, 1, 0.36, 1] as const;
-
 type PostCardProps = {
   post: BlogPost;
   locale: Locale;
   coverLabel: string;
-  index?: number;
   featured?: boolean;
 };
 
@@ -23,17 +17,10 @@ export function PostCard({
   post,
   locale,
   coverLabel,
-  index = 0,
   featured = false,
 }: PostCardProps) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: easing }}
-      className="group h-full"
-    >
+    <article className="group h-full">
       <Link
         href={`/blog/${post.slug}`}
         className={`flex h-full overflow-hidden rounded-[1.5rem] border border-border bg-card/45 transition-colors hover:border-primary/50 ${
@@ -100,6 +87,6 @@ export function PostCard({
           </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }

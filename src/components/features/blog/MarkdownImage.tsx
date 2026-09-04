@@ -1,21 +1,15 @@
-"use client";
-
-import Image from "next/image";
-
-function markdownImageLoader({ src }: { src: string }): string {
-  return src;
-}
-
 export function MarkdownImage({ alt, src }: { alt: string; src: string }) {
   return (
-    <Image
+    // Markdown authors may use arbitrary HTTPS hosts, which cannot be known in
+    // Next's remote image allowlist at build time.
+    // biome-ignore lint/performance/noImgElement: see explanation above
+    <img
       alt={alt}
       className="h-auto w-full rounded-[1.25rem] border border-border object-cover"
+      decoding="async"
       height={675}
-      loader={markdownImageLoader}
-      sizes="(max-width: 768px) 100vw, 768px"
+      loading="lazy"
       src={src}
-      unoptimized
       width={1200}
     />
   );

@@ -119,8 +119,7 @@ export default async function PostPage({ params }: PostPageProps) {
           src={post.cover}
           alt={`${t("cover")} ${post.title}`}
           fill
-          fetchPriority="high"
-          loading="eager"
+          preload
           sizes="(max-width: 768px) 100vw, 768px"
           className="object-cover"
         />

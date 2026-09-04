@@ -197,6 +197,8 @@ export default function NavbarClient({
       </nav>
 
       <div
+        aria-hidden={!open}
+        inert={!open}
         className={`mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl border border-mint-50/10 bg-pine-900/92 p-2 shadow-[0_18px_50px_-28px_rgba(17,24,39,0.35)] backdrop-blur-2xl transition-all duration-300 lg:hidden ${
           open
             ? "pointer-events-auto translate-y-0 opacity-100"

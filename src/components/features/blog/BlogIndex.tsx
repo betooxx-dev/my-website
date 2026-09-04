@@ -19,25 +19,27 @@ type BlogIndexProps = {
 };
 
 export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
-  const [active, setActive] = useState(labels.all);
+  const [active, setActive] = useState<string | null>(null);
 
-  const filtered =
-    active === labels.all
-      ? posts
-      : posts.filter(function isTagged(post) {
-          return post.tags.includes(active);
-        });
+  const filtered = active
+    ? posts.filter(function isTagged(post) {
+        return post.tags.includes(active);
+      })
+    : posts;
 
   const featured = posts.find(function isFeatured(post) {
     return post.featured;
   });
-  const showFeatured = active === labels.all && featured;
+  const showFeatured = active === null && featured;
 
-  function renderTag(tag: string) {
+  function renderTag(tag: string | null) {
+    const label = tag ?? labels.all;
+
     return (
       <button
-        key={tag}
+        key={label}
         type="button"
+        aria-pressed={active === tag}
         onClick={() => setActive(tag)}
         className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
           active === tag
@@ -45,7 +47,7 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
             : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
         }`}
       >
-        {tag}
+        {label}
       </button>
     );
   }
@@ -54,7 +56,7 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
     return !(showFeatured && post.slug === featured?.slug);
   }
 
-  function renderPost(post: BlogPost, index: number) {
+  function renderPost(post: BlogPost) {
     return (
       <motion.div
         key={post.slug}
@@ -64,12 +66,7 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
         exit={{ opacity: 0, scale: 0.96 }}
         transition={{ duration: 0.3 }}
       >
-        <PostCard
-          post={post}
-          locale={locale}
-          coverLabel={labels.cover}
-          index={index}
-        />
+        <PostCard post={post} locale={locale} coverLabel={labels.cover} />
       </motion.div>
     );
   }
@@ -77,7 +74,7 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        {[labels.all, ...tags].map(renderTag)}
+        {[null, ...tags].map(renderTag)}
       </div>
 
       {showFeatured && (
@@ -102,7 +99,7 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
 
       {filtered.length === 0 && (
         <p className="mt-16 text-center text-muted-foreground">
-          {labels.emptyStart} {active} {labels.emptyEnd}
+          {labels.emptyStart} {active ?? labels.all} {labels.emptyEnd}
         </p>
       )}
     </div>

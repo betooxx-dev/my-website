@@ -24,13 +24,12 @@ export function RelatedPosts({ posts, locale, labels }: RelatedPostsProps) {
         {labels.title}
       </h2>
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <PostCard
             key={post.slug}
             post={post}
             locale={locale}
             coverLabel={labels.cover}
-            index={index}
           />
         ))}
       </div>
