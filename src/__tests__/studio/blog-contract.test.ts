@@ -1,5 +1,4 @@
 import {
-  studioBlogErrorUrl,
   studioBlogSuccessUrl,
   studioPostRecoveryKey,
 } from "@/features/studio/publishing/feedback";
@@ -29,12 +28,6 @@ describe("studio blog contract", () => {
       tags: ["ai", "crm"],
       title: "Draft title",
     });
-  });
-
-  it("encodes backend mutation errors for visible Studio feedback", () => {
-    expect(studioBlogErrorUrl("Cover & Markdown are required.")).toBe(
-      "/studio/blog?error=Cover+%26+Markdown+are+required.",
-    );
   });
 
   it("returns successful mutations with the recovery key to clear", () => {

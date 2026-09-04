@@ -15,7 +15,6 @@ type StudioSubmitButtonProps = {
   children: React.ReactNode;
   className?: string;
   confirmation?: string;
-  formAction?: (formData: FormData) => Promise<void> | void;
   icon?: StudioIconName;
   intent?: string;
   pendingLabel: string;
@@ -26,7 +25,6 @@ export function StudioSubmitButton({
   children,
   className = "",
   confirmation,
-  formAction,
   icon,
   intent,
   pendingLabel,
@@ -50,7 +48,6 @@ export function StudioSubmitButton({
       aria-disabled={pending}
       className={`${variantClass} disabled:cursor-wait disabled:opacity-60 ${className}`}
       disabled={pending}
-      formAction={formAction}
       name={intent ? STUDIO_SUBMIT_INTENT_FIELD : undefined}
       onClick={(event) => {
         if (confirmation && !window.confirm(confirmation)) {

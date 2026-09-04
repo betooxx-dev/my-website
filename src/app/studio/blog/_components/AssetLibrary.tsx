@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { StudioActionForm } from "@/components/features/studio/StudioActionForm";
 import { StudioSubmitButton } from "@/components/features/studio/StudioSubmitButton";
 import {
   StudioEmptyState,
@@ -27,7 +28,7 @@ export function AssetLibrary({ assets, available }: AssetLibraryProps) {
       title={blog.assetsTitle}
     >
       <div className="grid gap-6 p-4 sm:p-6 lg:grid-cols-[19rem_minmax(0,1fr)]">
-        <form
+        <StudioActionForm
           action={uploadAssetAction}
           className="h-fit rounded-2xl border border-border bg-background/55 p-4 sm:p-5"
         >
@@ -69,7 +70,7 @@ export function AssetLibrary({ assets, available }: AssetLibraryProps) {
           >
             {blog.uploadAsset}
           </StudioSubmitButton>
-        </form>
+        </StudioActionForm>
 
         <div className="grid content-start gap-4 md:grid-cols-2">
           {assets.length > 0 ? (

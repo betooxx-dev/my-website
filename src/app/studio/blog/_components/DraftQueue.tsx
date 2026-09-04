@@ -1,3 +1,4 @@
+import { StudioActionForm } from "@/components/features/studio/StudioActionForm";
 import { StudioSubmitButton } from "@/components/features/studio/StudioSubmitButton";
 import {
   StudioEmptyState,
@@ -8,7 +9,7 @@ import { StudioUnsavedChanges } from "@/components/features/studio/StudioUnsaved
 import type { StudioAsset, StudioPost } from "@/contracts";
 import { studioCopy } from "@/features/studio/content";
 import { studioPostRecoveryKey } from "@/features/studio/publishing/feedback";
-import { publishPostAction, updatePostAction } from "../actions";
+import { updateDraftAction } from "../actions";
 import { StudioPostFields } from "../post-fields";
 import { formatStudioDate } from "./studio-blog-utils";
 
@@ -47,7 +48,7 @@ export function DraftQueue({ assets, drafts, savedKey }: DraftQueueProps) {
                 <StudioStatusBadge label="Borrador" tone="draft" />
               </div>
 
-              <form action={updatePostAction}>
+              <StudioActionForm action={updateDraftAction}>
                 <StudioUnsavedChanges
                   clearWhen={savedKey === studioPostRecoveryKey(post.id)}
                   message={blog.unsavedWarning}
@@ -70,7 +71,6 @@ export function DraftQueue({ assets, drafts, savedKey }: DraftQueueProps) {
                   </StudioSubmitButton>
                   <StudioSubmitButton
                     className="w-full sm:w-auto"
-                    formAction={publishPostAction}
                     icon="spark"
                     intent="publish-draft"
                     pendingLabel={blog.publishing}
@@ -78,7 +78,7 @@ export function DraftQueue({ assets, drafts, savedKey }: DraftQueueProps) {
                     {blog.publish}
                   </StudioSubmitButton>
                 </div>
-              </form>
+              </StudioActionForm>
             </article>
           ))}
         </div>

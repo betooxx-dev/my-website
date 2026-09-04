@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StudioActionForm } from "@/components/features/studio/StudioActionForm";
 import { StudioIcon } from "@/components/features/studio/StudioIcon";
 import { StudioSubmitButton } from "@/components/features/studio/StudioSubmitButton";
 import {
@@ -63,7 +64,7 @@ export function PublishedPosts({
                     name="chevron"
                   />
                 </summary>
-                <form
+                <StudioActionForm
                   action={updatePostAction}
                   className="border-border border-t p-3"
                 >
@@ -87,10 +88,10 @@ export function PublishedPosts({
                   >
                     {blog.saveChanges}
                   </StudioSubmitButton>
-                </form>
+                </StudioActionForm>
               </details>
 
-              <form action={unpublishPostAction} className="mt-3">
+              <StudioActionForm action={unpublishPostAction} className="mt-3">
                 <input name="id" type="hidden" value={post.id} />
                 <input name="locale" type="hidden" value={post.locale} />
                 <input name="slug" type="hidden" value={post.slug} />
@@ -103,7 +104,7 @@ export function PublishedPosts({
                 >
                   {blog.unpublish}
                 </StudioSubmitButton>
-              </form>
+              </StudioActionForm>
             </article>
           ))}
         </div>

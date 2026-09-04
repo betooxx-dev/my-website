@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StudioActionForm } from "@/components/features/studio/StudioActionForm";
 import { StudioFrame } from "@/components/features/studio/StudioFrame";
 import { StudioIcon } from "@/components/features/studio/StudioIcon";
 import { StudioSavedFeedback } from "@/components/features/studio/StudioSavedFeedback";
@@ -22,7 +23,6 @@ import { StudioPostFields } from "./post-fields";
 
 type StudioBlogPageProps = {
   searchParams: Promise<{
-    error?: string | string[];
     saved?: string | string[];
   }>;
 };
@@ -57,20 +57,6 @@ export default async function StudioBlogPage({
         title={blog.title}
       />
 
-      {typeof query.error === "string" ? (
-        <p
-          aria-live="assertive"
-          className="mt-6 flex items-start gap-3 rounded-2xl border border-destructive/25 bg-destructive/8 px-4 py-3 text-sm leading-6 text-destructive"
-          role="alert"
-        >
-          <span
-            aria-hidden="true"
-            className="mt-2 size-1.5 shrink-0 rounded-full bg-destructive"
-          />
-          {query.error}
-        </p>
-      ) : null}
-
       {savedKey ? <StudioSavedFeedback message={blog.savedNotice} /> : null}
 
       <div className="mt-8 grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_21rem]">
@@ -80,7 +66,7 @@ export default async function StudioBlogPage({
             icon="writing"
             title={blog.createTitle}
           >
-            <form action={createDraftAction} className="p-4 sm:p-6">
+            <StudioActionForm action={createDraftAction} className="p-4 sm:p-6">
               <StudioUnsavedChanges
                 clearWhen={savedKey === "new-post"}
                 message={blog.unsavedWarning}
@@ -100,7 +86,7 @@ export default async function StudioBlogPage({
                   {blog.saveDraft}
                 </StudioSubmitButton>
               </div>
-            </form>
+            </StudioActionForm>
           </StudioPanel>
         </div>
 

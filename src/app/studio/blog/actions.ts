@@ -3,62 +3,108 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireStudioSession } from "@/features/studio/auth/session";
+import type { StudioActionState } from "@/features/studio/publishing/action-state";
 import {
-  studioBlogErrorUrl,
+  studioMutationErrorMessage,
+  studioPartialPublishMessage,
+} from "@/features/studio/publishing/errors";
+import {
   studioBlogSuccessUrl,
   studioPostRecoveryKey,
 } from "@/features/studio/publishing/feedback";
 import { draftStudioPostInput } from "@/features/studio/publishing/post-form";
+import { STUDIO_SUBMIT_INTENT_FIELD } from "@/features/studio/publishing/submit-state";
 import { isLocale } from "@/i18n/routing";
 import { StudioService } from "@/services/studio.service";
 
-export async function createDraftAction(formData: FormData) {
+export async function createDraftAction(
+  _state: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
   await requireStudioSession();
-  await runMutation(StudioService.createDraft(draftStudioPostInput(formData)));
+  const error = await mutationError(
+    StudioService.createDraft(draftStudioPostInput(formData)),
+  );
+  if (error) return { error };
   finishStudioMutation(formData, "new-post");
 }
 
-export async function updatePostAction(formData: FormData) {
+export async function updatePostAction(
+  _state: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
   await requireStudioSession();
   const id = String(formData.get("id") ?? "");
-  await runMutation(
+  const error = await mutationError(
     StudioService.updatePost(id, draftStudioPostInput(formData)),
   );
+  if (error) return { error };
   finishStudioMutation(formData, studioPostRecoveryKey(id));
 }
 
-export async function publishPostAction(formData: FormData) {
+export async function updateDraftAction(
+  state: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
+  const intent = formData.get(STUDIO_SUBMIT_INTENT_FIELD);
+  return intent === "publish-draft"
+    ? publishPostAction(state, formData)
+    : updatePostAction(state, formData);
+}
+
+async function publishPostAction(
+  _state: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
   await requireStudioSession();
   const id = String(formData.get("id") ?? "");
-  await runMutation(
+  const updateError = await mutationError(
     StudioService.updatePost(id, draftStudioPostInput(formData)),
   );
-  await runMutation(StudioService.setPostPublication(id, "publish"));
+  if (updateError) return { error: updateError };
+
+  const publishError = await mutationError(
+    StudioService.setPostPublication(id, "publish"),
+  );
+  if (publishError) {
+    return { error: studioPartialPublishMessage(publishError) };
+  }
+
   finishStudioMutation(formData, studioPostRecoveryKey(id));
 }
 
-export async function unpublishPostAction(formData: FormData) {
+export async function unpublishPostAction(
+  _state: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
   await requireStudioSession();
   const id = String(formData.get("id") ?? "");
-  await runMutation(StudioService.setPostPublication(id, "unpublish"));
+  const error = await mutationError(
+    StudioService.setPostPublication(id, "unpublish"),
+  );
+  if (error) return { error };
   finishStudioMutation(formData, studioPostRecoveryKey(id));
 }
 
-export async function uploadAssetAction(formData: FormData) {
+export async function uploadAssetAction(
+  _state: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
   await requireStudioSession();
-  await runMutation(StudioService.uploadAsset(formData));
+  const error = await mutationError(StudioService.uploadAsset(formData));
+  if (error) return { error };
   finishStudioMutation(formData, "asset-upload");
 }
 
-async function runMutation(operation: Promise<unknown>) {
+async function mutationError(
+  operation: Promise<unknown>,
+  fallback?: string,
+): Promise<string | null> {
   try {
     await operation;
+    return null;
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? error.message
-        : "No se pudo completar la operación.";
-    redirect(studioBlogErrorUrl(message));
+    return studioMutationErrorMessage(error, fallback);
   }
 }
 
