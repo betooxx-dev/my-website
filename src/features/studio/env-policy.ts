@@ -6,21 +6,35 @@ const passwordHash = z.string().regex(/^scrypt:[^:]+:[A-Za-z0-9_-]+$/);
 
 export function studioServerEnvSchema(production: boolean) {
   return z.object({
-    // TODO: Require the HTTPS Argos URL and Studio credentials in production
-    // once the backend is deployed. Production currently serves only the
-    // portfolio, so the unpublished integration keeps its local fallbacks.
     ARGOS_API_URL: z.url().default("http://localhost:5000/api"),
     NODE_ENV: production
       ? z.literal("production")
       : z.enum(["development", "test"]).default("development"),
     STUDIO_ARGOS_API_KEY: z.string().min(16).optional(),
-    STUDIO_USERNAME: z.string().min(3).default("studio"),
-    STUDIO_PASSWORD_HASH: passwordHash.default(localPasswordHash),
-    STUDIO_SESSION_SECRET: z
-      .string()
-      .min(24)
-      .default("local-studio-session-secret"),
+    STUDIO_USERNAME: production
+      ? z.string().min(3).optional()
+      : z.string().min(3).default("studio"),
+    STUDIO_PASSWORD_HASH: production
+      ? passwordHash.optional()
+      : passwordHash.default(localPasswordHash),
+    STUDIO_SESSION_SECRET: production
+      ? z.string().min(32).optional()
+      : z.string().min(24).default("local-studio-session-secret"),
   });
+}
+
+const studioAuthConfigSchema = z.object({
+  STUDIO_PASSWORD_HASH: passwordHash,
+  STUDIO_SESSION_SECRET: z.string().min(24),
+  STUDIO_USERNAME: z.string().min(3),
+});
+
+export function studioAuthConfig(input: {
+  STUDIO_PASSWORD_HASH?: string;
+  STUDIO_SESSION_SECRET?: string;
+  STUDIO_USERNAME?: string;
+}) {
+  return studioAuthConfigSchema.parse(input);
 }
 
 export function studioClientEnvSchema(_production: boolean) {

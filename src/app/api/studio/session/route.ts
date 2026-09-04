@@ -10,17 +10,24 @@ import {
   createStudioSessionToken,
   STUDIO_SESSION_COOKIE,
 } from "@/features/studio/auth/token";
+import { studioAuthConfig } from "@/features/studio/env-policy";
+import { isStudioEnabled } from "@/features/studio/public-policy";
 
 export async function POST(request: NextRequest) {
+  if (!isStudioEnabled(env.NODE_ENV)) {
+    return new Response(null, { status: 404 });
+  }
+
+  const auth = studioAuthConfig(env);
   const formData = await request.formData();
   const username = formData.get("username");
   const password = formData.get("password");
 
   const isValidUsername =
-    typeof username === "string" && username === env.STUDIO_USERNAME;
+    typeof username === "string" && username === auth.STUDIO_USERNAME;
   const isValidPassword =
     typeof password === "string" &&
-    (await verifyStudioPassword(password, env.STUDIO_PASSWORD_HASH));
+    (await verifyStudioPassword(password, auth.STUDIO_PASSWORD_HASH));
 
   if (!(isValidUsername && isValidPassword)) {
     return NextResponse.redirect(
@@ -34,8 +41,8 @@ export async function POST(request: NextRequest) {
 
   const expiresAt = Date.now() + STUDIO_SESSION_MAX_AGE_SECONDS * 1000;
   const token = await createStudioSessionToken(
-    env.STUDIO_SESSION_SECRET,
-    env.STUDIO_USERNAME,
+    auth.STUDIO_SESSION_SECRET,
+    auth.STUDIO_USERNAME,
     expiresAt,
   );
   const response = NextResponse.redirect(

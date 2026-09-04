@@ -7,6 +7,8 @@ import {
   STUDIO_SESSION_COOKIE,
   verifyStudioSessionToken,
 } from "./features/studio/auth/token";
+import { studioAuthConfig } from "./features/studio/env-policy";
+import { isStudioEnabled } from "./features/studio/public-policy";
 import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
@@ -20,10 +22,15 @@ export default async function proxy(request: NextRequest) {
   }
 
   if (pathname === "/studio" || pathname.startsWith("/studio/")) {
+    if (!isStudioEnabled(env.NODE_ENV)) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
+    const auth = studioAuthConfig(env);
     const token = request.cookies.get(STUDIO_SESSION_COOKIE)?.value;
     const hasSession = await verifyStudioSessionToken(
       token,
-      env.STUDIO_SESSION_SECRET,
+      auth.STUDIO_SESSION_SECRET,
     );
     const decision = getStudioRouteDecision(pathname, hasSession);
 

@@ -19,9 +19,13 @@ describe("Studio environment policy", () => {
   });
 
   it("allows a portfolio-only production build before Argos is deployed", () => {
-    expect(
-      studioServerEnvSchema(true).safeParse({ NODE_ENV: "production" }).success,
-    ).toBe(true);
+    const result = studioServerEnvSchema(true).parse({
+      NODE_ENV: "production",
+    });
+
+    expect(result.STUDIO_USERNAME).toBeUndefined();
+    expect(result.STUDIO_PASSWORD_HASH).toBeUndefined();
+    expect(result.STUDIO_SESSION_SECRET).toBeUndefined();
     expect(studioClientEnvSchema(true).safeParse({}).success).toBe(true);
   });
 
