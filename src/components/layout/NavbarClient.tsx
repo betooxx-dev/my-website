@@ -187,6 +187,7 @@ export default function NavbarClient({
           <button
             type="button"
             aria-label={open ? closeMenuLabel : menuLabel}
+            aria-controls="mobile-navigation"
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
             className="inline-grid size-10 place-items-center rounded-full border border-mint-50/14 bg-mint-50/[0.04] text-mint-50/80 transition-colors hover:border-mint-50/25 hover:text-mint-50 focus:outline-none focus:ring-2 focus:ring-amber-300/50 lg:hidden"
@@ -197,6 +198,7 @@ export default function NavbarClient({
       </nav>
 
       <div
+        id="mobile-navigation"
         aria-hidden={!open}
         inert={!open}
         className={`mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl border border-mint-50/10 bg-pine-900/92 p-2 shadow-[0_18px_50px_-28px_rgba(17,24,39,0.35)] backdrop-blur-2xl transition-all duration-300 lg:hidden ${
