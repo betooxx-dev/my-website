@@ -1,7 +1,7 @@
 import {
   getPublicBlogRedirect,
   isPublicBlogEnabled,
-} from "@/lib/public-blog-policy";
+} from "@/features/blog/public-policy";
 
 describe("public blog production policy", () => {
   it("keeps the public blog available outside production", () => {

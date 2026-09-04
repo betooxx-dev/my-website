@@ -2,13 +2,14 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import type { BlogPost } from "@/lib/blog-data";
+import type { BlogPost } from "@/contracts";
+import type { Locale } from "@/i18n/routing";
 import { PostCard } from "./PostCard";
 
 type BlogIndexProps = {
   posts: BlogPost[];
   tags: string[];
-  locale: "es" | "en";
+  locale: Locale;
   labels: {
     all: string;
     cover: string;

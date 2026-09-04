@@ -4,7 +4,7 @@ import { useFormStatus } from "react-dom";
 import {
   isStudioSubmitIntentPending,
   STUDIO_SUBMIT_INTENT_FIELD,
-} from "@/lib/studio-submit";
+} from "@/features/studio/publishing/submit-state";
 import { StudioIcon, type StudioIconName } from "./StudioIcon";
 import {
   studioPrimaryButtonClass,

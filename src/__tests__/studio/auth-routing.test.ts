@@ -1,5 +1,5 @@
-import { getStudioRouteDecision } from "@/lib/studio-auth";
-import { studioRedirectUrl } from "@/lib/studio-redirect";
+import { studioRedirectUrl } from "@/features/studio/auth/redirect";
+import { getStudioRouteDecision } from "@/features/studio/auth/token";
 
 describe("studio auth routing", () => {
   it("redirects anonymous studio visitors to login", () => {

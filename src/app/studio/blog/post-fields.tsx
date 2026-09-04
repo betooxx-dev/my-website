@@ -2,8 +2,8 @@ import {
   studioInputClass,
   studioLabelClass,
 } from "@/components/features/studio/StudioUi";
-import { studioCopy } from "@/lib/studio-content";
-import type { StudioAsset, StudioPost } from "@/lib/studio-schema";
+import type { StudioAsset, StudioPost } from "@/contracts";
+import { studioCopy } from "@/features/studio/content";
 
 type StudioPostFieldsProps = {
   assets: StudioAsset[];

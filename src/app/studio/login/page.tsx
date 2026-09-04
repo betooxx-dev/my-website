@@ -1,5 +1,5 @@
 import { StudioIcon } from "@/components/features/studio/StudioIcon";
-import { studioCopy } from "@/lib/studio-content";
+import { studioCopy } from "@/features/studio/content";
 
 type StudioLoginPageProps = {
   searchParams: Promise<{ error?: string }>;

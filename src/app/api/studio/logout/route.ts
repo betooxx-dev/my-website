@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { env } from "@/env";
-import { STUDIO_SESSION_COOKIE } from "@/lib/studio-auth";
-import { getStudioSessionCookieOptions } from "@/lib/studio-cookie";
-import { studioRedirectUrl } from "@/lib/studio-redirect";
+import { getStudioSessionCookieOptions } from "@/features/studio/auth/cookie";
+import { studioRedirectUrl } from "@/features/studio/auth/redirect";
+import { STUDIO_SESSION_COOKIE } from "@/features/studio/auth/token";
 
 export async function POST() {
   const response = NextResponse.redirect(

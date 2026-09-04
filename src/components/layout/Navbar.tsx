@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { env } from "@/env";
-import { isPublicBlogEnabled } from "@/lib/public-blog-policy";
+import { isPublicBlogEnabled } from "@/features/blog/public-policy";
 import NavbarClient from "./NavbarClient";
 
 export default async function Navbar() {

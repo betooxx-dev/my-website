@@ -1,8 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SocialLinks from "@/components/shared/SocialLinks";
-
-const EMAIL = "avendanoargueta.josealberto@gmail.com";
+import { siteProfile } from "@/config/site-profile";
 
 function ArrowUpRightIcon() {
   return (
@@ -51,11 +50,11 @@ export default async function ContactSection() {
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href={`mailto:${EMAIL}`}
-                aria-label={`${t("emailLabel")}: ${EMAIL}`}
+                href={`mailto:${siteProfile.email}`}
+                aria-label={`${t("emailLabel")}: ${siteProfile.email}`}
                 className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring/50"
               >
-                {EMAIL}
+                {siteProfile.email}
                 <ArrowUpRightIcon />
               </a>
             </div>
@@ -67,7 +66,7 @@ export default async function ContactSection() {
               <SocialLinks tone="dark" />
               <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="https://www.linkedin.com/in/alberto-avenda%C3%B1o"
+                  href={siteProfile.social.linkedin.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full border border-border bg-background/70 px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"
@@ -75,7 +74,7 @@ export default async function ContactSection() {
                   {t("ctaLinkedIn")}
                 </a>
                 <a
-                  href="https://x.com/betooxx_dev"
+                  href={siteProfile.social.x.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full border border-border bg-background/70 px-4 py-2 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/50"

@@ -1,7 +1,7 @@
 import {
   studioClientEnvSchema,
   studioServerEnvSchema,
-} from "@/lib/studio-env-policy";
+} from "@/features/studio/env-policy";
 
 const passwordHash =
   "scrypt:test-salt:0vdEp3zFMNJRLiyYzDoq560rnhIEArNIKn9ZdKuWGMyaHwHUqnxdnSRhbdZeG4UoztiSF2LU9KTlIK7TEhM2VQ";

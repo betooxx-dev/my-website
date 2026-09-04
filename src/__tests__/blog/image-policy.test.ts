@@ -1,4 +1,4 @@
-import { shouldBypassImageOptimization } from "@/lib/image-policy";
+import { shouldBypassImageOptimization } from "@/features/blog/image-policy";
 
 describe("blog image policy", () => {
   it("lets the browser load local Argos assets directly during end-to-end work", () => {

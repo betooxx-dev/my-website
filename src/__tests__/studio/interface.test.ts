@@ -103,7 +103,10 @@ describe("studio interface", () => {
   });
 
   it("associates image alternative-text guidance with its field", () => {
-    const source = readFileSync("src/app/studio/blog/page.tsx", "utf8");
+    const source = readFileSync(
+      "src/app/studio/blog/_components/AssetLibrary.tsx",
+      "utf8",
+    );
 
     expect(source).toContain('aria-describedby="asset-alt-help"');
     expect(source).toContain('id="asset-alt-help"');

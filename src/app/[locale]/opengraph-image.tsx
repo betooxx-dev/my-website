@@ -1,7 +1,9 @@
 import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
 
-export const alt = "Alberto Avendaño — Software Engineer";
+import { siteProfile } from "@/config/site-profile";
+
+export const alt = `${siteProfile.name} — Software Engineer`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

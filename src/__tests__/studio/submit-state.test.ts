@@ -1,4 +1,4 @@
-import { isStudioSubmitIntentPending } from "@/lib/studio-submit";
+import { isStudioSubmitIntentPending } from "@/features/studio/publishing/submit-state";
 
 describe("studio submit state", () => {
   it("announces progress only on the button that submitted the form", () => {

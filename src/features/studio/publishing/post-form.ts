@@ -1,4 +1,5 @@
-import type { StudioPostInput } from "@/lib/studio-schema";
+import type { StudioPostInput } from "@/contracts";
+import { isLocale, type Locale, routing } from "@/i18n/routing";
 
 export function draftStudioPostInput(formData: FormData): StudioPostInput {
   return {
@@ -17,8 +18,9 @@ export function draftStudioPostInput(formData: FormData): StudioPostInput {
   };
 }
 
-function normalizeLocale(value: FormDataEntryValue | null): "es" | "en" {
-  return value === "en" || value === "EN" ? "en" : "es";
+function normalizeLocale(value: FormDataEntryValue | null): Locale {
+  const normalized = String(value ?? "").toLowerCase();
+  return isLocale(normalized) ? normalized : routing.defaultLocale;
 }
 
 function normalizeCoverAssetId(value: FormDataEntryValue | null) {

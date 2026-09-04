@@ -55,12 +55,17 @@ Mientras el backend de Argos no esté desplegado, el portafolio puede compilar e
 
 ```
 src/
-  app/[locale]/   Rutas con i18n (home, blog, now, error, not-found)
-  components/     UI (features, layout, shared)
-  i18n/           Configuración de next-intl
+  app/            Rutas y layouts delgados de Next.js
+  services/       Cliente HTTP y servicios de dominio contra Argos
+  components/     UI reutilizable (features, layout, shared)
+  config/         Identidad y configuración central del sitio
+  contracts/      Esquemas Zod y tipos nombrados como *-contract.ts
+  features/       Reglas de Blog, Studio y SEO
+  i18n/           Configuración y tipo compartido de locale
   messages/       Traducciones (es.json es la fuente)
-  __tests__/      Tests de i18n y env
-  proxy.ts        Detección de locale (convención Next 16)
+  shared/         Utilidades puras transversales
+  __tests__/      Tests por dominio
+  proxy.ts        Locale, política pública y acceso a Studio
 ```
 
 ## Docker (desarrollo)

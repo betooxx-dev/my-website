@@ -1,4 +1,4 @@
-import { formatDate } from "@/lib/format";
+import { formatDate } from "@/shared/format";
 
 describe("blog date formatting", () => {
   it("keeps a published calendar date stable across server and browser timezones", () => {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { studioCopy } from "@/lib/studio-content";
+import { studioCopy } from "@/features/studio/content";
 import { StudioIcon, type StudioIconName } from "./StudioIcon";
 
 const SIDEBAR_PREFERENCE_KEY = "studio.sidebar.v1";

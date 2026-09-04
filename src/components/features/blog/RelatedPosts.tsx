@@ -1,9 +1,10 @@
-import type { BlogPost } from "@/lib/blog-data";
+import type { BlogPost } from "@/contracts";
+import type { Locale } from "@/i18n/routing";
 import { PostCard } from "./PostCard";
 
 type RelatedPostsProps = {
   posts: BlogPost[];
-  locale: "es" | "en";
+  locale: Locale;
   labels: {
     kicker: string;
     title: string;

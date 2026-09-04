@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { siteProfile } from "@/config/site-profile";
 import "@/styles/globals.css";
 
 const fontSans = Inter({
@@ -15,7 +16,7 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Studio | Alberto",
+  title: `Studio | ${siteProfile.firstName}`,
   description: "Consola privada de administración.",
   robots: {
     follow: false,

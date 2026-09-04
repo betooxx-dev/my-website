@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import type { BlogPost } from "@/lib/blog-data";
+import type { BlogPost } from "@/contracts";
 
 type BlogSitemapPost = Pick<BlogPost, "locale" | "slug" | "updatedAt">;
 

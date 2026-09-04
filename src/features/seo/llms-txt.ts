@@ -1,9 +1,11 @@
+import { siteProfile } from "@/config/site-profile";
+
 export function createLlmsTxt(siteUrl: string): string {
   const base = siteUrl.replace(/\/+$/, "");
 
-  return `# Alberto Avendaño
+  return `# ${siteProfile.name}
 
-> Personal portfolio of Alberto Avendaño, a software engineer focused on product engineering, digital experiences, and operational improvement.
+> Personal portfolio of ${siteProfile.name}, a software engineer focused on product engineering, digital experiences, and operational improvement.
 
 The portfolio is available in Spanish and English. It presents Alberto's professional profile, selected work, verified certifications, and public contact channels.
 
@@ -16,8 +18,8 @@ The portfolio is available in Spanish and English. It presents Alberto's profess
 
 ## Profiles
 
-- [LinkedIn](https://www.linkedin.com/in/alberto-avenda%C3%B1o): Professional profile and work history.
-- [X](https://x.com/betooxx_dev): Public posts and direct contact channel.
+- [LinkedIn](${siteProfile.social.linkedin.href}): Professional profile and work history.
+- [X](${siteProfile.social.x.href}): Public posts and direct contact channel.
 
 ## Optional
 

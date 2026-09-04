@@ -1,7 +1,8 @@
+import { siteProfile } from "@/config/site-profile";
+
 const socials = [
   {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/alberto-avenda%C3%B1o",
+    ...siteProfile.social.linkedin,
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -15,8 +16,7 @@ const socials = [
     ),
   },
   {
-    name: "X",
-    href: "https://x.com/betooxx_dev",
+    ...siteProfile.social.x,
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -30,8 +30,7 @@ const socials = [
     ),
   },
   {
-    name: "Instagram",
-    href: "https://www.instagram.com/avendanooxx",
+    ...siteProfile.social.instagram,
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -45,8 +44,7 @@ const socials = [
     ),
   },
   {
-    name: "Facebook",
-    href: "https://www.facebook.com/alberto.avendano.205880",
+    ...siteProfile.social.facebook,
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -60,8 +58,7 @@ const socials = [
     ),
   },
   {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@avendanooxx",
+    ...siteProfile.social.tiktok,
     icon: (
       <svg
         viewBox="0 0 24 24"

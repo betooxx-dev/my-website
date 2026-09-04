@@ -1,4 +1,4 @@
-import { getBlogContractStatus } from "@/lib/studio-resource-status";
+import { getBlogContractStatus } from "@/features/studio/publishing/resource-status";
 
 describe("Studio resource status", () => {
   it("never reports Argos as connected when the blog resource is unavailable", () => {

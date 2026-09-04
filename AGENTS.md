@@ -21,14 +21,22 @@ Guía para agentes de IA y colaboradores sobre las convenciones, decisiones de d
 
 ```
 src/
-  app/[locale]/          # Rutas Next.js con soporte i18n
+  app/                   # Rutas y layouts delgados de Next.js
+    [locale]/            # Superficie pública y shell compartido
+    studio/blog/
+      _components/       # Componentes privados de la ruta editorial
   components/
-    features/home/       # Secciones de la home page
-    layout/              # Navbar, Footer
-    shared/              # Componentes reutilizables
+    features/            # UI reutilizable agrupada por dominio
+    layout/              # Shells compartidos (Navbar, Footer)
+    shared/              # Primitivas reutilizables entre dominios
+  config/                # Fuentes únicas de configuración del sitio
+  contracts/             # Esquemas runtime y tipos nombrados como *-contract
+  services/              # Cliente api.ts y servicios *.service.ts
+  features/              # Reglas de negocio agrupadas por dominio
+  i18n/                  # Routing, navegación y tipos de locale
+  shared/                # Utilidades puras realmente transversales
   messages/              # Archivos de traducción (es.json, en.json)
-  __tests__/
-    i18n/                # Tests de cobertura de traducciones
+  __tests__/             # Tests agrupados por dominio
 scripts/                 # Scripts de utilidad para CI
 .github/workflows/       # GitHub Actions
 ```
@@ -86,7 +94,8 @@ Y en el hook usar `test:fast` para no ralentizar el commit.
 
 ## Tests
 
-La suite actual cubre exclusivamente i18n. Todos los tests viven en `src/__tests__/`.
+La suite cubre i18n, Blog, Studio, SEO, contratos externos y utilidades. Todos
+los tests viven en `src/__tests__/` y se agrupan por dominio.
 
 ### Archivos
 
@@ -95,6 +104,22 @@ La suite actual cubre exclusivamente i18n. Todos los tests viven en `src/__tests
 | `i18n/helpers.ts` | Utilidades compartidas (loaders, flattenKeys, findKeyLine, findSourceFiles) |
 | `i18n/translations.test.ts` | Completitud entre locales: todos los keys de `es.json` existen en los demás locales y viceversa |
 | `i18n/usage.test.ts` | Uso en código: no hay keys en el JSON sin usar, ni keys usados en el código que no existan en el JSON |
+| `blog/argos-contract.test.ts` | Los DTO recibidos desde Argos cumplen esquemas Zod en runtime |
+| `seo/site-profile.test.ts` | Correo y redes sociales sólo se definen en `config/site-profile.ts` |
+
+### Límites arquitectónicos
+
+- `app/` coordina rutas, datos y layouts; una página no debe acumular secciones
+  independientes. Los componentes exclusivos de una ruta viven en `_components/`.
+- `components/shared/` no importa desde `components/features/` ni desde `app/`.
+- `services/` contiene exclusivamente integración remota; no renderiza UI.
+- `features/` contiene reglas de negocio y se divide por dominio y subdominio.
+- `shared/` no conoce `app/`, `services/` ni un feature concreto.
+- Los datos personales públicos se leen desde `config/site-profile.ts`.
+- Todo payload externo de Argos se valida con los esquemas de `contracts/`.
+- `i18n/routing.ts` es la única fuente para la lista y el tipo `Locale`.
+- `services/api.ts` configura únicamente el cliente HTTP base; cada servicio
+  `*.service.ts` declara sus endpoints y valida sus respuestas.
 
 ### Locale fuente
 

@@ -1,3 +1,5 @@
+import { siteProfile } from "@/config/site-profile";
+
 export const studioCopy = {
   login: {
     eyebrow: "Acceso al Studio",
@@ -17,7 +19,7 @@ export const studioCopy = {
   },
   shell: {
     brand: "Studio",
-    owner: "Alberto Avendaño",
+    owner: siteProfile.name,
     dashboard: "Resumen",
     writing: "Publicaciones",
     logout: "Cerrar sesión",
@@ -30,7 +32,7 @@ export const studioCopy = {
   },
   dashboard: {
     eyebrow: "Panel de control",
-    title: "Buenos días, Alberto.",
+    title: `Buenos días, ${siteProfile.firstName}.`,
     description:
       "Aquí tienes una vista general de tu actividad editorial y del estado del Studio.",
     newPost: "Escribir una nueva publicación",

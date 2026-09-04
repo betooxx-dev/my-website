@@ -12,9 +12,9 @@ import {
   studioPrimaryButtonClass,
   studioSecondaryButtonClass,
 } from "@/components/features/studio/StudioUi";
-import { getStudioDashboardData } from "@/lib/studio-api";
-import { studioCopy } from "@/lib/studio-content";
-import { requireStudioSession } from "@/lib/studio-session";
+import { requireStudioSession } from "@/features/studio/auth/session";
+import { studioCopy } from "@/features/studio/content";
+import { StudioService } from "@/services/studio.service";
 
 type DashboardMetric = {
   icon: StudioIconName;
@@ -26,7 +26,7 @@ type DashboardMetric = {
 export default async function StudioPage() {
   await requireStudioSession();
 
-  const data = await getStudioDashboardData();
+  const data = await StudioService.getDashboardData();
   const { dashboard } = studioCopy;
   const posts = data.posts.data;
   const publishedCount = posts.filter(

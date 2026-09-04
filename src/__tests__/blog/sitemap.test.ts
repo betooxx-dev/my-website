@@ -1,4 +1,4 @@
-import { blogSitemapEntries } from "@/lib/blog-sitemap";
+import { blogSitemapEntries } from "@/features/blog/sitemap";
 
 describe("blog sitemap", () => {
   it("adds every published post with its canonical localized URL", () => {

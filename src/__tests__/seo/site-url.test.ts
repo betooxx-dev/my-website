@@ -1,4 +1,4 @@
-import { resolveSiteUrl } from "@/lib/site-url";
+import { resolveSiteUrl } from "@/features/seo/site-url";
 
 describe("resolveSiteUrl", () => {
   it("prefers an explicitly configured site URL", () => {

@@ -3,6 +3,9 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
+import { siteProfile } from "@/config/site-profile";
 import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
@@ -39,17 +42,17 @@ export async function generateMetadata({
     metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
     title: {
       default: t("title"),
-      template: "%s | Alberto Avendaño",
+      template: `%s | ${siteProfile.name}`,
     },
     description: t("description"),
     authors: [
       {
-        name: "Alberto Avendaño",
+        name: siteProfile.name,
         url: `${env.NEXT_PUBLIC_SITE_URL}/${locale}`,
       },
     ],
-    creator: "Alberto Avendaño",
-    publisher: "Alberto Avendaño",
+    creator: siteProfile.name,
+    publisher: siteProfile.name,
     category: "technology",
     robots: {
       index: true,
@@ -76,7 +79,11 @@ export default async function RootLayout({
         className={`${fontSans.variable} ${fontMono.variable} bg-background text-foreground antialiased overflow-x-hidden`}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

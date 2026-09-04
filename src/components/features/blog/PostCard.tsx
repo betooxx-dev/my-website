@@ -2,17 +2,18 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import type { BlogPost } from "@/contracts";
+import { shouldBypassImageOptimization } from "@/features/blog/image-policy";
 import { Link } from "@/i18n/navigation";
-import type { BlogPost } from "@/lib/blog-data";
-import { formatDate } from "@/lib/format";
-import { shouldBypassImageOptimization } from "@/lib/image-policy";
+import type { Locale } from "@/i18n/routing";
+import { formatDate } from "@/shared/format";
 import { ClockIcon } from "./BlogIcons";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
 type PostCardProps = {
   post: BlogPost;
-  locale: "es" | "en";
+  locale: Locale;
   coverLabel: string;
   index?: number;
   featured?: boolean;

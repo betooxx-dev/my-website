@@ -1,13 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { env } from "./env";
-import { routing } from "./i18n/routing";
-import { getPublicBlogRedirect } from "./lib/public-blog-policy";
+import { getPublicBlogRedirect } from "./features/blog/public-policy";
 import {
   getStudioRouteDecision,
   STUDIO_SESSION_COOKIE,
   verifyStudioSessionToken,
-} from "./lib/studio-auth";
+} from "./features/studio/auth/token";
+import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 

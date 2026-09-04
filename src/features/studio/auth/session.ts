@@ -2,14 +2,14 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { env } from "@/env";
 import {
+  getStudioSessionCookieOptions,
+  STUDIO_SESSION_MAX_AGE_SECONDS,
+} from "@/features/studio/auth/cookie";
+import {
   createStudioSessionToken,
   STUDIO_SESSION_COOKIE,
   verifyStudioSessionToken,
-} from "@/lib/studio-auth";
-import {
-  getStudioSessionCookieOptions,
-  STUDIO_SESSION_MAX_AGE_SECONDS,
-} from "@/lib/studio-cookie";
+} from "@/features/studio/auth/token";
 
 export async function createStudioSessionCookie() {
   const cookieStore = await cookies();

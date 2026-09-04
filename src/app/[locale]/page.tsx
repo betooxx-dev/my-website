@@ -6,21 +6,13 @@ import ContactSection from "@/components/features/home/ContactSection";
 import ExperienceSection from "@/components/features/home/ExperienceSection";
 import HeroSection from "@/components/features/home/HeroSection";
 import ProjectsSection from "@/components/features/home/ProjectsSection";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
+import { siteProfile, siteSocialUrls } from "@/config/site-profile";
 import { env } from "@/env";
+import type { Locale } from "@/i18n/routing";
 
 type HomePageProps = {
-  params: Promise<{ locale: "es" | "en" }>;
+  params: Promise<{ locale: Locale }>;
 };
-
-const socialProfiles = [
-  "https://www.linkedin.com/in/alberto-avenda%C3%B1o",
-  "https://x.com/betooxx_dev",
-  "https://www.instagram.com/avendanooxx",
-  "https://www.facebook.com/alberto.avendano.205880",
-  "https://www.tiktok.com/@avendanooxx",
-] as const;
 
 export async function generateMetadata({
   params,
@@ -46,7 +38,7 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
       url: pageUrl,
-      siteName: "Alberto Avendaño",
+      siteName: siteProfile.name,
       locale: locale === "es" ? "es_MX" : "en_US",
       alternateLocale: locale === "es" ? ["en_US"] : ["es_MX"],
     },
@@ -54,7 +46,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      creator: "@betooxx_dev",
+      creator: siteProfile.social.x.handle,
     },
   };
 }
@@ -70,13 +62,13 @@ export default async function Home({ params }: HomePageProps) {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${base}/#person`,
-    name: "Alberto Avendaño",
+    name: siteProfile.name,
     url: `${base}/${locale}`,
-    image: `${base}/banner-com-02.png`,
+    image: `${base}${siteProfile.image}`,
     jobTitle: heroT("title"),
     description: metadataT("description"),
-    email: "avendanoargueta.josealberto@gmail.com",
-    sameAs: socialProfiles,
+    email: siteProfile.email,
+    sameAs: siteSocialUrls,
     knowsAbout: [
       "Software engineering",
       "Product engineering",
@@ -96,7 +88,6 @@ export default async function Home({ params }: HomePageProps) {
           __html: JSON.stringify(personSchema).replace(/</g, "\\u003c"),
         }}
       />
-      <Navbar />
       <main>
         <HeroSection />
         <ExperienceSection />
@@ -105,7 +96,6 @@ export default async function Home({ params }: HomePageProps) {
         <CertificationsSection />
         <ContactSection />
       </main>
-      <Footer />
     </>
   );
 }

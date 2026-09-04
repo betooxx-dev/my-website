@@ -2,34 +2,27 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import {
-  createStudioDraft,
-  type StudioApiMutationResult,
-  setStudioPostPublication,
-  updateStudioPost,
-  uploadStudioAsset,
-} from "@/lib/studio-api";
+import { requireStudioSession } from "@/features/studio/auth/session";
 import {
   studioBlogErrorUrl,
   studioBlogSuccessUrl,
   studioPostRecoveryKey,
-} from "@/lib/studio-feedback";
-import { draftStudioPostInput } from "@/lib/studio-post-form";
-import { requireStudioSession } from "@/lib/studio-session";
+} from "@/features/studio/publishing/feedback";
+import { draftStudioPostInput } from "@/features/studio/publishing/post-form";
+import { isLocale } from "@/i18n/routing";
+import { StudioService } from "@/services/studio.service";
 
 export async function createDraftAction(formData: FormData) {
   await requireStudioSession();
-  requireSuccessfulMutation(
-    await createStudioDraft(draftStudioPostInput(formData)),
-  );
+  await runMutation(StudioService.createDraft(draftStudioPostInput(formData)));
   finishStudioMutation(formData, "new-post");
 }
 
 export async function updatePostAction(formData: FormData) {
   await requireStudioSession();
   const id = String(formData.get("id") ?? "");
-  requireSuccessfulMutation(
-    await updateStudioPost(id, draftStudioPostInput(formData)),
+  await runMutation(
+    StudioService.updatePost(id, draftStudioPostInput(formData)),
   );
   finishStudioMutation(formData, studioPostRecoveryKey(id));
 }
@@ -37,29 +30,36 @@ export async function updatePostAction(formData: FormData) {
 export async function publishPostAction(formData: FormData) {
   await requireStudioSession();
   const id = String(formData.get("id") ?? "");
-  requireSuccessfulMutation(
-    await updateStudioPost(id, draftStudioPostInput(formData)),
+  await runMutation(
+    StudioService.updatePost(id, draftStudioPostInput(formData)),
   );
-  requireSuccessfulMutation(await setStudioPostPublication(id, "publish"));
+  await runMutation(StudioService.setPostPublication(id, "publish"));
   finishStudioMutation(formData, studioPostRecoveryKey(id));
 }
 
 export async function unpublishPostAction(formData: FormData) {
   await requireStudioSession();
   const id = String(formData.get("id") ?? "");
-  requireSuccessfulMutation(await setStudioPostPublication(id, "unpublish"));
+  await runMutation(StudioService.setPostPublication(id, "unpublish"));
   finishStudioMutation(formData, studioPostRecoveryKey(id));
 }
 
 export async function uploadAssetAction(formData: FormData) {
   await requireStudioSession();
-  requireSuccessfulMutation(await uploadStudioAsset(formData));
+  await runMutation(StudioService.uploadAsset(formData));
   finishStudioMutation(formData, "asset-upload");
 }
 
-function requireSuccessfulMutation<T>(result: StudioApiMutationResult<T>) {
-  if (!result.ok) redirect(studioBlogErrorUrl(result.message));
-  return result.data;
+async function runMutation(operation: Promise<unknown>) {
+  try {
+    await operation;
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : "No se pudo completar la operación.";
+    redirect(studioBlogErrorUrl(message));
+  }
 }
 
 function finishStudioMutation(formData: FormData, recoveryKey: string): never {
@@ -71,7 +71,7 @@ function finishStudioMutation(formData: FormData, recoveryKey: string): never {
 
   const locale = String(formData.get("locale") ?? "");
   const slug = String(formData.get("slug") ?? "");
-  if ((locale === "es" || locale === "en") && slug) {
+  if (isLocale(locale) && slug) {
     revalidatePath(`/${locale}/blog/${slug}`);
   }
 

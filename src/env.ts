@@ -1,9 +1,9 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-import { resolveSiteUrl } from "@/lib/site-url";
+import { resolveSiteUrl } from "@/features/seo/site-url";
 import {
   studioClientEnvSchema,
   studioServerEnvSchema,
-} from "@/lib/studio-env-policy";
+} from "@/features/studio/env-policy";
 
 const production = process.env.NODE_ENV === "production";
 const server = studioServerEnvSchema(production);

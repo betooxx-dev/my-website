@@ -1,4 +1,4 @@
-import { verifyStudioPassword } from "@/lib/studio-password";
+import { verifyStudioPassword } from "@/features/studio/auth/password";
 
 describe("studio password auth", () => {
   it("accepts the configured scrypt password and rejects a wrong password", async () => {

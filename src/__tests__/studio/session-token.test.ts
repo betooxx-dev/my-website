@@ -1,7 +1,7 @@
 import {
   createStudioSessionToken,
   verifyStudioSessionToken,
-} from "@/lib/studio-auth";
+} from "@/features/studio/auth/token";
 
 describe("studio session token", () => {
   it("accepts issued tokens and rejects tampered tokens", async () => {

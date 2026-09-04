@@ -1,4 +1,4 @@
-import { createLlmsTxt } from "@/lib/llms-txt";
+import { createLlmsTxt } from "@/features/seo/llms-txt";
 
 describe("createLlmsTxt", () => {
   const content = createLlmsTxt("https://example.com/");

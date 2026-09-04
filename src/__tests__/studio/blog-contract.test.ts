@@ -2,8 +2,8 @@ import {
   studioBlogErrorUrl,
   studioBlogSuccessUrl,
   studioPostRecoveryKey,
-} from "@/lib/studio-feedback";
-import { draftStudioPostInput } from "@/lib/studio-post-form";
+} from "@/features/studio/publishing/feedback";
+import { draftStudioPostInput } from "@/features/studio/publishing/post-form";
 
 describe("studio blog contract", () => {
   it("maps the editor form into the backend draft payload without publication state", () => {

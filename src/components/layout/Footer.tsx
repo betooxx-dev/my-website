@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import SocialLinks from "@/components/shared/SocialLinks";
-
-const EMAIL = "avendanoargueta.josealberto@gmail.com";
+import { siteProfile } from "@/config/site-profile";
 
 function ArrowUpRightIcon() {
   return (
@@ -70,10 +69,10 @@ export default async function Footer() {
                 {footerT("contactHeading")}
               </p>
               <a
-                href={`mailto:${EMAIL}`}
+                href={`mailto:${siteProfile.email}`}
                 className="group inline-flex items-center justify-center gap-1 break-all text-sm text-foreground/80 transition-colors hover:text-primary md:justify-start"
               >
-                {EMAIL}
+                {siteProfile.email}
                 <ArrowUpRightIcon />
               </a>
             </div>

@@ -1,15 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { env } from "@/env";
 import {
-  createStudioSessionToken,
-  STUDIO_SESSION_COOKIE,
-} from "@/lib/studio-auth";
-import {
   getStudioSessionCookieOptions,
   STUDIO_SESSION_MAX_AGE_SECONDS,
-} from "@/lib/studio-cookie";
-import { verifyStudioPassword } from "@/lib/studio-password";
-import { studioRedirectUrl } from "@/lib/studio-redirect";
+} from "@/features/studio/auth/cookie";
+import { verifyStudioPassword } from "@/features/studio/auth/password";
+import { studioRedirectUrl } from "@/features/studio/auth/redirect";
+import {
+  createStudioSessionToken,
+  STUDIO_SESSION_COOKIE,
+} from "@/features/studio/auth/token";
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();

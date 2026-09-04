@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import SocialLinks from "@/components/shared/SocialLinks";
 import TiltCard from "@/components/shared/TiltCard";
+import { siteProfile } from "@/config/site-profile";
 
 export default async function HeroSection() {
   const t = await getTranslations("hero");
@@ -132,7 +133,7 @@ export default async function HeroSection() {
                 </span>
               </a>
               <a
-                href="mailto:avendanoargueta.josealberto@gmail.com"
+                href={`mailto:${siteProfile.email}`}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-mint-50/18 bg-mint-50/[0.03] px-6 text-sm font-medium text-mint-50/72 backdrop-blur-md transition-all duration-300 hover:border-mint-50/35 hover:bg-mint-50/[0.07] hover:text-mint-50 focus:outline-none focus:ring-2 focus:ring-mint-50/20"
               >
                 {t("secondaryCta")}

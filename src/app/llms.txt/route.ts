@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { createLlmsTxt } from "@/lib/llms-txt";
+import { createLlmsTxt } from "@/features/seo/llms-txt";
 
 export const dynamic = "force-static";
 
