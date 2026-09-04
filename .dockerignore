@@ -1,6 +1,9 @@
 node_modules
 .next
 .git
+.github
 .claude
 .env*
+coverage
 graphify-out
+*.log

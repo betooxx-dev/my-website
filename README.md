@@ -66,10 +66,22 @@ src/
 ## Docker (desarrollo)
 
 ```bash
+cp .env.example .env.local
 docker compose up --build
 ```
 
-El Compose de desarrollo monta el código con hot-reload sobre `node:20-alpine`.
+Un solo Compose levanta el sitio, Argos y PostgreSQL con healthchecks. El sitio
+queda en <http://localhost:3000>, la API en <http://localhost:5001/api>, y el
+código de ambos repositorios conserva hot reload. Las dependencias, la base de
+datos y los assets viven en volúmenes Docker, no en los directorios de trabajo.
+
+La primera vez, crea la llave administrativa y copia el token resultante a
+`STUDIO_ARGOS_API_KEY` dentro de `.env.local`; después recrea el servicio web:
+
+```bash
+docker compose exec api npm run api-key:create -- --name studio --scopes blog:admin
+docker compose up -d --force-recreate web
+```
 
 ## Docker (producción)
 
@@ -80,7 +92,11 @@ docker compose -f compose.production.yaml up --build -d
 docker compose -f compose.production.yaml ps
 ```
 
-El build usa la salida `standalone` de Next.js y ejecuta el servidor con un usuario sin privilegios. El archivo `.env.production` se monta como secreto durante el build —necesario para validar las variables `NEXT_PUBLIC_*`— y también se inyecta en runtime; está ignorado por Git y por el contexto normal de Docker.
+El build multietapa usa la salida `standalone` de Next.js, copia únicamente lo
+necesario para servirla y ejecuta el servidor con un usuario sin privilegios y
+`dumb-init`. El archivo `.env.production` se monta como secreto durante el build
+—necesario para validar las variables `NEXT_PUBLIC_*`— y también se inyecta en
+runtime; está ignorado por Git y por el contexto normal de Docker.
 
 El puerto se publica únicamente en `127.0.0.1:3000` para colocarlo detrás de un reverse proxy con TLS. Puede cambiarse con `WEBSITE_PORT`. El healthcheck está disponible en `/api/health`.
 
