@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BlogIndex } from "@/components/features/blog/BlogIndex";
+import { getPublishedPosts, getPublishedTags } from "@/features/blog/queries";
 import type { Locale } from "@/i18n/routing";
-import { BlogService } from "@/services/blog.service";
-
-export const dynamic = "force-dynamic";
 
 type BlogPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -15,18 +13,39 @@ export async function generateMetadata({
 }: BlogPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
+  const path = `/${locale}/blog`;
   return {
     title: t("metadataTitle"),
     description: t("metadataDescription"),
+    alternates: {
+      canonical: path,
+      languages: {
+        en: "/en/blog",
+        es: "/es/blog",
+        "x-default": "/es/blog",
+      },
+    },
+    openGraph: {
+      description: t("metadataDescription"),
+      title: t("metadataTitle"),
+      type: "website",
+      url: path,
+    },
+    twitter: {
+      card: "summary_large_image",
+      description: t("metadataDescription"),
+      title: t("metadataTitle"),
+    },
   };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "blog" });
   const [posts, tags] = await Promise.all([
-    BlogService.getPosts(locale),
-    BlogService.getAllTags(locale),
+    getPublishedPosts(locale),
+    getPublishedTags(locale),
   ]);
 
   return (

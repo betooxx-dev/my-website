@@ -1,7 +1,8 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { BLOG_CACHE_TAG } from "@/features/blog/queries";
 import { requireStudioSession } from "@/features/studio/auth/session";
 import type { StudioActionState } from "@/features/studio/publishing/action-state";
 import {
@@ -109,6 +110,7 @@ async function mutationError(
 }
 
 function finishStudioMutation(formData: FormData, recoveryKey: string): never {
+  updateTag(BLOG_CACHE_TAG);
   revalidatePath("/studio");
   revalidatePath("/studio/blog");
   revalidatePath("/es/blog");

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import AboutSection from "@/components/features/home/AboutSection";
 import CertificationsSection from "@/components/features/home/CertificationsSection";
 import ContactSection from "@/components/features/home/ContactSection";
@@ -8,11 +8,15 @@ import HeroSection from "@/components/features/home/HeroSection";
 import ProjectsSection from "@/components/features/home/ProjectsSection";
 import { siteProfile, siteSocialUrls } from "@/config/site-profile";
 import { env } from "@/env";
-import type { Locale } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 
 type HomePageProps = {
   params: Promise<{ locale: Locale }>;
 };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,
@@ -53,6 +57,7 @@ export async function generateMetadata({
 
 export default async function Home({ params }: HomePageProps) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const [metadataT, heroT] = await Promise.all([
     getTranslations({ locale, namespace: "metadata" }),
     getTranslations({ locale, namespace: "hero" }),

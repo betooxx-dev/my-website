@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeftIcon, ClockIcon } from "@/components/features/blog/BlogIcons";
 import { MarkdownContent } from "@/components/features/blog/MarkdownContent";
 import { RelatedPosts } from "@/components/features/blog/RelatedPosts";
 import SocialLinks from "@/components/shared/SocialLinks";
+import { siteProfile } from "@/config/site-profile";
+import { env } from "@/env";
+import {
+  getPublishedPost,
+  getRelatedPublishedPosts,
+} from "@/features/blog/queries";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { BlogService } from "@/services/blog.service";
 import { formatDate } from "@/shared/format";
-
-export const dynamic = "force-dynamic";
 
 type PostPageProps = {
   params: Promise<{ locale: Locale; slug: string }>;
@@ -21,31 +24,70 @@ export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = await BlogService.getPostBySlug(locale, slug);
+  const post = await getPublishedPost(locale, slug);
   if (!post) return {};
+  const path = `/${locale}/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: path },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [{ url: post.cover }],
+      authors: [siteProfile.name],
+      images: [{ alt: post.title, url: post.cover }],
+      modifiedTime: post.updatedAt,
+      publishedTime: post.publishedAt,
       type: "article",
+      url: path,
+    },
+    twitter: {
+      card: "summary_large_image",
+      description: post.excerpt,
+      images: [post.cover],
+      title: post.title,
     },
   };
 }
 
 export default async function PostPage({ params }: PostPageProps) {
   const { locale, slug } = await params;
-  const postPromise = BlogService.getPostBySlug(locale, slug);
+  setRequestLocale(locale);
+  const postPromise = getPublishedPost(locale, slug);
   const t = await getTranslations({ locale, namespace: "blogPost" });
   const post = await postPromise;
   if (!post) notFound();
 
-  const related = await BlogService.getRelatedPosts(locale, slug);
+  const related = await getRelatedPublishedPosts(locale, slug);
+  const canonicalUrl = `${env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${post.slug}`;
+  const blogPosting = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    author: {
+      "@id": `${env.NEXT_PUBLIC_SITE_URL}/#person`,
+      "@type": "Person",
+      name: siteProfile.name,
+      url: `${env.NEXT_PUBLIC_SITE_URL}/${locale}`,
+    },
+    dateModified: post.updatedAt,
+    datePublished: post.publishedAt,
+    description: post.excerpt,
+    headline: post.title,
+    image: post.cover,
+    inLanguage: locale,
+    mainEntityOfPage: canonicalUrl,
+    url: canonicalUrl,
+  };
 
   return (
     <main className="mx-auto max-w-3xl px-4 pb-24 pt-32 sm:px-6 sm:pt-40">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is validated by the Argos contract and escaped for HTML.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogPosting).replace(/</g, "\\u003c"),
+        }}
+      />
       <Link
         href="/blog"
         className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"

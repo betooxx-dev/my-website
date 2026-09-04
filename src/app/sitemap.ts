@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { env } from "@/env";
 import { isPublicBlogEnabled } from "@/features/blog/public-policy";
+import { getPublishedPosts } from "@/features/blog/queries";
 import { blogSitemapEntries } from "@/features/blog/sitemap";
 import { locales } from "@/i18n/routing";
-import { BlogService } from "@/services/blog.service";
 
 const base = env.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, "");
 const staticRoutes = isPublicBlogEnabled(env.NODE_ENV)
@@ -31,8 +31,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     await Promise.all(
       locales.map(async (locale) => {
         try {
-          return await BlogService.getPosts(locale);
-        } catch {
+          return await getPublishedPosts(locale);
+        } catch (error) {
+          console.error(
+            `No se pudo generar el sitemap del blog (${locale}).`,
+            error,
+          );
           return [];
         }
       }),
