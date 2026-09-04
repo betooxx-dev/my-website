@@ -79,6 +79,7 @@
     "description": "Escribo sobre lo que aprendo construyendo productos: los detalles que hacen que el software se sienta tranquilo y los sistemas detrás de equipos que entregan buen trabajo.",
     "all": "Todo",
     "cover": "Imagen de portada de",
+    "emptyAll": "Aún no hay publicaciones. Vuelve pronto.",
     "emptyStart": "Aún no hay posts con",
     "emptyEnd": "Vuelve pronto."
   },

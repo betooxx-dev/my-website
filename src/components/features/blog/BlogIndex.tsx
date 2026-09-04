@@ -13,6 +13,7 @@ type BlogIndexProps = {
   labels: {
     all: string;
     cover: string;
+    emptyAll: string;
     emptyStart: string;
     emptyEnd: string;
   };
@@ -99,7 +100,9 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
 
       {filtered.length === 0 && (
         <p className="mt-16 text-center text-muted-foreground">
-          {labels.emptyStart} {active ?? labels.all} {labels.emptyEnd}
+          {active
+            ? `${labels.emptyStart} ${active} ${labels.emptyEnd}`
+            : labels.emptyAll}
         </p>
       )}
     </div>

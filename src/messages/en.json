@@ -79,6 +79,7 @@
     "description": "I write about the things I learn building products: the details that make software feel calm, and the systems behind teams that ship great work.",
     "all": "All",
     "cover": "Cover image for",
+    "emptyAll": "There are no posts yet. Check back soon.",
     "emptyStart": "No posts tagged",
     "emptyEnd": "yet. Check back soon."
   },

@@ -68,6 +68,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           labels={{
             all: t("all"),
             cover: t("cover"),
+            emptyAll: t("emptyAll"),
             emptyStart: t("emptyStart"),
             emptyEnd: t("emptyEnd"),
           }}
