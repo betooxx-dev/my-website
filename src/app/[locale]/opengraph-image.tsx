@@ -30,7 +30,7 @@ export default async function Image() {
           marginBottom: 24,
         }}
       >
-        PORTFOLIO
+        {t("siteLabel")}
       </div>
       <div
         style={{

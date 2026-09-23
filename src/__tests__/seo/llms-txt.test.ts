@@ -5,7 +5,7 @@ describe("createLlmsTxt", () => {
 
   it("follows the llms.txt heading and summary format", () => {
     expect(content).toMatch(/^# Alberto Avendaño\n\n> /);
-    expect(content).toContain("## Portfolio");
+    expect(content).toContain("## Website");
     expect(content).toContain("## Optional");
   });
 
