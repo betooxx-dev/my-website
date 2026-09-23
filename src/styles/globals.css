@@ -313,10 +313,21 @@ body::after {
 @media (min-width: 1024px) {
   .desktop-marquee-track {
     animation: marquee 34s linear infinite;
+    animation-play-state: paused;
+  }
+
+  .desktop-marquee-active .desktop-marquee-track {
+    animation-play-state: running;
   }
 
   .desktop-marquee-pause:hover .desktop-marquee-track {
     animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-marquee-track {
+    animation: none;
   }
 }
 

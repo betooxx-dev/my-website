@@ -6,6 +6,7 @@ import {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import { hasDragged, normalizeInfiniteScroll } from "./infinite-slider";
 
@@ -29,12 +30,16 @@ export default function DragSlider({
   "aria-label": ariaLabel,
 }: DragSliderProps) {
   const scrollerRef = useRef(null as HTMLElement | null);
+  const firstCopyRef = useRef(null as HTMLDivElement | null);
   const rafRef = useRef(null as number | null);
+  const halfWidthRef = useRef(0);
   const pausedRef = useRef(false);
+  const touchingRef = useRef(false);
   const dragging = useRef(false);
   const moved = useRef(false);
   const startX = useRef(0);
   const startScroll = useRef(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const el = scrollerRef.current;
@@ -42,32 +47,84 @@ export default function DragSlider({
       return;
     }
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (prefersReduced) {
-      return;
-    }
-
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktop = window.matchMedia("(min-width: 1024px)");
-    if (marqueeDesktop && desktop.matches) {
-      return;
+    const updateWidth = () => {
+      halfWidthRef.current = firstCopyRef.current?.offsetWidth ?? 0;
+    };
+    updateWidth();
+    const resizeObserver = new ResizeObserver(updateWidth);
+    if (firstCopyRef.current) {
+      resizeObserver.observe(firstCopyRef.current);
     }
 
     const tick = () => {
-      if (!pausedRef.current && !dragging.current) {
+      if (
+        !pausedRef.current &&
+        !touchingRef.current &&
+        !dragging.current &&
+        halfWidthRef.current > 0
+      ) {
         el.scrollLeft = normalizeInfiniteScroll({
           scrollLeft: el.scrollLeft + speed,
-          scrollWidth: el.scrollWidth,
+          scrollWidth: halfWidthRef.current * 2,
         });
       }
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current) {
+    let visible = false;
+    let pageScrolling = false;
+    let scrollResumeTimer: ReturnType<typeof setTimeout> | null = null;
+    const updateAnimation = () => {
+      const shouldRun =
+        visible &&
+        !pageScrolling &&
+        !document.hidden &&
+        !reducedMotion.matches &&
+        !(marqueeDesktop && desktop.matches);
+      if (shouldRun && rafRef.current === null) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else if (!shouldRun && rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      setIsVisible(visible);
+      updateAnimation();
+    });
+    const onPageScroll = () => {
+      pageScrolling = true;
+      updateAnimation();
+      if (scrollResumeTimer !== null) {
+        clearTimeout(scrollResumeTimer);
+      }
+      scrollResumeTimer = setTimeout(() => {
+        pageScrolling = false;
+        updateAnimation();
+      }, 150);
+    };
+    visibilityObserver.observe(el);
+    window.addEventListener("scroll", onPageScroll, { passive: true });
+    document.addEventListener("visibilitychange", updateAnimation);
+    reducedMotion.addEventListener("change", updateAnimation);
+    desktop.addEventListener("change", updateAnimation);
+
+    return () => {
+      visibilityObserver.disconnect();
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", onPageScroll);
+      if (scrollResumeTimer !== null) {
+        clearTimeout(scrollResumeTimer);
+      }
+      document.removeEventListener("visibilitychange", updateAnimation);
+      reducedMotion.removeEventListener("change", updateAnimation);
+      desktop.removeEventListener("change", updateAnimation);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
       }
     };
   }, [marqueeDesktop, speed]);
@@ -78,15 +135,22 @@ export default function DragSlider({
       return;
     }
 
-    el.scrollLeft = normalizeInfiniteScroll({
+    const normalized = normalizeInfiniteScroll({
       scrollLeft: el.scrollLeft,
-      scrollWidth: el.scrollWidth,
+      scrollWidth: halfWidthRef.current * 2,
     });
+    if (normalized !== el.scrollLeft) {
+      el.scrollLeft = normalized;
+    }
   }, []);
 
   const onPointerDown = (event: SliderPointerEvent) => {
     const el = scrollerRef.current;
     if (!el) {
+      return;
+    }
+    if (event.pointerType !== "mouse") {
+      touchingRef.current = true;
       return;
     }
 
@@ -98,7 +162,7 @@ export default function DragSlider({
 
   const onPointerMove = (event: SliderPointerEvent) => {
     const el = scrollerRef.current;
-    if (!el || !dragging.current) {
+    if (!el || event.pointerType !== "mouse" || !dragging.current) {
       return;
     }
 
@@ -120,6 +184,8 @@ export default function DragSlider({
     }
 
     dragging.current = false;
+    touchingRef.current = false;
+    normalizeScroll();
     if (el.hasPointerCapture(event.pointerId)) {
       el.releasePointerCapture(event.pointerId);
     }
@@ -131,7 +197,7 @@ export default function DragSlider({
       aria-label={ariaLabel}
       className={`mask-fade-edges hide-scrollbar relative cursor-grab overflow-x-auto overscroll-x-contain active:cursor-grabbing ${
         marqueeDesktop
-          ? "desktop-marquee-pause lg:cursor-default lg:overflow-hidden lg:active:cursor-default"
+          ? `desktop-marquee-pause lg:cursor-default lg:overflow-hidden lg:active:cursor-default ${isVisible ? "desktop-marquee-active" : ""}`
           : ""
       } ${className}`}
       onPointerDown={onPointerDown}
@@ -151,15 +217,18 @@ export default function DragSlider({
       onMouseLeave={() => {
         pausedRef.current = false;
       }}
-      onScroll={normalizeScroll}
     >
       <div
         className={`flex w-max items-stretch ${
           marqueeDesktop ? "desktop-marquee-track" : ""
-        } ${gapClassName}`}
+        }`}
       >
-        <div className={`flex shrink-0 items-stretch ${gapClassName}`}>
+        <div
+          ref={firstCopyRef}
+          className={`flex shrink-0 items-stretch ${gapClassName}`}
+        >
           {children}
+          <span className="w-0 shrink-0" aria-hidden="true" />
         </div>
         <div
           className={`flex shrink-0 items-stretch ${gapClassName}`}
@@ -167,6 +236,7 @@ export default function DragSlider({
           inert
         >
           {children}
+          <span className="w-0 shrink-0" aria-hidden="true" />
         </div>
       </div>
     </section>
