@@ -80,7 +80,7 @@
     "all": "All",
     "cover": "Cover image for",
     "emptyAll": "There are no posts yet. Check back soon.",
-    "emptyStart": "No posts tagged",
+    "emptyStart": "There are no posts in",
     "emptyEnd": "yet. Check back soon."
   },
   "blogPost": {
@@ -88,7 +88,10 @@
     "cover": "Cover image for",
     "connect": "Enjoyed this? Let's connect.",
     "relatedKicker": "Keep reading",
-    "relatedTitle": "Related posts"
+    "relatedTitle": "Related posts",
+    "writtenBy": "Written by",
+    "noCover": "No cover selected",
+    "draftDate": "Draft · unpublished"
   },
   "notFound": {
     "title": "404",

@@ -9,19 +9,23 @@ import {
 } from "@/components/features/studio/StudioUi";
 import { StudioUnsavedChanges } from "@/components/features/studio/StudioUnsavedChanges";
 import type { StudioAsset, StudioPost } from "@/contracts";
+import type { StudioCategory } from "@/contracts/studio-contract";
 import { studioCopy } from "@/features/studio/content";
 import { studioPostRecoveryKey } from "@/features/studio/publishing/feedback";
 import { unpublishPostAction, updatePostAction } from "../actions";
 import { StudioPostFields } from "../post-fields";
+import { DeletePost } from "./DeletePost";
 import { formatStudioDate } from "./studio-blog-utils";
 
 type PublishedPostsProps = {
+  categories: StudioCategory[];
   assets: StudioAsset[];
   posts: StudioPost[];
   savedKey: string | null;
 };
 
 export function PublishedPosts({
+  categories,
   assets,
   posts,
   savedKey,
@@ -75,6 +79,7 @@ export function PublishedPosts({
                   />
                   <input name="id" type="hidden" value={post.id} />
                   <StudioPostFields
+                    categories={categories}
                     assets={assets}
                     compact
                     fieldIdPrefix={`published-${post.id}`}
@@ -105,6 +110,7 @@ export function PublishedPosts({
                   {blog.unpublish}
                 </StudioSubmitButton>
               </StudioActionForm>
+              <DeletePost id={post.id} title={post.title} />
             </article>
           ))}
         </div>

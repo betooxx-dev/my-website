@@ -150,9 +150,9 @@ export default function NavbarClient({
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 transition-all duration-500 sm:px-6 sm:pt-5">
+    <header className="fixed inset-x-0 top-0 z-50 w-full min-w-0 px-4 pt-3 transition-all duration-500 sm:px-6 sm:pt-5">
       <nav
-        className={`relative mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-3 backdrop-blur-2xl transition-all duration-500 sm:px-5 sm:py-3.5 ${
+        className={`relative mx-auto flex w-full min-w-0 max-w-6xl items-center justify-between gap-2 rounded-full border px-4 py-3 backdrop-blur-2xl transition-all duration-500 sm:px-5 sm:py-3.5 ${
           scrolled
             ? "border-amber-400/25 bg-pine-900/80 shadow-[0_12px_40px_-18px_rgba(17,24,39,0.22)]"
             : "border-mint-50/10 bg-pine-900/65 shadow-[0_4px_24px_-16px_rgba(17,24,39,0.16)]"
@@ -175,7 +175,7 @@ export default function NavbarClient({
           {links.map(renderDesktopLink)}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
           <LocaleSwitcher />
           <Link
             href="/#contact"

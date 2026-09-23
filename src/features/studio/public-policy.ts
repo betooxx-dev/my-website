@@ -1,3 +1,4 @@
 export function isStudioEnabled(nodeEnv: string | undefined): boolean {
-  return nodeEnv !== "production";
+  void nodeEnv;
+  return false;
 }

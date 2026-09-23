@@ -3,9 +3,13 @@ import {
   studioLabelClass,
 } from "@/components/features/studio/StudioUi";
 import type { StudioAsset, StudioPost } from "@/contracts";
+import type { StudioCategory } from "@/contracts/studio-contract";
+import { studioAdminCopy } from "@/features/studio/admin-copy";
 import { studioCopy } from "@/features/studio/content";
+import { SeoReview } from "./_components/SeoReview";
 
 type StudioPostFieldsProps = {
+  categories: StudioCategory[];
   assets: StudioAsset[];
   compact?: boolean;
   fieldIdPrefix?: string;
@@ -13,6 +17,7 @@ type StudioPostFieldsProps = {
 };
 
 export function StudioPostFields({
+  categories,
   assets,
   compact = false,
   fieldIdPrefix = "studio-post",
@@ -85,16 +90,20 @@ export function StudioPostFields({
           </Field>
 
           <Field htmlFor={ids.category} label={blog.categoryLabel}>
-            <input
+            <select
               className={studioInputClass}
-              defaultValue={post?.category}
+              defaultValue={post?.category ?? ""}
               id={ids.category}
-              maxLength={80}
               name="category"
-              placeholder={blog.categoryPlaceholder}
               required
-              type="text"
-            />
+            >
+              <option value="">{studioAdminCopy.chooseCategory}</option>
+              {categories.map((category) => (
+                <option key={category.name} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
           </Field>
         </div>
 
@@ -183,6 +192,7 @@ export function StudioPostFields({
           />
         </Field>
       </fieldset>
+      <SeoReview post={post} assets={assets} />
     </div>
   );
 }

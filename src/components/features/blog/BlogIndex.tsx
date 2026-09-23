@@ -8,7 +8,7 @@ import { PostCard } from "./PostCard";
 
 type BlogIndexProps = {
   posts: BlogPost[];
-  tags: string[];
+  categories: string[];
   locale: Locale;
   labels: {
     all: string;
@@ -19,12 +19,17 @@ type BlogIndexProps = {
   };
 };
 
-export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
+export function BlogIndex({
+  posts,
+  categories,
+  locale,
+  labels,
+}: BlogIndexProps) {
   const [active, setActive] = useState<string | null>(null);
 
   const filtered = active
-    ? posts.filter(function isTagged(post) {
-        return post.tags.includes(active);
+    ? posts.filter(function isInCategory(post) {
+        return post.category === active;
       })
     : posts;
 
@@ -33,17 +38,17 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
   });
   const showFeatured = active === null && featured;
 
-  function renderTag(tag: string | null) {
-    const label = tag ?? labels.all;
+  function renderCategory(category: string | null) {
+    const label = category ?? labels.all;
 
     return (
       <button
         key={label}
         type="button"
-        aria-pressed={active === tag}
-        onClick={() => setActive(tag)}
+        aria-pressed={active === category}
+        onClick={() => setActive(category)}
         className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-          active === tag
+          active === category
             ? "border-primary bg-primary text-primary-foreground"
             : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
         }`}
@@ -75,7 +80,7 @@ export function BlogIndex({ posts, tags, locale, labels }: BlogIndexProps) {
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        {[null, ...tags].map(renderTag)}
+        {[null, ...categories].map(renderCategory)}
       </div>
 
       {showFeatured && (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useRef } from "react";
 import {
   initialStudioActionState,
   type StudioFormAction,
@@ -17,10 +17,27 @@ export function StudioActionForm({
   children,
   className,
 }: StudioActionFormProps) {
-  const [state, formAction] = useActionState(action, initialStudioActionState);
+  const failedRef = useRef(false);
+  const preserveFailedInput: StudioFormAction = async (previous, formData) => {
+    const result = await action(previous, formData);
+    failedRef.current = Boolean(result.error);
+    return result;
+  };
+  const [state, formAction] = useActionState(
+    preserveFailedInput,
+    initialStudioActionState,
+  );
 
   return (
-    <form action={formAction} className={className}>
+    <form
+      action={formAction}
+      className={className}
+      onResetCapture={(event) => {
+        // React resets uncontrolled inputs after a resolved action, including
+        // recoverable errors. Keep the editor intact when the operation failed.
+        if (failedRef.current) event.preventDefault();
+      }}
+    >
       {state.error ? (
         <p
           aria-live="assertive"

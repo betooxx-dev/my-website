@@ -1,7 +1,8 @@
 const PUBLIC_BLOG_PATH = /^\/(es|en)\/blog(?:\/|$)/;
 
 export function isPublicBlogEnabled(nodeEnv: string | undefined): boolean {
-  return nodeEnv !== "production";
+  void nodeEnv;
+  return true;
 }
 
 export function getPublicBlogRedirect(

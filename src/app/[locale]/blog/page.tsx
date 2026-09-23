@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BlogIndex } from "@/components/features/blog/BlogIndex";
-import { getPublishedPosts, getPublishedTags } from "@/features/blog/queries";
+import { env } from "@/env";
+import {
+  getPublishedCategories,
+  getPublishedPosts,
+} from "@/features/blog/queries";
 import type { Locale } from "@/i18n/routing";
 
 type BlogPageProps = {
@@ -17,6 +21,10 @@ export async function generateMetadata({
   return {
     title: t("metadataTitle"),
     description: t("metadataDescription"),
+    robots:
+      env.SHOW_DEMO_BLOG_POSTS === "true"
+        ? { index: false, follow: false }
+        : undefined,
     alternates: {
       canonical: path,
       languages: {
@@ -43,9 +51,9 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "blog" });
-  const [posts, tags] = await Promise.all([
+  const [posts, categories] = await Promise.all([
     getPublishedPosts(locale),
-    getPublishedTags(locale),
+    getPublishedCategories(locale),
   ]);
 
   return (
@@ -63,7 +71,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <div className="mt-14">
         <BlogIndex
           posts={posts}
-          tags={tags}
+          categories={categories}
           locale={locale}
           labels={{
             all: t("all"),

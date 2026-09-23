@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import ts from "typescript";
 import { findSourceFiles, relPath, SOURCE_DIR } from "./helpers";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -34,53 +35,39 @@ function isHumanReadableText(text: string): boolean {
   return /\S+\s+\S+/.test(t);
 }
 
-/**
- * Scans a TSX file for hardcoded human-readable strings:
- *
- * 1. JSX text nodes — text between `>` and `<` (single or multi-line).
- *    Uses a multiline regex so that patterns like:
- *      <span>
- *        En progreso
- *      </span>
- *    are also detected.
- *
- * 2. User-visible attributes — `alt`, `placeholder`, `title`, `aria-label`
- *    with string literal values.
- */
+/** Inspect JSX nodes rather than confusing TypeScript generics with tags. */
 function findHardcodedStrings(
   content: string,
   filePath: string,
 ): HardcodedString[] {
   const results: HardcodedString[] = [];
 
-  // ── JSX text nodes ──────────────────────────────────────────────────────────
-  // Matches text between > and < that doesn't contain JSX/JS delimiters.
-  // The character class [^<{}>] already matches newlines, so no `s` flag needed.
-  const jsxTextRegex = />([^<{}>]+)</g;
-
-  for (const match of content.matchAll(jsxTextRegex)) {
-    const text = match[1].trim();
-    if (!isHumanReadableText(text)) continue;
-
-    // Point to the line where the visible text starts (first non-whitespace char)
-    const offsetToText = (match.index ?? 0) + 1 + match[1].search(/\S/);
-    const line = content.slice(0, offsetToText).split("\n").length;
-
-    results.push({ file: filePath, line, text, kind: "jsx-text" });
+  const source = ts.createSourceFile(
+    filePath,
+    content,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
+  function record(node: ts.Node, text: string, kind: HardcodedString["kind"]) {
+    if (!isHumanReadableText(text)) return;
+    const line =
+      source.getLineAndCharacterOfPosition(node.getStart(source)).line + 1;
+    results.push({ file: filePath, line, text: text.trim(), kind });
   }
-
-  // ── User-visible attributes ─────────────────────────────────────────────────
-  const attrPattern = `(?:${USER_VISIBLE_ATTRS.join("|")})=["']([^"']+)["']`;
-  const attrRegex = new RegExp(attrPattern, "g");
-  const lines = content.split("\n");
-
-  for (const [idx, line] of lines.entries()) {
-    for (const [, text] of line.matchAll(attrRegex)) {
-      if (isHumanReadableText(text)) {
-        results.push({ file: filePath, line: idx + 1, text, kind: "attr" });
-      }
+  function visit(node: ts.Node) {
+    if (ts.isJsxText(node)) record(node, node.text, "jsx-text");
+    if (
+      ts.isJsxAttribute(node) &&
+      USER_VISIBLE_ATTRS.includes(node.name.getText(source)) &&
+      node.initializer &&
+      ts.isStringLiteral(node.initializer)
+    ) {
+      record(node, node.initializer.text, "attr");
     }
+    ts.forEachChild(node, visit);
   }
+  visit(source);
 
   return results;
 }
@@ -117,4 +104,18 @@ describe("i18n — strings hardcodeados en TSX", () => {
 
     if (findings.length > 0) throw new Error(formatError(findings));
   });
+});
+
+test("JSX copy scanner distinguishes refs from visible strings", () => {
+  expect(
+    findHardcodedStrings(
+      "const first = useRef<HTMLButtonElement>(null); const second = useRef<HTMLDialogElement>(null);",
+      "refs.tsx",
+    ),
+  ).toEqual([]);
+  expect(
+    findHardcodedStrings("<p>Texto visible {value}</p>", "copy.tsx"),
+  ).toEqual([
+    expect.objectContaining({ text: "Texto visible", kind: "jsx-text" }),
+  ]);
 });

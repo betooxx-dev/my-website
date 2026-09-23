@@ -5,6 +5,7 @@ export const studioPostSchema = z.object({
   category: z.string(),
   contentMarkdown: z.string(),
   cover: z.string().nullable(),
+  coverAlt: z.string().optional(),
   coverAssetId: z.string().nullable(),
   createdAt: z.string(),
   excerpt: z.string(),
@@ -53,3 +54,9 @@ export type StudioPostInput = Pick<
 export type StudioResource<T> =
   | { data: T; status: "available" }
   | { data: T; status: "unauthorized" | "unavailable" };
+
+export const studioCategorySchema = z.object({
+  name: z.string(),
+  position: z.number().int(),
+});
+export type StudioCategory = z.infer<typeof studioCategorySchema>;

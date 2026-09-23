@@ -26,11 +26,11 @@ export default function LocaleSwitcher() {
   }
 
   return (
-    <label className="relative block">
+    <label className="relative block min-w-0 shrink-0">
       <span className="sr-only">{languageLabel}</span>
       <select
         aria-label={languageLabel}
-        className="appearance-none rounded-full border border-mint-50/20 bg-pine-900/55 py-1.5 pl-3 pr-8 font-mono text-sm text-mint-50/75 transition-colors hover:border-mint-50/35 focus:border-mint-50/40 focus:outline-none focus:ring-2 focus:ring-amber-300/50"
+        className="w-[105px] max-w-full appearance-none rounded-full border border-mint-50/20 bg-pine-900/55 py-1.5 pl-3 pr-7 font-mono text-sm text-mint-50/75 transition-colors hover:border-mint-50/35 focus:border-mint-50/40 focus:outline-none focus:ring-2 focus:ring-amber-300/50 sm:w-auto sm:pr-8"
         onChange={handleChange}
         value={currentLocale}
       >

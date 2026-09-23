@@ -40,5 +40,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     )
   ).flat();
 
-  return [...staticEntries, ...blogSitemapEntries(base, posts)];
+  return [
+    ...staticEntries,
+    ...blogSitemapEntries(
+      base,
+      posts.filter((post) => !post.demo),
+    ),
+  ];
 }

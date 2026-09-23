@@ -85,7 +85,7 @@ const components: Components = {
 
 export function MarkdownContent({ source }: { source: string }) {
   return (
-    <div className="flex flex-col gap-6 text-pretty text-lg leading-relaxed text-foreground/90">
+    <div className="flex flex-col gap-7 text-pretty text-[1.075rem] leading-8 text-foreground/90 [&>p:first-of-type]:first-letter:float-left [&>p:first-of-type]:first-letter:mr-2 [&>p:first-of-type]:first-letter:font-heading [&>p:first-of-type]:first-letter:text-6xl [&>p:first-of-type]:first-letter:font-semibold [&>p:first-of-type]:first-letter:leading-[0.82] sm:text-lg">
       <ReactMarkdown
         components={components}
         rehypePlugins={[rehypeSanitize]}

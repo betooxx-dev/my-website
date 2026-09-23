@@ -8,6 +8,12 @@ Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · next-intl ·
 
 Ver [AGENTS.md](./AGENTS.md) para el detalle de convenciones, pre-commit hooks y estructura de tests.
 
+## Blog provisional
+
+El blog público se sirve desde archivos Markdown en `content/blog/es/` y `content/blog/en/`, también en producción. Consulta [content/blog/README.md](content/blog/README.md) para crear artículos. Studio está deshabilitado mientras se usa este flujo. No hace falta levantar Argos ni PostgreSQL para desarrollar el sitio.
+
+Para probar las tres publicaciones de ejemplo por idioma en Vercel, configura `SHOW_DEMO_BLOG_POSTS=true` en el entorno Production y despliega de nuevo. La variable ausente o en `false` las oculta. Los artículos de prueba llevan `noindex` y quedan fuera del sitemap.
+
 ## Requisitos
 
 - Docker Desktop con Docker Compose
@@ -84,10 +90,8 @@ cp .env.example .env.local
 docker compose up --build
 ```
 
-Un solo Compose levanta el sitio, Argos y PostgreSQL con healthchecks. El sitio
-queda en <http://localhost:3000>, la API en <http://localhost:5001/api>, y el
-código de ambos repositorios conserva hot reload. Las dependencias, la base de
-datos y los assets viven en volúmenes Docker, no en los directorios de trabajo.
+Compose levanta el sitio en <http://localhost:3000> con hot reload. Las dependencias
+y la caché de Next.js viven en volúmenes Docker, no en el directorio de trabajo.
 
 La primera vez, crea la llave administrativa y copia el token resultante a
 `STUDIO_ARGOS_API_KEY` dentro de `.env.local`; después recrea el servicio web:
@@ -117,3 +121,60 @@ El puerto se publica únicamente en `127.0.0.1:3000` para colocarlo detrás de u
 ## Contribuir
 
 Convención de commits: [Conventional Commits](https://www.conventionalcommits.org/) (`type: slug`). Detalles de flujo en [AGENTS.md](./AGENTS.md).
+
+## Administración anterior del blog (Studio deshabilitado)
+
+Las instrucciones siguientes documentan el flujo anterior con Argos y quedan como referencia histórica; no aplican al modo Markdown actual.
+
+Studio obtiene las categorías desde Argos. En **Administrar categorías** puedes
+crear, renombrar, ordenar y eliminar; una categoría en uso requiere reasignar sus
+publicaciones antes de eliminarla. Los filtros públicos siguen viniendo de Argos.
+
+Borradores, publicaciones e imágenes ofrecen eliminación con confirmación y
+mensajes de error recuperables. Argos protege portadas y referencias guardadas en
+Markdown. Si seleccionaste una imagen en cambios sin guardar y la eliminaste,
+Argos rechazará guardar esa referencia: selecciona otra imagen o retira su enlace.
+
+**Vista previa** muestra la última versión guardada del borrador en
+`/studio/blog/preview/:id`, con sesión obligatoria y `noindex, nofollow`. Reutiliza
+la presentación pública y nunca publica el borrador. Guarda antes de abrirla.
+
+La revisión SEO muestra el título final (incluido el nombre del autor), extracto,
+URL, portada y alt usando los mismos campos que los metadatos públicos. Las
+longitudes son orientativas y no bloquean la publicación. `coverAlt` se utiliza
+en tarjetas, artículos, Open Graph, Twitter y la imagen de BlogPosting; se conserva
+un fallback para respuestas antiguas que todavía no incluyan ese campo.
+
+El blog público de Markdown está habilitado en producción. Studio sigue deshabilitado.
+
+Pruebas HTTP de desarrollo, ejecutadas desde este compose y con recursos de QA:
+
+```sh
+docker compose exec web node scripts/qa/categories.mjs
+docker compose exec web node scripts/qa/deletions.mjs
+docker compose exec web node scripts/qa/preview.mjs
+```
+
+La prueba de preview firma una sesión efímera en memoria para verificar el control
+de acceso. No imprime credenciales ni modifica la configuración de autenticación.
+
+### Usuario local de pruebas
+
+La autenticación de Studio usa configuración local, no una tabla de usuarios de
+Argos. El seed de contenido de Argos y el usuario de Studio se preparan así:
+
+```sh
+docker compose exec api npm run blog:seed
+docker compose exec web npm run studio:seed-user
+docker compose up -d --no-deps --force-recreate web
+```
+
+Acceso en `http://localhost:3000/studio/login`:
+
+- Usuario: `studio-test`
+- Contraseña de desarrollo: `Studio-local-2026!`
+
+`studio:seed-user` es idempotente y solo funciona en Docker con
+`NODE_ENV=development`. Configura el único usuario local de Studio y preserva las
+credenciales anteriores en `.env.local.studio-user-backup` (ignorado por Git).
+Conserva la API key y el secreto de sesión existentes. Nunca configura producción.

@@ -58,6 +58,7 @@ describe("studio interface", () => {
     const html = renderToStaticMarkup(
       React.createElement(StudioPostFields, {
         assets: [],
+        categories: [{ name: "Tecnología", position: 0 }],
         fieldIdPrefix: "contract",
       }),
     );

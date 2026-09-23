@@ -4,7 +4,9 @@ import { localeSchema } from "./locale-contract";
 export const blogPostSchema = z.object({
   category: z.string(),
   contentMarkdown: z.string(),
+  demo: z.boolean().optional(),
   cover: z.string(),
+  coverAlt: z.string().optional(),
   coverAssetId: z.string(),
   createdAt: z.string(),
   date: z.string(),

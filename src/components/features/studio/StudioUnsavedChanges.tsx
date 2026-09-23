@@ -42,7 +42,8 @@ export function StudioUnsavedChanges({
       persistRecovery();
       dirty = false;
     };
-    const clearRecovery = () => {
+    const clearRecovery = (event: Event) => {
+      if (event.defaultPrevented) return;
       dirty = false;
       safelyRemoveRecovery(recoveryStorageKey);
     };

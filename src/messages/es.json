@@ -73,22 +73,25 @@
   },
   "blog": {
     "metadataTitle": "Blog",
-    "metadataDescription": "Ensayos y notas sobre ingeniería de producto, diseño y software tranquilo.",
-    "eyebrow": "Writing",
-    "title": "Notas sobre craft, diseño y shipping.",
-    "description": "Escribo sobre lo que aprendo construyendo productos: los detalles que hacen que el software se sienta tranquilo y los sistemas detrás de equipos que entregan buen trabajo.",
-    "all": "Todo",
+    "metadataDescription": "Ideas y aprendizajes de Alberto Avendaño sobre tecnología, inteligencia artificial, sistemas personales, trabajo y vida digital.",
+    "eyebrow": "Blog",
+    "title": "Lo que pienso, aprendo y construyo.",
+    "description": "Escribo sobre tecnología, inteligencia artificial, sistemas personales, trabajo y cualquier otra idea que valga la pena compartir.",
+    "all": "Todas",
     "cover": "Imagen de portada de",
     "emptyAll": "Aún no hay publicaciones. Vuelve pronto.",
-    "emptyStart": "Aún no hay posts con",
+    "emptyStart": "Aún no hay publicaciones en",
     "emptyEnd": "Vuelve pronto."
   },
   "blogPost": {
-    "allPosts": "Todos los posts",
+    "allPosts": "Volver al blog",
     "cover": "Imagen de portada de",
     "connect": "¿Te gustó esto? Conectemos.",
     "relatedKicker": "Sigue leyendo",
-    "relatedTitle": "Posts relacionados"
+    "relatedTitle": "Publicaciones relacionadas",
+    "writtenBy": "Escrito por",
+    "noCover": "Sin portada seleccionada",
+    "draftDate": "Borrador · sin publicar"
   },
   "notFound": {
     "title": "404",

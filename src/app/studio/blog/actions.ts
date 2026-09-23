@@ -97,6 +97,38 @@ export async function uploadAssetAction(
   finishStudioMutation(formData, "asset-upload");
 }
 
+export async function deletePostAction(
+  _: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
+  await requireStudioSession();
+  const id = String(formData.get("id") ?? "");
+  let post: Awaited<ReturnType<typeof StudioService.getPost>>;
+  try {
+    post = await StudioService.getPost(id);
+  } catch (error) {
+    return { error: studioMutationErrorMessage(error) };
+  }
+  const error = await mutationError(StudioService.deletePost(id));
+  if (error) return { error };
+  formData.set("locale", post.locale);
+  formData.set("slug", post.slug);
+  finishStudioMutation(formData, studioPostRecoveryKey(id));
+}
+
+export async function deleteAssetAction(
+  _: StudioActionState,
+  formData: FormData,
+): Promise<StudioActionState> {
+  await requireStudioSession();
+  const error = await mutationError(
+    StudioService.deleteAsset(String(formData.get("id") ?? "")),
+  );
+  if (error) return { error };
+  revalidatePath("/studio/blog");
+  return { error: null };
+}
+
 async function mutationError(
   operation: Promise<unknown>,
   fallback?: string,
@@ -116,6 +148,7 @@ function finishStudioMutation(formData: FormData, recoveryKey: string): never {
   revalidatePath("/es/blog");
   revalidatePath("/en/blog");
   revalidatePath("/sitemap.xml");
+  revalidatePath("/[locale]/blog", "layout");
 
   const locale = String(formData.get("locale") ?? "");
   const slug = String(formData.get("slug") ?? "");

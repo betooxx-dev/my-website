@@ -21,7 +21,7 @@ export default async function ProjectsSection() {
 
         <ScrollReveal delay={0.12}>
           <output
-            className="mx-auto mt-14 flex max-w-3xl flex-col items-center rounded-[2rem] border border-border bg-card/30 px-6 py-14 text-center sm:px-12 sm:py-16"
+            className="mx-auto mt-14 flex max-w-3xl flex-col items-center overflow-hidden rounded-[2rem] border border-border bg-card/30 px-6 py-14 text-center sm:px-12 sm:py-16"
             aria-live="polite"
           >
             <KiwiWalkLoader label={t("loaderLabel")} />

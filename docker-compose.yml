@@ -1,90 +1,19 @@
 name: portfolio-local
 
 services:
-  db:
-    image: postgres:14.3-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: argos
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
-      interval: 5s
-      timeout: 3s
-      retries: 10
-    volumes:
-      - argos_postgres_data:/var/lib/postgresql/data
-
-  api:
-    build:
-      context: ../argos
-      target: development
-    init: true
-    command: npm run start:dev
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      STAGE: dev
-      PORT: 5000
-      CLIENT_URL: http://localhost:3000
-      API_PUBLIC_URL: http://localhost:${ARGOS_HOST_PORT:-5001}/api
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: argos
-      DB_SSL_REJECT_UNAUTHORIZED: "true"
-      JWT_SECRET: local_argos_development_secret_32_chars
-      API_KEY_PREFIX: argos_
-      BLOG_ASSET_DRIVER: local
-      BLOG_ASSET_LOCAL_DIR: /app/.local/blog-assets
-      BLOG_ASSET_MAX_BYTES: 8388608
-    ports:
-      - "127.0.0.1:${ARGOS_HOST_PORT:-5001}:5000"
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "fetch('http://localhost:5000/api/blog/posts?locale=es').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
-        ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
-    volumes:
-      - ../argos:/app
-      - argos_node_modules:/app/node_modules
-      - argos_assets:/app/.local
-
   web:
     build:
       context: .
       target: development
     init: true
     command: npm run dev -- --hostname 0.0.0.0
-    depends_on:
-      api:
-        condition: service_healthy
-    env_file:
-      - .env.local
     environment:
       NODE_ENV: development
-      ARGOS_API_URL: http://api:5000/api
-      NEXT_PUBLIC_ARGOS_API_URL: http://localhost:${ARGOS_HOST_PORT:-5001}/api
       NEXT_PUBLIC_SITE_URL: http://localhost:3000
     ports:
       - "127.0.0.1:${WEBSITE_PORT:-3000}:3000"
     healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "fetch('http://localhost:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
-        ]
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -95,8 +24,5 @@ services:
       - website_next_cache:/app/.next
 
 volumes:
-  argos_assets:
-  argos_node_modules:
-  argos_postgres_data:
-  website_next_cache:
   website_node_modules:
+  website_next_cache:

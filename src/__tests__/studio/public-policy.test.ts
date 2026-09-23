@@ -1,9 +1,9 @@
 import { isStudioEnabled } from "@/features/studio/public-policy";
 
 describe("Studio public policy", () => {
-  it("is available during local development", () => {
-    expect(isStudioEnabled("development")).toBe(true);
-    expect(isStudioEnabled("test")).toBe(true);
+  it("is unavailable while posts are managed in Git", () => {
+    expect(isStudioEnabled("development")).toBe(false);
+    expect(isStudioEnabled("test")).toBe(false);
   });
 
   it("is unavailable in production", () => {

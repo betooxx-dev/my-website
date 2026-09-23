@@ -14,6 +14,7 @@ import { requireStudioSession } from "@/features/studio/auth/session";
 import { studioCopy } from "@/features/studio/content";
 import { StudioService } from "@/services/studio.service";
 import { AssetLibrary } from "./_components/AssetLibrary";
+import { CategoryManager } from "./_components/CategoryManager";
 import { DraftQueue } from "./_components/DraftQueue";
 import { PublishChecklist } from "./_components/PublishChecklist";
 import { PublishedPosts } from "./_components/PublishedPosts";
@@ -59,6 +60,11 @@ export default async function StudioBlogPage({
 
       {savedKey ? <StudioSavedFeedback message={blog.savedNotice} /> : null}
 
+      <CategoryManager
+        categories={data.categories.data}
+        available={data.categories.status === "available"}
+      />
+
       <div className="mt-8 grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_21rem]">
         <div className="scroll-mt-6" id="new-post">
           <StudioPanel
@@ -72,7 +78,11 @@ export default async function StudioBlogPage({
                 message={blog.unsavedWarning}
                 storageKey="new-post"
               />
-              <StudioPostFields assets={assets} fieldIdPrefix="new-post" />
+              <StudioPostFields
+                categories={data.categories.data}
+                assets={assets}
+                fieldIdPrefix="new-post"
+              />
               <div className="mt-6 flex flex-col gap-3 border-border/80 border-t pt-5 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm leading-6 text-muted-foreground">
                   {blog.draftHint}
@@ -93,6 +103,7 @@ export default async function StudioBlogPage({
         <aside className="grid gap-6 xl:sticky xl:top-10">
           <PublishChecklist />
           <PublishedPosts
+            categories={data.categories.data}
             assets={assets}
             posts={published}
             savedKey={savedKey}
@@ -108,7 +119,12 @@ export default async function StudioBlogPage({
       </div>
 
       <div className="mt-6">
-        <DraftQueue assets={assets} drafts={drafts} savedKey={savedKey} />
+        <DraftQueue
+          categories={data.categories.data}
+          assets={assets}
+          drafts={drafts}
+          savedKey={savedKey}
+        />
       </div>
     </StudioFrame>
   );

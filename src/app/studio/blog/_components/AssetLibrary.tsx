@@ -9,8 +9,9 @@ import {
 } from "@/components/features/studio/StudioUi";
 import type { StudioAsset } from "@/contracts";
 import { shouldBypassImageOptimization } from "@/features/blog/image-policy";
+import { studioAdminCopy } from "@/features/studio/admin-copy";
 import { studioCopy } from "@/features/studio/content";
-import { uploadAssetAction } from "../actions";
+import { deleteAssetAction, uploadAssetAction } from "../actions";
 import { formatBytes } from "./studio-blog-utils";
 
 type AssetLibraryProps = {
@@ -114,6 +115,16 @@ export function AssetLibrary({ assets, available }: AssetLibraryProps) {
                     />
                   </div>
                 </div>
+                <StudioActionForm action={deleteAssetAction} className="mt-4">
+                  <input name="id" type="hidden" value={asset.id} />
+                  <StudioSubmitButton
+                    variant="danger"
+                    confirmation={`¿Eliminar definitivamente la imagen «${asset.altText}»? Comprueba que no la necesitas en cambios sin guardar.`}
+                    pendingLabel="Eliminando…"
+                  >
+                    {studioAdminCopy.deleteImage}
+                  </StudioSubmitButton>
+                </StudioActionForm>
               </article>
             ))
           ) : (

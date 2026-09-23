@@ -38,6 +38,26 @@ test("keeps the closed mobile menu out of keyboard navigation", async ({
   await expect(menu).not.toHaveAttribute("inert", "");
 });
 
+test("keeps the navbar and page inside narrow mobile viewports", async ({
+  page,
+}) => {
+  for (const width of [320, 360, 390]) {
+    await page.setViewportSize({ height: 844, width });
+    await page.goto("/es");
+
+    const bounds = await page.locator("header nav").boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds?.x).toBeGreaterThanOrEqual(0);
+    expect((bounds?.x ?? 0) + (bounds?.width ?? 0)).toBeLessThanOrEqual(width);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(width);
+    await expect(
+      page.locator('button[aria-controls="mobile-navigation"]'),
+    ).toBeInViewport();
+  }
+});
+
 test("does not expose Studio in a production runtime", async ({ page }) => {
   await page.goto("/studio");
 

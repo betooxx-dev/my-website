@@ -1,3 +1,4 @@
+import { studioCategorySchema } from "@/contracts/studio-contract";
 import "server-only";
 import axios from "axios";
 import { z } from "zod";
@@ -15,19 +16,50 @@ import { type Locale, locales } from "@/i18n/routing";
 import api from "./api";
 
 export class StudioService {
+  static async getCategories() {
+    const { data } = await api.get("/blog/admin/categories", studioConfig());
+    return studioCategorySchema.array().parse(data.data);
+  }
+
+  static async saveCategory(
+    previousName: string,
+    name: string,
+    position: number,
+  ) {
+    const body = { name, position };
+    const { data } = previousName
+      ? await api.patch(
+          `/blog/admin/categories/${encodeURIComponent(previousName)}`,
+          body,
+          studioConfig(),
+        )
+      : await api.post("/blog/admin/categories", body, studioConfig());
+    return studioCategorySchema.parse(data.data);
+  }
+
+  static async deleteCategory(name: string) {
+    const { data } = await api.delete(
+      `/blog/admin/categories/${encodeURIComponent(name)}`,
+      studioConfig(),
+    );
+    return z.object({ deleted: z.literal(true) }).parse(data.data);
+  }
+
   static async getDashboardData() {
     return { posts: await asResource(getPosts(), []) };
   }
 
   static async getBlogData() {
-    const [posts, assets, ...tags] = await Promise.all([
+    const [posts, assets, categories, ...tags] = await Promise.all([
       asResource(getPosts(), []),
       asResource(getAssets(), []),
+      asResource(StudioService.getCategories(), []),
       ...locales.map((locale) => asResource(getTags(locale), [])),
     ]);
 
     return {
       assets,
+      categories,
       posts,
       tags: mergeTags(tags),
     };
@@ -66,6 +98,30 @@ export class StudioService {
       studioConfig(),
     );
     return studioPostSchema.parse(data.data);
+  }
+
+  static async getPost(id: string) {
+    const { data } = await api.get(
+      `/blog/admin/posts/${encodeURIComponent(id)}`,
+      studioConfig(),
+    );
+    return studioPostSchema.parse(data.data);
+  }
+
+  static async deletePost(id: string) {
+    const { data } = await api.delete(
+      `/blog/admin/posts/${encodeURIComponent(id)}`,
+      studioConfig(),
+    );
+    return z.object({ deleted: z.literal(true) }).parse(data.data);
+  }
+
+  static async deleteAsset(id: string) {
+    const { data } = await api.delete(
+      `/blog/admin/assets/${encodeURIComponent(id)}`,
+      studioConfig(),
+    );
+    return z.object({ deleted: z.literal(true) }).parse(data.data);
   }
 
   static async uploadAsset(input: FormData) {

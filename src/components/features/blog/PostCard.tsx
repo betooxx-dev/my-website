@@ -36,7 +36,7 @@ export function PostCard({
         >
           <Image
             src={post.cover}
-            alt={`${coverLabel} ${post.title}`}
+            alt={post.coverAlt || `${coverLabel} ${post.title}`}
             fill
             sizes={
               featured

@@ -1,24 +1,38 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeftIcon, ClockIcon } from "@/components/features/blog/BlogIcons";
-import { MarkdownContent } from "@/components/features/blog/MarkdownContent";
+import { BlogArticle } from "@/components/features/blog/BlogArticle";
+import { ArrowLeftIcon } from "@/components/features/blog/BlogIcons";
 import { RelatedPosts } from "@/components/features/blog/RelatedPosts";
-import SocialLinks from "@/components/shared/SocialLinks";
 import { siteProfile } from "@/config/site-profile";
 import { env } from "@/env";
 import {
   getPublishedPost,
+  getPublishedPosts,
   getRelatedPublishedPosts,
 } from "@/features/blog/queries";
+import { blogSeoFields } from "@/features/blog/seo";
 import { Link } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
-import { formatDate } from "@/shared/format";
+import { type Locale, locales } from "@/i18n/routing";
 
 type PostPageProps = {
   params: Promise<{ locale: Locale; slug: string }>;
 };
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const postsByLocale = await Promise.all(
+    locales.map(async (locale) => ({
+      locale,
+      posts: await getPublishedPosts(locale),
+    })),
+  );
+
+  return postsByLocale.flatMap(({ locale, posts }) =>
+    posts.map((post) => ({ locale, slug: post.slug })),
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -26,16 +40,18 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await getPublishedPost(locale, slug);
   if (!post) return {};
-  const path = `/${locale}/blog/${post.slug}`;
+  const seo = blogSeoFields(post, env.NEXT_PUBLIC_SITE_URL);
+  const path = seo.path;
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: { absolute: seo.searchTitle },
+    description: seo.description,
+    robots: post.demo ? { index: false, follow: false } : undefined,
     alternates: { canonical: path },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       authors: [siteProfile.name],
-      images: [{ alt: post.title, url: post.cover }],
+      images: [{ alt: seo.coverAlt, url: post.cover }],
       modifiedTime: post.updatedAt,
       publishedTime: post.publishedAt,
       type: "article",
@@ -44,7 +60,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       description: post.excerpt,
-      images: [post.cover],
+      images: [{ alt: seo.coverAlt, url: post.cover }],
       title: post.title,
     },
   };
@@ -73,14 +89,18 @@ export default async function PostPage({ params }: PostPageProps) {
     datePublished: post.publishedAt,
     description: post.excerpt,
     headline: post.title,
-    image: post.cover,
+    image: {
+      "@type": "ImageObject",
+      url: post.cover,
+      caption: post.coverAlt || post.title,
+    },
     inLanguage: locale,
     mainEntityOfPage: canonicalUrl,
     url: canonicalUrl,
   };
 
   return (
-    <main className="mx-auto max-w-3xl px-4 pb-24 pt-32 sm:px-6 sm:pt-40">
+    <main className="pb-24 pt-32 sm:pt-40">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is validated by the Argos contract and escaped for HTML.
@@ -88,73 +108,38 @@ export default async function PostPage({ params }: PostPageProps) {
           __html: JSON.stringify(blogPosting).replace(/</g, "\\u003c"),
         }}
       />
-      <Link
-        href="/blog"
-        className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeftIcon className="size-4 transition-transform group-hover:-translate-x-0.5" />
-        {t("allPosts")}
-      </Link>
-
-      <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-        <span className="rounded-full border border-border bg-muted px-3 py-1 text-xs text-muted-foreground">
-          {post.category}
-        </span>
-        <span>{formatDate(post.date, locale)}</span>
-        <span className="inline-flex items-center gap-1">
-          <ClockIcon className="size-4" />
-          {post.readingTimeMinutes} min
-        </span>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <Link
+          href="/blog"
+          className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeftIcon className="size-4 transition-transform group-hover:-translate-x-0.5" />
+          {t("allPosts")}
+        </Link>
       </div>
-
-      <h1 className="mt-5 text-balance font-heading text-4xl leading-[1.05] tracking-tight sm:text-6xl">
-        {post.title}
-      </h1>
-      <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
-        {post.excerpt}
-      </p>
-
-      <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-border">
-        <Image
-          src={post.cover}
-          alt={`${t("cover")} ${post.title}`}
-          fill
-          preload
-          sizes="(max-width: 768px) 100vw, 768px"
-          className="object-cover"
-        />
-      </div>
-
-      <div className="mt-12">
-        <MarkdownContent source={post.contentMarkdown} />
-      </div>
-
-      <div className="mt-10 flex flex-wrap gap-2">
-        {post.tags.map((tag) => (
-          <Link
-            key={tag}
-            href="/blog"
-            className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
-          >
-            #{tag}
-          </Link>
-        ))}
-      </div>
-
-      <div className="mt-12 flex flex-col items-center gap-3 rounded-[1.5rem] border border-border bg-card/45 p-8 text-center">
-        <p className="text-sm text-muted-foreground">{t("connect")}</p>
-        <SocialLinks tone="dark" />
-      </div>
-
-      <RelatedPosts
-        posts={related}
+      <BlogArticle
+        post={post}
         locale={locale}
         labels={{
-          kicker: t("relatedKicker"),
-          title: t("relatedTitle"),
+          writtenBy: t("writtenBy"),
+          connect: t("connect"),
           cover: t("cover"),
+          noCover: t("noCover"),
+          draftDate: t("draftDate"),
         }}
       />
+
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <RelatedPosts
+          posts={related}
+          locale={locale}
+          labels={{
+            kicker: t("relatedKicker"),
+            title: t("relatedTitle"),
+            cover: t("cover"),
+          }}
+        />
+      </div>
     </main>
   );
 }

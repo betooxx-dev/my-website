@@ -12,7 +12,8 @@
     "test": "jest",
     "test:e2e": "playwright test",
     "test:watch": "jest --watch",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "studio:seed-user": "node scripts/qa/seed-studio-user.mjs"
   },
   "engines": {
     "node": ">=22 <23"

@@ -7,6 +7,7 @@ const passwordHash = z.string().regex(/^scrypt:[^:]+:[A-Za-z0-9_-]+$/);
 export function studioServerEnvSchema(production: boolean) {
   return z.object({
     ARGOS_API_URL: z.url().default("http://localhost:5000/api"),
+    SHOW_DEMO_BLOG_POSTS: z.enum(["true", "false"]).default("false"),
     NODE_ENV: production
       ? z.literal("production")
       : z.enum(["development", "test"]).default("development"),
