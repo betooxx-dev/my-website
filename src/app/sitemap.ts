@@ -6,9 +6,10 @@ import { blogSitemapEntries } from "@/features/blog/sitemap";
 import { locales } from "@/i18n/routing";
 
 const base = env.NEXT_PUBLIC_SITE_URL.replace(/\/+$/, "");
-const staticRoutes = isPublicBlogEnabled(env.NODE_ENV)
-  ? (["", "/blog"] as const)
-  : ([""] as const);
+const staticRoutes =
+  isPublicBlogEnabled(env.NODE_ENV) && env.SHOW_DEMO_BLOG_POSTS !== "true"
+    ? (["", "/blog"] as const)
+    : ([""] as const);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) =>
