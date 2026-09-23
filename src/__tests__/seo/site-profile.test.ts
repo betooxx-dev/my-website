@@ -7,6 +7,8 @@ describe("site profile", () => {
     const profilePath = "src/config/site-profile.ts";
     const protectedValues = [
       siteProfile.email,
+      siteProfile.whatsapp.href,
+      siteProfile.whatsapp.phone,
       ...Object.values(siteProfile.social).map(({ href }) => href),
     ];
     const violations = findSourceFiles(SOURCE_DIR, ["__tests__"])

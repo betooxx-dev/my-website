@@ -59,8 +59,8 @@
   "contact": {
     "title1": "Got a project",
     "title2": "in mind?",
-    "description": "Have something in mind? Find me on social media or reach out directly via email.",
-    "emailLabel": "Email",
+    "description": "Tell me about your idea on WhatsApp or find me on social media.",
+    "whatsappLabel": "Message me on WhatsApp",
     "socialLabel": "Social",
     "ctaLinkedIn": "Connect on LinkedIn",
     "ctaX": "DM on X"

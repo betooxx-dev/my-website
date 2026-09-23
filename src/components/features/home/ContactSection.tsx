@@ -3,20 +3,20 @@ import ScrollReveal from "@/components/shared/ScrollReveal";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { siteProfile } from "@/config/site-profile";
 
-function ArrowUpRightIcon() {
+function WhatsAppIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      className="size-5"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="1.8"
+      strokeWidth="1.7"
     >
-      <path d="M7 17 17 7" />
-      <path d="M8 7h9v9" />
+      <path d="M20.5 11.8a8.5 8.5 0 0 1-12.7 7.4L3.5 20.5l1.3-4.2a8.5 8.5 0 1 1 15.7-4.5Z" />
+      <path d="M8.4 8.1c-.3.1-.7.7-.7 1.3 0 2 2.7 5 5.2 5.9.8.3 1.4.3 1.9.1.5-.2 1.2-1 1.2-1.5 0-.2-.1-.3-.4-.5l-1.7-.8c-.2-.1-.4-.1-.6.2l-.7.8c-.2.2-.4.2-.7.1a7.3 7.3 0 0 1-2.7-2.4c-.2-.3-.1-.5.1-.7l.5-.6c.1-.2.2-.4.1-.6l-.8-1.7c-.1-.3-.3-.4-.7-.4Z" />
     </svg>
   );
 }
@@ -50,12 +50,14 @@ export default async function ContactSection() {
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href={`mailto:${siteProfile.email}`}
-                aria-label={`${t("emailLabel")}: ${siteProfile.email}`}
+                href={siteProfile.whatsapp.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t("whatsappLabel")}: ${siteProfile.whatsapp.phone}`}
                 className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring/50"
               >
-                {siteProfile.email}
-                <ArrowUpRightIcon />
+                <WhatsAppIcon />
+                {t("whatsappLabel")}
               </a>
             </div>
 

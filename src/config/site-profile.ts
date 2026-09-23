@@ -3,6 +3,10 @@ export const siteProfile = {
   firstName: "Alberto",
   image: "/banner-com-02.png",
   name: "Alberto Avendaño",
+  whatsapp: {
+    href: "https://wa.me/529631683016",
+    phone: "+52 963 168 3016",
+  },
   social: {
     facebook: {
       href: "https://www.facebook.com/alberto.avendano.205880",

@@ -59,8 +59,8 @@
   "contact": {
     "title1": "¿Tienes un proyecto",
     "title2": "en mente?",
-    "description": "¿Tienes algo en mente? Encuéntrame en mis redes o escríbeme directamente al correo.",
-    "emailLabel": "Email",
+    "description": "Cuéntame tu idea por WhatsApp o encuéntrame en mis redes.",
+    "whatsappLabel": "Escríbeme por WhatsApp",
     "socialLabel": "Social",
     "ctaLinkedIn": "Conectar en LinkedIn",
     "ctaX": "Escribir en X"
