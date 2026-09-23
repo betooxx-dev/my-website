@@ -21,6 +21,13 @@ test("switches locale using the native language control", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
 });
 
+test("navigates from the blog to a portfolio section", async ({ page }) => {
+  await page.goto("/es/blog");
+  await page.getByRole("link", { name: "Experiencia" }).first().click();
+
+  await expect(page).toHaveURL(/\/es#experience$/);
+});
+
 test("keeps the closed mobile menu out of keyboard navigation", async ({
   page,
 }) => {

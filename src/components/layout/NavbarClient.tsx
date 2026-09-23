@@ -109,14 +109,14 @@ export default function NavbarClient({
     }
 
     return (
-      <a
+      <Link
         key={link.href}
-        href={link.href}
+        href={`/${link.href}`}
         className={className}
         onClick={(event) => handleHashClick(event, link.href)}
       >
         {link.label}
-      </a>
+      </Link>
     );
   }
 
@@ -138,14 +138,14 @@ export default function NavbarClient({
     }
 
     return (
-      <a
+      <Link
         key={link.href}
-        href={link.href}
+        href={`/${link.href}`}
         className={className}
         onClick={(event) => handleHashClick(event, link.href)}
       >
         {link.label}
-      </a>
+      </Link>
     );
   }
 

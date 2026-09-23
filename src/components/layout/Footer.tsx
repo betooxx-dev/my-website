@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { siteProfile } from "@/config/site-profile";
+import { Link } from "@/i18n/navigation";
 
 function ArrowUpRightIcon() {
   return (
@@ -54,13 +55,13 @@ export default async function Footer() {
                 {footerT("socialHeading")}
               </p>
               {links.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  href={`/${link.href}`}
                   className="text-sm text-foreground/80 transition-colors hover:text-primary"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
 

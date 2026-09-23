@@ -6,8 +6,6 @@ Cada artículo vive en `es/slug.md` o `en/slug.md`. El nombre del archivo es el 
 ---
 {"title":"Título","excerpt":"Resumen breve","category":"Tecnología","date":"2026-09-22","cover":"/blog/portada.png","coverAlt":"Descripción de la portada","tags":["web"],"featured":false}
 ---
-# Título
-
 Contenido del artículo.
 ```
 
