@@ -16,7 +16,7 @@
     "studio:seed-user": "node scripts/qa/seed-studio-user.mjs"
   },
   "engines": {
-    "node": ">=22 <23"
+    "node": ">=24 <25"
   },
   "simple-git-hooks": {
     "pre-commit": "docker compose run --rm --no-deps -e NODE_ENV=test web sh -lc 'npm run lint && npm run typecheck && npm test -- --runInBand'"
