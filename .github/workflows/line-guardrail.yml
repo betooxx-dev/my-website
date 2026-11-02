@@ -46,6 +46,12 @@ jobs:
           elif [ "$event_name" = "push" ]; then
             before_sha="${{ github.event.before }}"
             if [ -n "$before_sha" ] && [ "$before_sha" != "$zero_sha" ]; then
+              if ! git cat-file -e "${before_sha}^{commit}" 2>/dev/null; then
+                if ! git fetch --no-tags origin "$before_sha"; then
+                  echo "::error::Cannot fetch pre-push commit $before_sha."
+                  exit 1
+                fi
+              fi
               base_ref="$before_sha"
             else
               git fetch origin master --depth=1
@@ -61,6 +67,11 @@ jobs:
               git fetch origin "$base_branch" --depth=1
             fi
             base_ref="$requested_base"
+          fi
+
+          if ! git cat-file -e "${base_ref}^{commit}" 2>/dev/null; then
+            echo "::error::Guardrail base commit is unavailable: $base_ref"
+            exit 1
           fi
 
           echo "base_ref=$base_ref" >> "$GITHUB_OUTPUT"
@@ -97,7 +108,7 @@ jobs:
             if [ "$guardrail_exit" -eq 0 ]; then
               echo "No threshold-crossing violations found."
             else
-              echo "Guardrail failed due to threshold-crossing code files."
+              echo "Guardrail failed; inspect the log for a line-limit violation or comparison error."
             fi
             echo ""
             echo '```'

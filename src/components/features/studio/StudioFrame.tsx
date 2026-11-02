@@ -158,7 +158,7 @@ export function StudioFrame({ active, children }: StudioFrameProps) {
               className={`inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary motion-reduce:transition-none lg:px-3 ${
                 isCollapsed ? "lg:w-11 lg:justify-center lg:gap-0 lg:px-0" : ""
               }`}
-              href="/es"
+              href="/"
             >
               <StudioIcon className="size-4" name="external" />
               <span className={isCollapsed ? "lg:hidden" : ""}>

@@ -9,7 +9,8 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { siteProfile } from "@/config/site-profile";
 import { env } from "@/env";
-import { routing } from "@/i18n/routing";
+import { localizedPath } from "@/i18n/paths";
+import { type Locale, routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 
 const fontSans = Inter({
@@ -50,7 +51,7 @@ export async function generateMetadata({
     authors: [
       {
         name: siteProfile.name,
-        url: `${env.NEXT_PUBLIC_SITE_URL}/${locale}`,
+        url: `${env.NEXT_PUBLIC_SITE_URL}${localizedPath(locale as Locale)}`,
       },
     ],
     creator: siteProfile.name,

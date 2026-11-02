@@ -15,6 +15,7 @@ import {
 } from "@/features/studio/publishing/feedback";
 import { draftStudioPostInput } from "@/features/studio/publishing/post-form";
 import { STUDIO_SUBMIT_INTENT_FIELD } from "@/features/studio/publishing/submit-state";
+import { localizedPath } from "@/i18n/paths";
 import { isLocale } from "@/i18n/routing";
 import { StudioService } from "@/services/studio.service";
 
@@ -145,6 +146,7 @@ function finishStudioMutation(formData: FormData, recoveryKey: string): never {
   updateTag(BLOG_CACHE_TAG);
   revalidatePath("/studio");
   revalidatePath("/studio/blog");
+  revalidatePath("/blog");
   revalidatePath("/es/blog");
   revalidatePath("/en/blog");
   revalidatePath("/sitemap.xml");
@@ -153,6 +155,7 @@ function finishStudioMutation(formData: FormData, recoveryKey: string): never {
   const locale = String(formData.get("locale") ?? "");
   const slug = String(formData.get("slug") ?? "");
   if (isLocale(locale) && slug) {
+    revalidatePath(localizedPath(locale, `/blog/${slug}`));
     revalidatePath(`/${locale}/blog/${slug}`);
   }
 

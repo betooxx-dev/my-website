@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "test:watch": "jest --watch",
     "prepare": "simple-git-hooks",
-    "studio:seed-user": "node scripts/qa/seed-studio-user.mjs"
+    "studio:seed-user": "node scripts/qa/seed-studio-user.mjs",
+    "test:e2e:docker": "node scripts/test-docker-e2e.mjs"
   },
   "engines": {
     "node": ">=24 <25"
@@ -23,7 +24,20 @@
   },
   "overrides": {
     "postcss": "8.5.26",
-    "sharp": "0.35.3"
+    "sharp": "0.35.5",
+    "@jest/reporters": {
+      "glob": "14.0.2"
+    },
+    "jest-config": {
+      "glob": "14.0.2"
+    },
+    "jest-runtime": {
+      "glob": "14.0.2"
+    },
+    "test-exclude": {
+      "glob": "14.0.2",
+      "minimatch": "11.0.1"
+    }
   },
   "dependencies": {
     "@swc/helpers": "^0.5.18",
@@ -32,10 +46,10 @@
     "@vercel/speed-insights": "^2.0.0",
     "axios": "^1.13.6",
     "framer-motion": "^12.34.3",
-    "next": "16.2.11",
+    "next": "16.4.4",
     "next-intl": "^4.8.3",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
     "react-markdown": "^10.1.0",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
@@ -46,7 +60,7 @@
     "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "^4",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20",
+    "@types/node": "^24.13.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "jest": "^30.3.0",

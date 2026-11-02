@@ -143,6 +143,12 @@ El analizador de uso detecta llamadas dinámicas como `t(variable)` o `t(\`templ
 
 ## i18n
 
+- Español es el locale por defecto y se sirve sin prefijo: `/`, `/blog`.
+- Inglés usa `/en`. Las URLs antiguas con `/es` redirigen a su equivalente sin prefijo.
+- `routing.ts` usa `localePrefix: "as-needed"` y `localeDetection: false`:
+  la URL determina el idioma, independientemente de cookies o `Accept-Language`.
+- Usar `i18n/navigation.ts` para navegación pública y `localizedPath` de
+  `i18n/paths.ts` para URLs de metadatos, sitemap y enlaces fuera del contexto i18n.
 - Los archivos de traducción están en `src/messages/`
 - El patrón de uso con next-intl es siempre:
   ```ts

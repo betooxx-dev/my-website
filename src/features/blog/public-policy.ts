@@ -1,4 +1,4 @@
-const PUBLIC_BLOG_PATH = /^\/(es|en)\/blog(?:\/|$)/;
+const PUBLIC_BLOG_PATH = /^\/(?:(es|en)\/)?blog(?:\/|$)/;
 
 export function isPublicBlogEnabled(nodeEnv: string | undefined): boolean {
   void nodeEnv;
@@ -13,5 +13,5 @@ export function getPublicBlogRedirect(
 
   const match = pathname.match(PUBLIC_BLOG_PATH);
   const locale = match?.[1];
-  return locale ? `/${locale}` : null;
+  return match ? (locale === "en" ? "/en" : "/") : null;
 }

@@ -73,7 +73,7 @@ export default function NavbarClient({
   function handleHashClick(event: MouseEvent<HTMLAnchorElement>, href: string) {
     const id = href.split("#")[1];
     const isHome =
-      window.location.pathname === "/es" || window.location.pathname === "/en";
+      window.location.pathname === "/" || window.location.pathname === "/en";
     if (!id || !isHome) {
       setOpen(false);
       return;

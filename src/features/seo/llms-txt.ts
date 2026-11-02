@@ -11,10 +11,10 @@ The website is available in Spanish and English. It presents Alberto's professio
 
 ## Website
 
-- [Website in Spanish](${base}/es): Spanish-language homepage and primary presentation.
+- [Website in Spanish](${base}/): Spanish-language homepage and primary presentation.
 - [Website in English](${base}/en): English-language version of the website.
-- [Verified certifications](${base}/es#certifications): AWS Academy and Cisco credentials with links to their Credly records.
-- [Professional experience](${base}/es#experience): Organizations Alberto has collaborated with.
+- [Verified certifications](${base}/#certifications): AWS Academy and Cisco credentials with links to their Credly records.
+- [Professional experience](${base}/#experience): Organizations Alberto has collaborated with.
 
 ## Profiles
 
@@ -23,6 +23,6 @@ The website is available in Spanish and English. It presents Alberto's professio
 
 ## Optional
 
-- [Contact](${base}/es#contact): WhatsApp and social contact options.
+- [Contact](${base}/#contact): WhatsApp and social contact options.
 `;
 }

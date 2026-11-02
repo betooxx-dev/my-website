@@ -39,14 +39,21 @@ jobs:
       - name: Test
         run: npm test -- --runInBand
 
-      - name: Build
-        run: npm run build
-
       - name: Install browser for end-to-end tests
         run: npx playwright install --with-deps chromium
 
       - name: End-to-end tests
-        run: npm run test:e2e
+        run: npm run test:e2e:docker
+
+      - name: Browser evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-evidence
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
 
       - name: Dependency audit
         run: npm audit --audit-level=moderate
