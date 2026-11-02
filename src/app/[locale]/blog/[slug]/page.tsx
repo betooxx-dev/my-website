@@ -13,6 +13,7 @@ import {
 } from "@/features/blog/queries";
 import { blogSeoFields } from "@/features/blog/seo";
 import { Link } from "@/i18n/navigation";
+import { localizedPath } from "@/i18n/paths";
 import { type Locale, locales } from "@/i18n/routing";
 
 type PostPageProps = {
@@ -75,7 +76,7 @@ export default async function PostPage({ params }: PostPageProps) {
   if (!post) notFound();
 
   const related = await getRelatedPublishedPosts(locale, slug);
-  const canonicalUrl = `${env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${post.slug}`;
+  const canonicalUrl = blogSeoFields(post, env.NEXT_PUBLIC_SITE_URL).url;
   const blogPosting = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -83,7 +84,7 @@ export default async function PostPage({ params }: PostPageProps) {
       "@id": `${env.NEXT_PUBLIC_SITE_URL}/#person`,
       "@type": "Person",
       name: siteProfile.name,
-      url: `${env.NEXT_PUBLIC_SITE_URL}/${locale}`,
+      url: `${env.NEXT_PUBLIC_SITE_URL}${localizedPath(locale)}`,
     },
     dateModified: post.updatedAt,
     datePublished: post.publishedAt,

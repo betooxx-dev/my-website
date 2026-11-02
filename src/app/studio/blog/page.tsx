@@ -48,7 +48,7 @@ export default async function StudioBlogPage({
     <StudioFrame active="blog">
       <StudioPageHeader
         actions={
-          <Link className={studioSecondaryButtonClass} href="/es/blog">
+          <Link className={studioSecondaryButtonClass} href="/blog">
             {blog.viewPublicBlog}
             <StudioIcon className="size-4" name="external" />
           </Link>

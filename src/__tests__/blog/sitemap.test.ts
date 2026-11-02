@@ -18,7 +18,7 @@ describe("blog sitemap", () => {
     expect(entries).toEqual([
       {
         lastModified: new Date("2026-07-18T16:00:00.000Z"),
-        url: "https://albertocubillas.dev/es/blog/automatizaciones-utiles",
+        url: "https://albertocubillas.dev/blog/automatizaciones-utiles",
       },
       {
         lastModified: new Date("2026-07-17T16:00:00.000Z"),

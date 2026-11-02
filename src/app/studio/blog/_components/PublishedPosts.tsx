@@ -12,6 +12,7 @@ import type { StudioAsset, StudioPost } from "@/contracts";
 import type { StudioCategory } from "@/contracts/studio-contract";
 import { studioCopy } from "@/features/studio/content";
 import { studioPostRecoveryKey } from "@/features/studio/publishing/feedback";
+import { localizedPath } from "@/i18n/paths";
 import { unpublishPostAction, updatePostAction } from "../actions";
 import { StudioPostFields } from "../post-fields";
 import { DeletePost } from "./DeletePost";
@@ -54,7 +55,7 @@ export function PublishedPosts({
 
               <Link
                 className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-full text-sm font-semibold text-primary transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary motion-reduce:transition-none"
-                href={`/${post.locale}/blog/${post.slug}`}
+                href={localizedPath(post.locale, `/blog/${post.slug}`)}
               >
                 {blog.previewPost}
                 <StudioIcon className="size-4" name="external" />

@@ -31,6 +31,6 @@ describe("Blog SEO fields shared with Studio", () => {
     );
     expect(seo.title).toBe(title);
     expect(seo.coverAlt).toBe(title);
-    expect(seo.url).toBe("http://localhost:3000/es/blog/draft");
+    expect(seo.url).toBe("http://localhost:3000/blog/draft");
   });
 });

@@ -8,6 +8,7 @@ import HeroSection from "@/components/features/home/HeroSection";
 import ProjectsSection from "@/components/features/home/ProjectsSection";
 import { siteProfile, siteSocialUrls } from "@/config/site-profile";
 import { env } from "@/env";
+import { localizedPath } from "@/i18n/paths";
 import { type Locale, routing } from "@/i18n/routing";
 
 type HomePageProps = {
@@ -24,7 +25,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
   const base = env.NEXT_PUBLIC_SITE_URL;
-  const pageUrl = `${base}/${locale}`;
+  const pageUrl = `${base}${localizedPath(locale)}`;
 
   return {
     title: { absolute: t("title") },
@@ -32,7 +33,7 @@ export async function generateMetadata({
     alternates: {
       canonical: pageUrl,
       languages: {
-        es: `${base}/es`,
+        es: `${base}/`,
         en: `${base}/en`,
         "x-default": base,
       },
@@ -68,7 +69,7 @@ export default async function Home({ params }: HomePageProps) {
     "@type": "Person",
     "@id": `${base}/#person`,
     name: siteProfile.name,
-    url: `${base}/${locale}`,
+    url: `${base}${localizedPath(locale)}`,
     image: `${base}${siteProfile.image}`,
     jobTitle: heroT("title"),
     description: metadataT("description"),

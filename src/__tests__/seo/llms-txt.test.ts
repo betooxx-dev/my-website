@@ -10,7 +10,7 @@ describe("createLlmsTxt", () => {
   });
 
   it("uses absolute production URLs without duplicate slashes", () => {
-    expect(content).toContain("https://example.com/es");
-    expect(content).not.toContain("https://example.com//es");
+    expect(content).toContain("https://example.com/");
+    expect(content).not.toContain("https://example.com/es");
   });
 });

@@ -1,4 +1,5 @@
 import { siteProfile } from "@/config/site-profile";
+import { localizedPath } from "@/i18n/paths";
 import type { Locale } from "@/i18n/routing";
 
 export function blogSeoFields(
@@ -11,7 +12,7 @@ export function blogSeoFields(
   },
   siteUrl: string,
 ) {
-  const path = `/${post.locale}/blog/${post.slug}`;
+  const path = localizedPath(post.locale, `/blog/${post.slug}`);
   return {
     title: post.title,
     searchTitle: `${post.title} | ${siteProfile.name}`,

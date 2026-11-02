@@ -6,6 +6,7 @@ import {
   getPublishedCategories,
   getPublishedPosts,
 } from "@/features/blog/queries";
+import { localizedPath } from "@/i18n/paths";
 import type { Locale } from "@/i18n/routing";
 
 type BlogPageProps = {
@@ -17,7 +18,7 @@ export async function generateMetadata({
 }: BlogPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
-  const path = `/${locale}/blog`;
+  const path = localizedPath(locale, "/blog");
   return {
     title: t("metadataTitle"),
     description: t("metadataDescription"),
@@ -29,8 +30,8 @@ export async function generateMetadata({
       canonical: path,
       languages: {
         en: "/en/blog",
-        es: "/es/blog",
-        "x-default": "/es/blog",
+        es: "/blog",
+        "x-default": "/blog",
       },
     },
     openGraph: {

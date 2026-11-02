@@ -63,7 +63,7 @@ export default async function StudioPage() {
                 <StudioIcon className="size-4" name="writing" />
                 {dashboard.newPost}
               </Link>
-              <Link className={studioSecondaryButtonClass} href="/es/blog">
+              <Link className={studioSecondaryButtonClass} href="/blog">
                 {dashboard.viewBlog}
                 <StudioIcon className="size-4" name="external" />
               </Link>

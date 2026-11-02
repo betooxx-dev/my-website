@@ -32,6 +32,7 @@ export default function ScrollReveal({
 
   return (
     <motion.div
+      data-scroll-reveal
       ref={ref}
       initial={{ opacity: 0, x: offset.x, y: offset.y }}
       animate={isInView ? { opacity: 1, x: 0, y: 0 } : undefined}

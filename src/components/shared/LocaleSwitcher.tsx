@@ -2,7 +2,8 @@
 
 import { useLocale } from "next-intl";
 import type { ChangeEvent } from "react";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
+import { localizedPath } from "@/i18n/paths";
 import { routing } from "@/i18n/routing";
 
 const localeLabels: Record<(typeof routing.locales)[number], string> = {
@@ -13,7 +14,6 @@ const localeLabels: Record<(typeof routing.locales)[number], string> = {
 export default function LocaleSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
   const currentLocale = locale as (typeof routing.locales)[number];
   const languageLabel = currentLocale === "es" ? "Idioma" : "Language";
 
@@ -21,7 +21,9 @@ export default function LocaleSwitcher() {
     const nextLocale = event.target.value as (typeof routing.locales)[number];
 
     if (nextLocale !== currentLocale) {
-      router.replace(pathname, { locale: nextLocale });
+      window.location.assign(
+        `${localizedPath(nextLocale, pathname)}${window.location.search}${window.location.hash}`,
+      );
     }
   }
 

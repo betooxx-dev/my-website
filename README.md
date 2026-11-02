@@ -26,7 +26,7 @@ cp .env.example .env.local
 docker compose up --build
 ```
 
-El sitio queda en <http://localhost:3000>. La raíz redirige a `/es` o `/en` según el header `Accept-Language`. En desarrollo se usan defaults locales seguros; copia `.env.example` a `.env.local` cuando quieras conectar Studio con Argos.
+El sitio queda en <http://localhost:3000>. Español se sirve sin prefijo (`/`, `/blog`) e inglés bajo `/en`. El idioma depende de la URL; `/es` redirige a `/`. En desarrollo se usan defaults locales seguros; copia `.env.example` a `.env.local` cuando quieras conectar Studio con Argos.
 
 Instala el hook de Git una sola vez desde el contenedor:
 
@@ -49,6 +49,7 @@ dependencias Node instaladas en la laptop.
 | `npm run typecheck` | Verifica TypeScript sin emitir archivos |
 | `npm test` | Corre la suite de Jest |
 | `npm run test:watch` | Jest en modo watch |
+| `npm run test:e2e:docker` | Construye producción, inicia un contenedor aislado y ejecuta Playwright; requiere Node 24, Docker y Chromium de Playwright |
 
 ## Variables de entorno
 
