@@ -70,7 +70,7 @@ El hook de pre-commit corre dentro del servicio `web` y bloquea el commit si
 falla cualquiera de estos pasos:
 
 ```
-npm run lint   →   npm run typecheck   →   npm test -- --runInBand
+pnpm run lint   →   pnpm run typecheck   →   ppnpm test --runInBand
 ```
 
 - **Biome** revisa el repositorio sin reescribir archivos durante el commit.
@@ -78,12 +78,12 @@ npm run lint   →   npm run typecheck   →   npm test -- --runInBand
 - **Jest** corre toda la suite en un solo proceso.
 
 Instala o actualiza el hook con
-`docker compose run --rm --no-deps web npm run prepare`. No instales
+`docker compose run --rm --no-deps web pnpm run prepare`. No instales
 `node_modules` en el host para ejecutar el hook.
 
 ### Agregar un nuevo test al pre-commit
 
-Los tests se ejecutan automáticamente porque `npm test` corre toda la suite. Para que un nuevo test se incluya, solo hace falta que su archivo termine en `.test.ts` y esté dentro de `src/__tests__/`.
+Los tests se ejecutan automáticamente porque `pnpm test` corre toda la suite. Para que un nuevo test se incluya, solo hace falta que su archivo termine en `.test.ts` y esté dentro de `src/__tests__/`.
 
 No es necesario modificar `package.json` ni el hook.
 
@@ -133,7 +133,7 @@ los tests viven en `src/__tests__/` y se agrupan por dominio.
 
 1. Añadirla a `es.json`
 2. Añadir su traducción a todos los demás locales (`en.json`, etc.)
-3. Correr `npm test` — los tests confirmarán que todo está en sync
+3. Correr `pnpm test` — los tests confirmarán que todo está en sync
 
 ### Claves dinámicas
 

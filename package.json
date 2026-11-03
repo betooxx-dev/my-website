@@ -20,24 +20,7 @@
     "node": ">=24 <25"
   },
   "simple-git-hooks": {
-    "pre-commit": "docker compose run --rm --no-deps -e NODE_ENV=test web sh -lc 'npm run lint && npm run typecheck && npm test -- --runInBand'"
-  },
-  "overrides": {
-    "postcss": "8.5.26",
-    "sharp": "0.35.5",
-    "@jest/reporters": {
-      "glob": "14.0.2"
-    },
-    "jest-config": {
-      "glob": "14.0.2"
-    },
-    "jest-runtime": {
-      "glob": "14.0.2"
-    },
-    "test-exclude": {
-      "glob": "14.0.2",
-      "minimatch": "11.0.1"
-    }
+    "pre-commit": "docker compose run --rm --no-deps -e NODE_ENV=test web sh -lc 'pnpm run lint && pnpm run typecheck && pnpm test --runInBand'"
   },
   "dependencies": {
     "@swc/helpers": "^0.5.18",
@@ -68,5 +51,6 @@
     "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@12.17.0"
 }

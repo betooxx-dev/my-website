@@ -31,7 +31,7 @@ El sitio queda en <http://localhost:3000>. Español se sirve sin prefijo (`/`, `
 Instala el hook de Git una sola vez desde el contenedor:
 
 ```bash
-docker compose run --rm --no-deps web npm run prepare
+docker compose run --rm --no-deps web pnpm run prepare
 ```
 
 El pre-commit ejecuta lint, typecheck y tests dentro de Docker; no necesita
@@ -41,15 +41,15 @@ dependencias Node instaladas en la laptop.
 
 | Comando | Qué hace |
 |---|---|
-| `npm run dev` | Servidor de desarrollo con Turbopack |
-| `npm run build` | Build de producción (`output: "standalone"`) |
-| `npm run start` | Corre el build de producción |
-| `npm run lint` | Biome check (lint + formato) |
-| `npm run format` | Biome format con escritura |
-| `npm run typecheck` | Verifica TypeScript sin emitir archivos |
-| `npm test` | Corre la suite de Jest |
-| `npm run test:watch` | Jest en modo watch |
-| `npm run test:e2e:docker` | Construye producción, inicia un contenedor aislado y ejecuta Playwright; requiere Node 24, Docker y Chromium de Playwright |
+| `pnpm run dev` | Servidor de desarrollo con Turbopack |
+| `pnpm run build` | Build de producción (`output: "standalone"`) |
+| `pnpm run start` | Corre el build de producción |
+| `pnpm run lint` | Biome check (lint + formato) |
+| `pnpm run format` | Biome format con escritura |
+| `pnpm run typecheck` | Verifica TypeScript sin emitir archivos |
+| `pnpm test` | Corre la suite de Jest |
+| `pnpm run test:watch` | Jest en modo watch |
+| `pnpm run test:e2e:docker` | Construye producción, inicia un contenedor aislado y ejecuta Playwright; requiere Node 24, Docker y Chromium de Playwright |
 
 ## Variables de entorno
 
@@ -166,7 +166,7 @@ Argos. El seed de contenido de Argos y el usuario de Studio se preparan así:
 
 ```sh
 docker compose exec api npm run blog:seed
-docker compose exec web npm run studio:seed-user
+docker compose exec web pnpm run studio:seed-user
 docker compose up -d --no-deps --force-recreate web
 ```
 
