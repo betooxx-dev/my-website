@@ -10,6 +10,20 @@ const argosAssetPath = `${argosPublicUrl.pathname.replace(/\/$/, "")}/blog/asset
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/es",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/es/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+    ];
+  },
   outputFileTracingIncludes: {
     "/*": ["./content/blog/**/*"],
   },

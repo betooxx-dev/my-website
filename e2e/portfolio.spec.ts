@@ -103,6 +103,21 @@ test("publishes canonical locale URLs in the sitemap", async ({ request }) => {
   expect(xml).not.toMatch(/https:\/\/[^<"\s]+\/es(?:[/"<])/);
 });
 
+test("permanently moves legacy Spanish URLs to indexable canonical pages", async ({
+  request,
+}) => {
+  for (const path of ["/es", "/es/blog?source=legacy"]) {
+    const response = await request.get(path, { maxRedirects: 0 });
+    expect(response.status()).toBe(308);
+    expect(response.headers().location).toBeTruthy();
+    const target = new URL(response.headers().location, response.url());
+    expect(target.pathname).toBe(path.startsWith("/es/blog") ? "/blog" : "/");
+    expect(target.search).toBe(path.includes("?") ? "?source=legacy" : "");
+    const canonical = await request.get(target.href);
+    expect(canonical.status()).toBe(200);
+  }
+});
+
 test("keeps scroll content visible without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   try {
