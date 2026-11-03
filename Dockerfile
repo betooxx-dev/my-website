@@ -4,28 +4,30 @@ FROM node:24-alpine AS base
 
 WORKDIR /app
 
-ENV NPM_CONFIG_AUDIT=false \
-    NPM_CONFIG_FUND=false
+FROM base AS tooling
 
-FROM base AS deps
+COPY package.json ./
+RUN npm install --global "$(node -p 'require("./package.json").packageManager')" --no-audit --no-fund
 
-COPY package*.json ./
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --ignore-scripts
+FROM tooling AS deps
+
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile --ignore-scripts
 
 FROM deps AS development
 
 COPY . .
 EXPOSE 3000
-CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]
+CMD ["pnpm", "run", "dev", "--hostname", "0.0.0.0"]
 
-FROM base AS builder
+FROM tooling AS builder
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NODE_ENV=production
 RUN --mount=type=secret,id=production_env,required=true \
-    set -a && . /run/secrets/production_env && set +a && npm run build
+    set -a && . /run/secrets/production_env && set +a && pnpm run build
 
 FROM base AS runner
 

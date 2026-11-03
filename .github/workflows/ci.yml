@@ -25,25 +25,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
+
+      - name: Install pnpm
+        run: npm install --global "$(node -p 'require("./package.json").packageManager')"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Typecheck
-        run: npm run typecheck
+        run: pnpm run typecheck
 
       - name: Test
-        run: npm test -- --runInBand
+        run: pnpm test --runInBand
 
       - name: Install browser for end-to-end tests
-        run: npx playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium
 
       - name: End-to-end tests
-        run: npm run test:e2e:docker
+        run: pnpm run test:e2e:docker
 
       - name: Browser evidence
         if: failure()
@@ -56,4 +58,4 @@ jobs:
           retention-days: 7
 
       - name: Dependency audit
-        run: npm audit --audit-level=moderate
+        run: pnpm audit --audit-level=moderate

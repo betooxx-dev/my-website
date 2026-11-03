@@ -66,13 +66,9 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
   if (!ready) throw new Error("Production container did not become ready.");
-  await run(
-    process.execPath,
-    ["node_modules/playwright/cli.js", "test", ...process.argv.slice(2)],
-    {
-      env: { ...process.env, PLAYWRIGHT_BASE_URL: baseURL },
-    },
-  );
+  await run("pnpm", ["exec", "playwright", "test", ...process.argv.slice(2)], {
+    env: { ...process.env, PLAYWRIGHT_BASE_URL: baseURL },
+  });
 } catch (error) {
   if (containerStarted)
     spawnSync("docker", ["logs", name], { stdio: "inherit" });
