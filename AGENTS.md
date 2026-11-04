@@ -64,6 +64,17 @@ on:
 
 ---
 
+## Flujo de despliegue
+
+1. Subir los cambios a `develop` y esperar a que pase CI.
+2. Abrir un PR de `develop` hacia `master`, la rama de producción.
+3. Esperar a que pasen todos los checks del PR.
+4. Fusionar siempre con **Squash and merge** en GitHub o con
+   `gh pr merge <número> --squash`. Este es el único método de fusión
+   para los PR de despliegue.
+
+---
+
 ## Pre-commit hook
 
 El hook de pre-commit corre dentro del servicio `web` y bloquea el commit si
